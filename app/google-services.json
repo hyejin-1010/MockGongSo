@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "742461784506",
+    "firebase_url": "https://mockgongso.firebaseio.com",
+    "project_id": "mockgongso",
+    "storage_bucket": "mockgongso.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:742461784506:android:cffe8dee344e05d5",
+        "android_client_info": {
+          "package_name": "com.emirim.hyejin.mokgongso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "742461784506-orgjb046rqnjl3dofmlei9fge1sb2tog.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.emirim.hyejin.mokgongso",
+            "certificate_hash": "3d9353bf82106a7fe522870bddb73377d173ae44"
+          }
+        },
+        {
+          "client_id": "742461784506-oe65af5ge2esgfhtpjt9jktuerrmlk1g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbnJD0fDpUu64cX6jm8kVi6V3_g92I1XM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "742461784506-oe65af5ge2esgfhtpjt9jktuerrmlk1g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
