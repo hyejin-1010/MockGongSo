@@ -111,18 +111,24 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/facebook" />
-        <ImageView
-            android:id="@+id/googleBtn"
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/googleSignInBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:layout_constraintLeft_toRightOf="@id/facebookBtn"
+            android:layout_marginLeft="20dp"></com.google.android.gms.common.SignInButton>
+        <ImageView
+            android:id="@+id/googleSignInIcon"
             android:src="@drawable/google"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintLeft_toRightOf="@id/facebookBtn"
             android:layout_marginLeft="20dp"/>
         <ImageView
             android:id="@+id/kakaoBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:layout_constraintLeft_toRightOf="@id/googleBtn"
+            app:layout_constraintLeft_toRightOf="@id/googleSignInBtn"
             android:src="@drawable/kakaotalk"
             android:layout_marginLeft="20dp" />
 
