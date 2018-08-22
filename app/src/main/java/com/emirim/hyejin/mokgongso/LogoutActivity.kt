@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
+import android.widget.Toast
+import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -33,12 +35,14 @@ class LogoutActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
 
         signOutBtn.setOnClickListener {
+            Toast.makeText(this, "ID : " + mAuth!!.currentUser?.email, Toast.LENGTH_SHORT).show()
             signOut()
         }
     }
 
     private fun signOut() {
         mAuth!!.signOut()
+        LoginManager.getInstance().logOut()
 
         mGoogleSignInClent!!.signOut().addOnCompleteListener(this) {
             var intent: Intent = Intent(this, MainActivity::class.java)
