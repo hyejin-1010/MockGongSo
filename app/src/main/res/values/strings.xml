@@ -3,4 +3,5 @@
     <string name="login">Login</string>
     <string name="facebook_app_id">199352967351501</string>
     <string name="fb_login_protocol_scheme">fb199352967351501</string>
+    <string name="kakao_app_key">38b84439866fe69868f12a47603325c4</string>
 </resources>

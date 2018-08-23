@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.widget.ImageView
 import android.widget.Toast
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
@@ -19,6 +18,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.firebase.auth.*
+import com.kakao.auth.ISessionCallback
+import com.kakao.auth.Session
+import com.kakao.network.ErrorResult
+import com.kakao.usermgmt.UserManagement
+import com.kakao.usermgmt.callback.MeResponseCallback
+import com.kakao.usermgmt.response.model.UserProfile
+import com.kakao.util.exception.KakaoException
 
 class LoginActivity : AppCompatActivity() {
     private var mAuth: FirebaseAuth? = null
@@ -29,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
     private var mGoogleSignInClent: GoogleSignInClient? = null
     private var mCallbackManager: CallbackManager? = null
+    private var callback: SessionCallback? = null
 
     private val googleSignInBtn: SignInButton by lazy {
         findViewById(R.id.googleSignInBtn) as SignInButton
@@ -39,6 +46,12 @@ class LoginActivity : AppCompatActivity() {
     private val facebookSignInButton: LoginButton by lazy {
         findViewById(R.id.facebookSignInBtn) as LoginButton
     }
+    private val kakaoSignInBtn: com.kakao.usermgmt.LoginButton by lazy {
+        findViewById(R.id.kakaoSignInBtn) as com.kakao.usermgmt.LoginButton
+    }
+   // private val kakaoSignInBtn: ImageView by lazy {
+    //    findViewById(R.id.kakaoBtn) as ImageView
+   // }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +92,10 @@ class LoginActivity : AppCompatActivity() {
                 Log.d(TAG, "facebook:onError", error);
             }
         })
+
+        // kakao
+        callback = SessionCallback()
+        Session.getCurrentSession().addCallback(callback)
     }
 
     override fun onStart() {
@@ -90,8 +107,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+        if(Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)){
+            return
+        }
 
+        super.onActivityResult(requestCode, resultCode, data)
         mCallbackManager!!.onActivityResult(requestCode, resultCode, data)
 
         // 서버의 클라이언트 ID를 requestIdToken 메소드에 전달
@@ -157,4 +177,58 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
     }
+
+    // kakao
+    override fun onDestroy() {
+        super.onDestroy()
+
+        Session.getCurrentSession().removeCallback(callback)
+    }
+
+    private class SessionCallback : ISessionCallback {
+        override fun onSessionOpened() {
+            // 연결 성공 시
+            Log.d("SessionCallback", "연결 성공")
+            requestMe()
+        }
+
+        override fun onSessionOpenFailed(exception: KakaoException?) {
+            if(exception != null) {
+                Log.e("SessionCallback", exception.toString())
+            }
+        }
+
+        public fun requestMe() {
+            UserManagement.requestMe(object: MeResponseCallback() {
+                // 세션 오픈 실패. 세션이 삭제된 경유
+                override fun onSessionClosed(errorResult: ErrorResult?) {
+                    Log.e("SessionCallback :: ", "onSessionClosed : " + errorResult!!.getErrorMessage());
+                }
+
+                // 회원이 아닌 경우
+                override fun onNotSignedUp() {
+                    Log.e("SessionCallback :: ", "onNotSignedUp");
+                }
+
+                override fun onSuccess(result: UserProfile?) {
+                    Log.e("Profile", result!!.uuid)
+
+                    var loginActivity = LoginActivity()
+                    loginActivity.redirectSignupActivity()
+                }
+
+                override fun onFailure(errorResult: ErrorResult?) {
+                    Log.e("SessionCallback :: ", "onFailure : " + errorResult!!.getErrorMessage());
+                }
+            })
+        }
+    }
+
+    protected fun redirectSignupActivity() {
+        // 연결 성공 시
+//        val intent: Intent = Intent(this, LogoutActivity::class.java)
+ //       intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+  //      startActivity(intent)
+    }
 }
+

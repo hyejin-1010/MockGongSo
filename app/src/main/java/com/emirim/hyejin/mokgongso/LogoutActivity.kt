@@ -11,6 +11,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.kakao.usermgmt.UserManagement
+import com.kakao.usermgmt.callback.LogoutResponseCallback
+import com.kakao.usermgmt.response.model.UserProfile
 
 class LogoutActivity : AppCompatActivity() {
     private val signOutBtn by lazy {
@@ -44,9 +47,24 @@ class LogoutActivity : AppCompatActivity() {
         mAuth!!.signOut()
         LoginManager.getInstance().logOut()
 
+        kakaoLogout()
+
         mGoogleSignInClent!!.signOut().addOnCompleteListener(this) {
             var intent: Intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun kakaoLogout() {
+        UserManagement.requestLogout(object: LogoutResponseCallback() {
+            override fun onCompleteLogout() {
+                intentMain()
+            }
+        })
+    }
+
+    private fun intentMain() {
+        var intent: Intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 }
