@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".LogoutActivity" />
+        <activity android:name=".MandalartActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

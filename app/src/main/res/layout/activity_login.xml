@@ -106,48 +106,16 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView2"
         android:layout_marginTop="7dp">
-        <!--
-        <ImageView
-            android:id="@+id/facebookBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/facebook"
-            android:visibility="invisible" />
-         -->
         <com.facebook.login.widget.LoginButton
             android:id="@+id/facebookSignInBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            />
+            android:layout_width="260dp"
+            android:layout_height="wrap_content" />
         <com.google.android.gms.common.SignInButton
             android:id="@+id/googleSignInBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:layout_constraintLeft_toRightOf="@id/facebookSignInBtn"
+            android:layout_width="260dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@id/facebookSignInBtn"
             android:layout_marginLeft="20dp"></com.google.android.gms.common.SignInButton>
-        <com.kakao.usermgmt.LoginButton
-            android:id="@+id/kakaoSignInBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:layout_constraintLeft_toRightOf="@id/googleSignInBtn"
-            android:layout_marginLeft="20dp"></com.kakao.usermgmt.LoginButton>
-        <!--
-        <ImageView
-            android:id="@+id/googleSignInIcon"
-            android:src="@drawable/google"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:layout_constraintLeft_toRightOf="@id/googleSignInBtn"
-            android:visibility="invisible"
-            android:layout_marginLeft="20dp"/>
-        <ImageView
-            android:id="@+id/kakaoBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:layout_constraintLeft_toRightOf="@id/googleSignInBtn"
-            android:src="@drawable/kakaotalk"
-            android:layout_marginLeft="20dp" />
-                        -->
     </android.support.constraint.ConstraintLayout>
-
 </android.support.constraint.ConstraintLayout>

@@ -17,17 +17,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        redirectLoginActivity()
+        requestMe()
     }
 
     // 유저의 정보를 받아오는 함수
-    protected fun requestMe() {
+    fun requestMe() {
         UserManagement.requestMe(object: MeResponseCallback() {
             override fun onFailure(errorResult: ErrorResult?) {
-                var message: String = "failed to get user info. msg = " + errorResult
+                val message = "failed to get user info. msg = $errorResult"
                 Log.d(TAG, message)
 
-                var result: ErrorCode = ErrorCode.valueOf(errorResult!!.errorCode)
+                val result: ErrorCode = ErrorCode.valueOf(errorResult!!.errorCode)
                 if(result == ErrorCode.CLIENT_ERROR_CODE) {
                     finish()
                 } else {
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onNotSignedUp() {
-                showSignup()
+                showSignUp()
             }
 
             override fun onSuccess(result: UserProfile?) {
@@ -49,15 +49,17 @@ class MainActivity : AppCompatActivity() {
         });
     }
 
-    protected fun showSignup() {
+    fun showSignUp() {
         redirectLoginActivity()
     }
 
     private fun redirectLoginActivity() {
         startActivity(Intent(this, LoginActivity::class.java))
+        finish()
     }
 
     private fun redirectMainActivity() {
-        startActivity(Intent(this, LogoutActivity::class.java))
+        startActivity(Intent(this, MandalartActivity::class.java))
+        finish()
     }
 }
