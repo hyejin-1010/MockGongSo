@@ -18,13 +18,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
 import com.google.firebase.auth.*
-import com.kakao.auth.ISessionCallback
-import com.kakao.auth.Session
-import com.kakao.network.ErrorResult
-import com.kakao.usermgmt.UserManagement
-import com.kakao.usermgmt.callback.MeResponseCallback
-import com.kakao.usermgmt.response.model.UserProfile
-import com.kakao.util.exception.KakaoException
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -39,7 +32,6 @@ class LoginActivity : AppCompatActivity() {
 
     private var mGoogleSignInClient: GoogleSignInClient? = null
     private var mCallbackManager: CallbackManager? = null
-    private var callback: SessionCallback? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,10 +72,6 @@ class LoginActivity : AppCompatActivity() {
                 Log.d(TAG, "facebook:onError", error)
             }
         })
-
-        // kakao
-        callback = SessionCallback()
-        Session.getCurrentSession().addCallback(callback)
     }
 
     override fun onStart() {
@@ -94,10 +82,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)){
-            return
-        }
-
         super.onActivityResult(requestCode, resultCode, data)
         mCallbackManager!!.onActivityResult(requestCode, resultCode, data)
 
@@ -166,52 +150,6 @@ class LoginActivity : AppCompatActivity() {
                             Log.w(TAG, "signInWithCredential:failure", task.exception)
                         }
                     }
-        }
-    }
-
-    // kakao
-    override fun onDestroy() {
-        super.onDestroy()
-
-        Session.getCurrentSession().removeCallback(callback)
-    }
-
-    private class SessionCallback : ISessionCallback {
-        override fun onSessionOpened() {
-            // 연결 성공 시
-            Log.d("SessionCallback", "연결 성공")
-            requestMe()
-        }
-
-        override fun onSessionOpenFailed(exception: KakaoException?) {
-            if(exception != null) {
-                Log.e("SessionCallback", exception.toString())
-            }
-        }
-
-        fun requestMe() {
-            UserManagement.requestMe(object: MeResponseCallback() {
-                // 세션 오픈 실패. 세션이 삭제된 경유
-                override fun onSessionClosed(errorResult: ErrorResult?) {
-                    Log.e("SessionCallback :: ", "onSessionClosed : ${errorResult!!.errorMessage}")
-                }
-
-                // 회원이 아닌 경우
-                override fun onNotSignedUp() {
-                    Log.e("SessionCallback :: ", "onNotSignedUp")
-                }
-
-                override fun onSuccess(result: UserProfile?) {
-                    Log.e("Profile", result!!.uuid)
-
-                    // var loginActivity = LoginActivity()
-                    //  loginActivity.redirectSignupActivity()
-                }
-
-                override fun onFailure(errorResult: ErrorResult?) {
-                    Log.e("SessionCallback :: ", "onFailure : ${errorResult!!.errorMessage}")
-                }
-            })
         }
     }
 }

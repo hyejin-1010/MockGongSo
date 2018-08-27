@@ -15,8 +15,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.kakao.usermgmt.UserManagement
-import com.kakao.usermgmt.callback.LogoutResponseCallback
 
 class SettingFragment : Fragment() {
     companion object {
@@ -53,20 +51,10 @@ class SettingFragment : Fragment() {
         mAuth!!.signOut()
         LoginManager.getInstance().logOut()
 
-        kakaoLogout()
-
         mGoogleSignInClient!!.signOut().addOnCompleteListener {
             val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
         }
-    }
-
-    private fun kakaoLogout() {
-        UserManagement.requestLogout(object: LogoutResponseCallback() {
-            override fun onCompleteLogout() {
-                intentMain()
-            }
-        })
     }
 
     private fun intentMain() {
