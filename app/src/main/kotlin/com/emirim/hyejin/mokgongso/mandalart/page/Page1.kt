@@ -16,7 +16,7 @@ class Page1 : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val constraintLayout = inflater.inflate(R.layout.activity_page_1, container, false) as ConstraintLayout
 
-        constraintLayout.setBackgroundResource(R.color.colorPrimary)
+        constraintLayout.setBackgroundResource(R.color.backgroundColor)
 
         return constraintLayout
     }

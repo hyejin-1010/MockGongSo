@@ -3,6 +3,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.14" />
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="만다라트의 제목을\n입력해주세요"
+        android:gravity="center"
+        style="@style/textStyle5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/guideline"/>
+    <TextView
+        android:id="@+id/suTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="지금 적은 제목은 만다라트의\n중심에 위치합니다"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        style="@style/TextStyle2"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
-
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+    <TextView
+        android:id="@+id/box"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:text="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintTop_toBottomOf="@id/guideline2"
+        style="@style/textStyle5"
+        android:gravity="center"
+        android:background="@drawable/mandalart_box_1"/>
+    <EditText
+        android:layout_width="190dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@id/box"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/solid"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_marginTop="10dp"/>
 </android.support.constraint.ConstraintLayout>
