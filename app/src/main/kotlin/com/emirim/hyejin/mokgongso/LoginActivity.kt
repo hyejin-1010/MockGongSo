@@ -72,6 +72,11 @@ class LoginActivity : AppCompatActivity() {
                 Log.d(TAG, "facebook:onError", error)
             }
         })
+
+        // 회원가입
+        join.setOnClickListener {
+            startActivity(Intent(this, SignUpActivity::class.java))
+        }
     }
 
     override fun onStart() {

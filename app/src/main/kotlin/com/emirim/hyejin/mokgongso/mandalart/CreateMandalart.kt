@@ -20,11 +20,11 @@ class CreateMandalart : AppCompatActivity() {
         var curFragment = Fragment()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mandalart_create)
 
-        viewPager.adapter = adapter(supportFragmentManager)
+        // viewPager.adapter = adapter(supportFragmentManager)
     }
 
     class adapter(fm: FragmentManager): FragmentPagerAdapter(fm) {

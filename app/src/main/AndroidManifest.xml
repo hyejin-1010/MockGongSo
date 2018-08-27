@@ -46,7 +46,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".mandalart.CreateMandalart" />
-
+        <activity android:name=".SignUpActivity" />
     </application>
-
 </manifest>

@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.emirim.hyejin.mokgongso.LoginActivity
 import com.emirim.hyejin.mokgongso.R
 import com.emirim.hyejin.mokgongso.mandalart.CreateMandalart
 import kotlinx.android.synthetic.main.fragment_mandalart.view.*

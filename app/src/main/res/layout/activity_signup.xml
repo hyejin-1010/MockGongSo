@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="회원가입"
+        android:textColor="#000000"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:textSize="17sp"
+
+        android:id="@+id/txt_signin"
+        />
+
+    <Button
+        android:id="@+id/leftArrow"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+
+        android:layout_marginLeft="30dp"
+
+        app:layout_constraintTop_toTopOf="@+id/txt_signin"
+        app:layout_constraintBottom_toBottomOf="@id/txt_signin"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        android:padding="0dp"
+        android:background="@drawable/left_arrow" />
+
+    <ImageView
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+
+        android:layout_marginTop="70dp"
+
+        android:src="@mipmap/icon2"
+
+        app:layout_constraintTop_toTopOf="@id/txt_signin"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        android:id="@+id/img_logo"
+        />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="@drawable/dotted"
+
+        android:layout_marginTop="40dp"
+
+        android:hint="이름"
+        android:textSize="12sp"
+
+        android:paddingLeft="10sp"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_logo"
+
+        android:id="@+id/nameEdt"
+        />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="@drawable/dotted"
+
+        android:layout_marginTop="8dp"
+
+        android:hint="E-mail"
+        android:textSize="12sp"
+
+        android:paddingLeft="10sp"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameEdt"
+
+        android:id="@+id/emailEdt"
+        />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="@drawable/dotted"
+        android:password="true"
+
+        android:layout_marginTop="8dp"
+
+        android:hint="Password"
+        android:textSize="12sp"
+
+        android:paddingLeft="10sp"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailEdt"
+
+        android:id="@+id/pwEdt"
+        />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="@drawable/dotted"
+        android:password="true"
+
+        android:layout_marginTop="8dp"
+
+        android:hint="Confirm Password"
+        android:textSize="12sp"
+
+        android:paddingLeft="10sp"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pwEdt"
+
+        android:id="@+id/pwConfirmEdt"
+        />
+
+    <Button
+        android:id="@+id/signUpBtn"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
+
+        android:layout_marginTop="25dp"
+
+        app:layout_constraintTop_toBottomOf="@id/pwConfirmEdt"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        android:text="가입하기"
+        android:textColor="#000000"
+        android:background="@drawable/joinbutton"
+        />
+
+    <!--
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/dotted"
+        android:layerType="software"/>
+    -->
+</android.support.constraint.ConstraintLayout>

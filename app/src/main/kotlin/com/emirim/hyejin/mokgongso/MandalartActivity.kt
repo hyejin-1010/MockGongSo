@@ -30,6 +30,11 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         */
 
         initBottomNavigation()
+
+        supportFragmentManager
+                .beginTransaction()
+                .add(R.id.frameLayout, MandalartFragment.newInstance())
+                .commit()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

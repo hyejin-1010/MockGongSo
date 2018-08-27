@@ -19,21 +19,20 @@
     </style>
 
     <style name="TextStyle2">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="colorControlActivated">@color/colorPrimary</item>
     </style>
 
     <style name="TextStyle4">
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="TextStyle3">
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">11sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
     </style>

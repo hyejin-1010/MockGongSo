@@ -16,12 +16,14 @@ class BottomNavigationViewHelper {
                 shiftingMode.setBoolean(menuView, false)
                 shiftingMode.isAccessible = false
 
+                /*
                 for (x in 0..menuView.childCount) {
                     val item = menuView.getChildAt(x) as BottomNavigationItemView
                     item.setShifting(false)
                     item.setPadding(0, 15, 0, 0)
                     item.setChecked(item.itemData.isChecked)
                 }
+                */
             } catch (e: NoSuchFieldException) {
                 Log.e("BNVHelper", "Unable to get shift mode field", e)
             } catch (e : IllegalAccessException) {
