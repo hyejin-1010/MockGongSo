@@ -88,6 +88,15 @@
         android:id="@+id/emailEdt"
         />
 
+    <ImageView
+        android:id="@+id/emailCheck"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="26dp"
+        android:src="@mipmap/shape_4"
+        app:layout_constraintLeft_toRightOf="@id/emailEdt"
+        app:layout_constraintTop_toBottomOf="@id/nameEdt" />
+
     <android.support.v7.widget.AppCompatEditText
         android:layout_width="200dp"
         android:layout_height="50dp"
@@ -128,12 +137,22 @@
         android:id="@+id/pwConfirmEdt"
         />
 
+    <ImageView
+        android:id="@+id/pwConfirmCheck"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="26dp"
+        android:src="@mipmap/shape_4"
+        app:layout_constraintLeft_toRightOf="@id/pwConfirmEdt"
+        app:layout_constraintTop_toBottomOf="@id/pwEdt" />
+
     <Button
         android:id="@+id/signUpBtn"
         android:layout_width="200dp"
         android:layout_height="35dp"
 
         android:layout_marginTop="25dp"
+        style="@style/TextStyle4"
 
         app:layout_constraintTop_toBottomOf="@id/pwConfirmEdt"
         app:layout_constraintLeft_toLeftOf="parent"

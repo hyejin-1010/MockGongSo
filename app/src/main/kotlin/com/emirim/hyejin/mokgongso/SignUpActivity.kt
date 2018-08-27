@@ -5,13 +5,21 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Button
+import android.util.Log
 import android.widget.EditText
+import com.emirim.hyejin.mokgongso.api.APIRequestManager
+import com.emirim.hyejin.mokgongso.model.Duplicatechk
+import com.emirim.hyejin.mokgongso.model.Message
+import com.emirim.hyejin.mokgongso.model.Signup
 import kotlinx.android.synthetic.main.activity_signup.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SignUpActivity : AppCompatActivity() {
     companion object {
         var joinBoolean = false
+        var emailBoolean = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +33,38 @@ class SignUpActivity : AppCompatActivity() {
         signUpBtn.isEnabled = false
 
         nameEdt.addTextChangedListener(addListenerOnTextChange(this, nameEdt))
-        emailEdt.addTextChangedListener(addListenerOnTextChange(this, emailEdt))
+        emailEdt.setOnFocusChangeListener { v, hasFocus ->
+            if(!hasFocus && emailEdt.text.toString().trim().isNotEmpty()) {
+                User.duplicatechk = Duplicatechk(emailEdt.text.toString())
+
+                // 아이디 중복 확인
+                var call: Call<Message> = APIRequestManager.getInstance().requestServer().duplicatechk(User.duplicatechk)
+                call.enqueue(object: Callback<Message> {
+                    override fun onResponse(call: Call<Message>, response: Response<Message>) {
+                        when(response.code()) {
+                            200 -> {
+                                Log.d("SignUpActivity", "아이디 존재 X")
+                                emailCheck.setImageResource(R.mipmap.shape_3)
+                                emailEdt.setBackgroundResource(R.drawable.solid)
+                                emailBoolean = true
+                            }
+                            409 -> {
+                                Log.d("SignUpActivity", "아이디 존재 O")
+                                emailEdt.setBackgroundResource(R.drawable.dotted)
+                                emailCheck.setImageResource(R.mipmap.shape_4)
+                                emailBoolean = false
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Message>, t: Throwable) {
+                        Log.e("SignUpActivity", "에러: " + t.message)
+                        t.printStackTrace()
+                    }
+                })
+            }
+        }
+
         pwEdt.addTextChangedListener(addListenerOnTextChange(this, pwEdt))
 
         pwConfirmEdt.addTextChangedListener(object: TextWatcher {
@@ -35,15 +74,15 @@ class SignUpActivity : AppCompatActivity() {
                 if(s != null && s.trim().isNotEmpty() && pwConfirmEdt != null && pwConfirmEdt.text.toString().equals(pwEdt.text.toString())) {
                     pwConfirmEdt.setBackgroundResource(R.drawable.solid)
                     joinBoolean = true
+                    pwConfirmCheck.setImageResource(R.mipmap.shape_3)
 
                     // 회원가입 버튼 활성화
-                    if(nameEdt.text.toString().trim().isNotEmpty() && emailEdt.text.toString().trim().isNotEmpty() && pwEdt.text.toString().trim().isNotEmpty() && joinBoolean) {
-                        signUpBtn.setBackgroundResource(R.drawable.loginbutton)
-                        signUpBtn.isEnabled = true
-                    }
+                    signUpBtn.setBackgroundResource(R.drawable.loginbutton)
+                    signUpBtn.isEnabled = true
                 } else {
                     pwConfirmEdt.setBackgroundResource(R.drawable.dotted)
                     joinBoolean = false
+                    pwConfirmCheck.setImageResource(R.mipmap.shape_4)
                 }
             }
             override fun afterTextChanged(s: Editable?) {
@@ -52,13 +91,39 @@ class SignUpActivity : AppCompatActivity() {
 
         signUpBtn.setOnClickListener {
             // 회원가입 버튼 활성화
-            if(!(nameEdt.text.toString().trim().isNotEmpty() && emailEdt.text.toString().trim().isNotEmpty() && pwEdt.text.toString().trim().isNotEmpty() && joinBoolean)) {
+            if(!(nameEdt.text.toString().trim().isNotEmpty() && emailBoolean && pwEdt.text.toString().trim().isNotEmpty() && joinBoolean)) {
                 if(!nameEdt.text.toString().trim().isNotEmpty()) nameEdt.requestFocus()
-                else if(!emailEdt.text.toString().trim().isNotEmpty()) emailEdt.requestFocus()
+                else if(emailBoolean) emailEdt.requestFocus()
                 else if(!pwEdt.text.toString().trim().isNotEmpty()) pwEdt.requestFocus()
                 else pwConfirmEdt.requestFocus()
             } else {
+                User.signUp = Signup(nameEdt.text.toString(), emailEdt.text.toString(), pwEdt.text.toString())
 
+                // 회원가입
+                var call: Call<Message> = APIRequestManager.getInstance().requestServer().signup(User.signUp)
+
+                call.enqueue(object: Callback<Message> {
+                    override fun onResponse(call: Call<Message>, response: Response<Message>) {
+                        when(response.code()) {
+                            200 -> {
+                                Log.d("SignUpActivity", "회원가입 성공")
+                                finish()
+                            }
+                            400 -> {
+                                Log.d("SignUpActivity", "회원가입 Error")
+                            }
+                            409 -> {
+                                Log.d("SignUpActivity", "이메일 중복")
+                                emailEdt.requestFocus()
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Message>, t: Throwable) {
+                        Log.e("SignUpActivity", "에러: " + t.message)
+                        t.printStackTrace()
+                    }
+                })
             }
         }
     }
