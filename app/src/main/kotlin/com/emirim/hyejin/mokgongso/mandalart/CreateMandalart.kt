@@ -24,7 +24,7 @@ class CreateMandalart : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mandalart_create)
 
-        // viewPager.adapter = adapter(supportFragmentManager)
+        viewPager.adapter = adapter(supportFragmentManager)
     }
 
     class adapter(fm: FragmentManager): FragmentPagerAdapter(fm) {

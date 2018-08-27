@@ -27,6 +27,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="20dp"
+        android:gravity="center"
         android:text="현재 만들어 놓은\n만다라트가 없어요!"/>
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
@@ -36,12 +37,12 @@
         app:layout_constraintGuide_percent="0.7" />
     <Button
         android:id="@+id/createBtn"
-        android:layout_width="300dp"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/guideline2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:text="만다라트 새로 만들기"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorPrimaryDark"
         android:background="@drawable/createbutton"/>
 </android.support.constraint.ConstraintLayout>

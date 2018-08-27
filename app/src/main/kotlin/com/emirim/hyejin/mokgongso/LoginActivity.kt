@@ -5,6 +5,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
+import com.emirim.hyejin.mokgongso.api.APIRequestManager
+import com.emirim.hyejin.mokgongso.model.Message
+import com.emirim.hyejin.mokgongso.model.Signin
+import com.emirim.hyejin.mokgongso.model.Signup
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -19,6 +23,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
 import com.google.firebase.auth.*
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_signup.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
     private var mAuth: FirebaseAuth? = null
@@ -77,6 +85,33 @@ class LoginActivity : AppCompatActivity() {
         join.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
         }
+
+        // local 로그인
+        loginBtn.setOnClickListener {
+            User.signIn = Signin(email.text.toString(), password.text.toString())
+
+            var call: Call<Message> = APIRequestManager.getInstance().requestServer().signIn(User.signIn)
+
+            call.enqueue(object: Callback<Message> {
+                override fun onResponse(call: Call<Message>, response: Response<Message>) {
+                    when(response.code()) {
+                        200 -> {
+                            Log.d(TAG, "로그인 성공")
+                            intentMandalart()
+                        }
+                        404 -> {
+                            Log.d(TAG, "로그인 실패")
+                            password.requestFocus()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<Message>, t: Throwable) {
+                    Log.e("SignUpActivity", "에러: " + t.message)
+                    t.printStackTrace()
+                }
+            })
+        }
     }
 
     override fun onStart() {
@@ -133,8 +168,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun updateUI(user: FirebaseUser?) {
         user?.let {
-            var intent = Intent(this, MandalartActivity::class.java)
-            startActivity(intent)
+            intentMandalart()
         }
     }
 
@@ -156,6 +190,11 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
         }
+    }
+
+    fun intentMandalart() {
+        var intent = Intent(this, MandalartActivity::class.java)
+        startActivity(intent)
     }
 }
 
