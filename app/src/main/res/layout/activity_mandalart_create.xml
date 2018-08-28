@@ -3,10 +3,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/tabDots"/>
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/guideline"/>
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/tabDots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleBar"
+        android:layout_marginTop="30dp">
+        <ImageView
+            android:id="@+id/dot1"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@drawable/default_dot"/>
+        <ImageView
+            android:id="@+id/dot2"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="7dp"
+            app:layout_constraintLeft_toRightOf="@id/dot1"
+            android:background="@drawable/default_dot"/>
+        <ImageView
+            android:id="@+id/dot3"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="7dp"
+            app:layout_constraintLeft_toRightOf="@id/dot2"
+            android:background="@drawable/default_dot"/>
+    </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
         android:id="@+id/titleBar"
         android:layout_width="match_parent"
