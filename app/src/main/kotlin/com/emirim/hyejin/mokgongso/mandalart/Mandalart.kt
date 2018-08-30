@@ -6,5 +6,6 @@ class Mandalart {
         var count: Int = 1
         var subMandalartTitle: ArrayList<String> = ArrayList()
         var position: Int = 1
+        var thirdCout = IntArray(8)
     }
 }
