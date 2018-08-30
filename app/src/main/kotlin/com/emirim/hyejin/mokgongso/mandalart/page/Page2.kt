@@ -35,8 +35,8 @@ class Page2 : Fragment() {
         var mandalartSub = arrayOf<EditText>(constraintLayout.mandalartSub1,constraintLayout.mandalartSub2,constraintLayout.mandalartSub3, constraintLayout.mandalartSub4, constraintLayout.mandalartSub5, constraintLayout.mandalartSub6, constraintLayout.mandalartSub7, constraintLayout.mandalartSub8)
 
         constraintLayout.rightArrow.setOnClickListener {
-            for(i in 1..(Mandalart.count - 1)) {
-                Mandalart.subMandalartTitle.add(mandalartSub[i].text.toString())
+            for(i in 1..(Mandalart.count)) {
+                Mandalart.subMandalartTitle.add(mandalartSub[i - 1  ].text.toString())
             }
 
             CreateMandalart.mViewPager.currentItem = 2

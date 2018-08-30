@@ -5,5 +5,6 @@ class Mandalart {
         var title: String? = null
         var count: Int = 1
         var subMandalartTitle: ArrayList<String> = ArrayList()
+        var position: Int = 1
     }
 }

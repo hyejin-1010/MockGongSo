@@ -11,7 +11,7 @@ import com.emirim.hyejin.mokgongso.mandalart.CreateMandalart
 import com.emirim.hyejin.mokgongso.mandalart.Mandalart
 import kotlinx.android.synthetic.main.activity_page_3.view.*
 
-public class Page3 : Fragment() {
+class Page3 : Fragment() {
     companion object {
         lateinit var mandalartSub: Array<TextView>
     }
@@ -38,6 +38,13 @@ public class Page3 : Fragment() {
         for(i in 1..(Mandalart.count - 1)) {
             mandalartSub[i - 1].setText("2")
             mandalartSub[i - 1].setBackgroundResource(R.drawable.mandalart_box_1)
+        }
+
+        for(i in 1..(Mandalart.count - 1)){
+            mandalartSub[i - 1].setOnClickListener {
+                Mandalart.position = i
+                CreateMandalart.mViewPager.currentItem = 3
+            }
         }
     }
 }

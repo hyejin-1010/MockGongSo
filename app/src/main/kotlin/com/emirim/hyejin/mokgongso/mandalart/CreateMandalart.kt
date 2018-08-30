@@ -12,11 +12,12 @@ import com.emirim.hyejin.mokgongso.R
 import com.emirim.hyejin.mokgongso.mandalart.page.Page1
 import com.emirim.hyejin.mokgongso.mandalart.page.Page2
 import com.emirim.hyejin.mokgongso.mandalart.page.Page3
+import com.emirim.hyejin.mokgongso.mandalart.page.Page4
 import kotlinx.android.synthetic.main.activity_mandalart_create.*
 
 class CreateMandalart : AppCompatActivity() {
     companion object {
-        val MAX_PAGE = 3
+        val MAX_PAGE = 4
         var curFragment = Fragment()
         lateinit var mViewPager: CustomViewPager
     }
@@ -50,6 +51,11 @@ class CreateMandalart : AppCompatActivity() {
                         dot2.setImageResource(R.drawable.default_dot)
                         dot3.setImageResource(R.drawable.selected_dot)
                     }
+                    3 -> {
+                        dot1.setImageResource(R.drawable.default_dot)
+                        dot2.setImageResource(R.drawable.default_dot)
+                        dot3.setImageResource(R.drawable.selected_dot)
+                    }
                 }
             }
             override fun onPageScrollStateChanged(state: Int) {
@@ -79,6 +85,10 @@ class CreateMandalart : AppCompatActivity() {
                 }
                 2 -> {
                     curFragment = Page3()
+                    return curFragment
+                }
+                3 -> {
+                    curFragment = Page4()
                     return curFragment
                 }
             }
