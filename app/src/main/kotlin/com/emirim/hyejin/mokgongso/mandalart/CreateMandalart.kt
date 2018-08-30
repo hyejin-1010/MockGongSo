@@ -1,30 +1,24 @@
 package com.emirim.hyejin.mokgongso.mandalart
 
-import android.content.Context
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
-import android.view.View
 
 import com.emirim.hyejin.mokgongso.R
 import com.emirim.hyejin.mokgongso.mandalart.page.Page1
 import com.emirim.hyejin.mokgongso.mandalart.page.Page2
 import com.emirim.hyejin.mokgongso.mandalart.page.Page3
 import kotlinx.android.synthetic.main.activity_mandalart_create.*
-import kotlinx.android.synthetic.main.activity_page_1.*
 
 class CreateMandalart : AppCompatActivity() {
     companion object {
         val MAX_PAGE = 3
         var curFragment = Fragment()
-        lateinit var mViewPager: ViewPager
+        lateinit var mViewPager: CustomViewPager
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

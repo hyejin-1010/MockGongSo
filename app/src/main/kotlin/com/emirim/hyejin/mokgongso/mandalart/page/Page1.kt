@@ -5,11 +5,13 @@ import android.support.constraint.ConstraintLayout
 import android.support.v4.app.Fragment
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.emirim.hyejin.mokgongso.R
 import com.emirim.hyejin.mokgongso.mandalart.CreateMandalart
+import com.emirim.hyejin.mokgongso.mandalart.Mandalart
 import kotlinx.android.synthetic.main.activity_mandalart_create.*
 import kotlinx.android.synthetic.main.activity_page_1.*
 import kotlinx.android.synthetic.main.activity_page_1.view.*
@@ -23,7 +25,6 @@ class Page1 : Fragment() {
         val constraintLayout = inflater.inflate(R.layout.activity_page_1, container, false) as ConstraintLayout
 
         constraintLayout.setBackgroundResource(R.color.backgroundColor)
-
         constraintLayout.rightArrow.visibility = View.GONE
 
         constraintLayout.mandalartTitle.addTextChangedListener(object: TextWatcher {
@@ -39,9 +40,9 @@ class Page1 : Fragment() {
         })
 
         constraintLayout.rightArrow.setOnClickListener {
+            Mandalart.title = constraintLayout.mandalartTitle.text.toString()
             CreateMandalart.mViewPager.currentItem = 1
         }
-
 
         return constraintLayout
     }

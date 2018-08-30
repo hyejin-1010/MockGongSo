@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.emirim.hyejin.mokgongso.LoginActivity
 import com.emirim.hyejin.mokgongso.R
 import com.emirim.hyejin.mokgongso.mandalart.CreateMandalart
+import com.emirim.hyejin.mokgongso.mandalart.Mandalart
 import kotlinx.android.synthetic.main.fragment_mandalart.view.*
 
 class MandalartFragment : Fragment() {
@@ -22,6 +23,8 @@ class MandalartFragment : Fragment() {
         val view: View = inflater?.inflate(R.layout.fragment_mandalart, container, false)
 
         view.createBtn.setOnClickListener {
+            Mandalart.count = 1
+
             var intent = Intent(activity, CreateMandalart::class.java)
             startActivity(intent)
         }
