@@ -36,7 +36,7 @@ class Page2 : Fragment() {
 
         constraintLayout.rightArrow.setOnClickListener {
             for(i in 1..(Mandalart.count)) {
-                Mandalart.subMandalartTitle.add(mandalartSub[i - 1  ].text.toString())
+                Mandalart.subMandalartTitle[i - 1] = mandalartSub[i-1].text.toString()
             }
 
             CreateMandalart.mViewPager.currentItem = 2
