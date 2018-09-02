@@ -12,6 +12,7 @@ import com.emirim.hyejin.mokgongso.api.APIRequestManager
 import com.emirim.hyejin.mokgongso.mandalart.CreateMandalart
 import com.emirim.hyejin.mokgongso.mandalart.Mandalart
 import com.emirim.hyejin.mokgongso.model.Message
+import com.emirim.hyejin.mokgongso.model.Middle
 import kotlinx.android.synthetic.main.activity_page_3.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -36,9 +37,24 @@ class Page3 : Fragment() {
         }
 
         constraintLayout.rightArrow.setOnClickListener {
-            com.emirim.hyejin.mokgongso.Mandalart.mandalart = com.emirim.hyejin.mokgongso.model.Mandalart(Mandalart.title.toString(), Mandalart.subMandalartTitle, Mandalart.thirdContent)
+            // var test: Array<String> = Array<String>(8, {""})
+            // var middleArray: Array<Middle> = Array<Middle>(8, {Middle("", test)})
+            var middle: ArrayList<Middle> = ArrayList()
 
-            var call: Call<Message> = APIRequestManager.getInstance().requestServer().mandalart(com.emirim.hyejin.mokgongso.Mandalart.mandalart)
+            for(i in 1..(Mandalart.count - 1)) {
+                middle.add(Middle(Mandalart.subMandalartTitle[i - 1], Mandalart.thirdContent[i - 1].toList().toString()))
+            }
+
+            // middleArray = middle.toArray(middleArray)
+
+            com.emirim.hyejin.mokgongso.Mandalart.makemandalart = com.emirim.hyejin.mokgongso.model.Mandalart(Mandalart.title.toString(), middle)
+
+            for(i in 1..middle.size) {
+                Log.d("Page3", com.emirim.hyejin.mokgongso.Mandalart.makemandalart.middle[i - 1].title)
+                Log.d("Page3", com.emirim.hyejin.mokgongso.Mandalart.makemandalart.middle[i - 1].small)
+            }
+
+            var call: Call<Message> = APIRequestManager.getInstance().requestServer().make(com.emirim.hyejin.mokgongso.Mandalart.makemandalart)
 
             call.enqueue(object: Callback<Message> {
                 override fun onResponse(call: Call<Message>, response: Response<Message>) {

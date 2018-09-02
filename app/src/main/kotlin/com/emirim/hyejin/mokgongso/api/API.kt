@@ -20,5 +20,5 @@ interface API {
     fun signIn(@Body signIn: Signin): Call<Message>
 
     @POST("/make/app/")
-    fun mandalart(@Body mandalart: Mandalart): Call<Message>
+    fun make(@Body make: Mandalart): Call<Message>
 }
