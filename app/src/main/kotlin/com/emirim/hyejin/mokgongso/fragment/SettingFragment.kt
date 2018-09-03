@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import com.emirim.hyejin.mokgongso.LoginActivity
 import com.emirim.hyejin.mokgongso.MainActivity
 import com.emirim.hyejin.mokgongso.MandalartActivity
 import com.emirim.hyejin.mokgongso.R
@@ -41,6 +42,11 @@ class SettingFragment : Fragment() {
         mAuth = FirebaseAuth.getInstance()
 
         signOutBtn.setOnClickListener {
+            var editor = LoginActivity.appData!!.edit()
+
+            editor.clear()
+            editor.commit()
+
             signOut()
         }
 

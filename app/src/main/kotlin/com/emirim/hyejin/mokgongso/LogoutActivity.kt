@@ -3,7 +3,7 @@ package com.emirim.hyejin.mokgongso
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.Toast
+import android.util.Log
 import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -30,8 +30,17 @@ class LogoutActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
 
         signOutBtn.setOnClickListener {
-            Toast.makeText(this, "ID : ${mAuth!!.currentUser?.email}", Toast.LENGTH_SHORT).show()
-            signOut()
+            //Toast.makeText(this, "ID : ${mAuth!!.currentUser?.email}", Toast.LENGTH_SHORT).show()
+            var editor = LoginActivity.appData!!.edit()
+
+             editor.clear()
+             editor.commit()
+
+             var token: String = LoginActivity.appData!!.getString("ID", "")
+
+             Log.d("뭘까", "ss")
+
+            // signOut()
         }
     }
 
@@ -42,11 +51,7 @@ class LogoutActivity : AppCompatActivity() {
         mGoogleSignInClient!!.signOut().addOnCompleteListener(this) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
-    }
-
-    private fun intentMain() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
     }
 }

@@ -1,12 +1,17 @@
 package com.emirim.hyejin.mokgongso
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
 import com.emirim.hyejin.mokgongso.api.APIRequestManager
 import com.emirim.hyejin.mokgongso.model.Message
+import com.emirim.hyejin.mokgongso.model.SignInMessage
 import com.emirim.hyejin.mokgongso.model.Signin
 import com.emirim.hyejin.mokgongso.model.Signup
 import com.facebook.AccessToken
@@ -36,6 +41,7 @@ class LoginActivity : AppCompatActivity() {
     companion object {
         const val TAG: String = "LoginActivity"
         const val RC_SIGN_IN: Int = 9001 // ?
+        var appData: SharedPreferences? = null
     }
 
     private var mGoogleSignInClient: GoogleSignInClient? = null
@@ -44,6 +50,18 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        // local login _ SharedPreferences
+        appData = this.getSharedPreferences("Mandalart", 0)
+
+        // 설정값 불러옴
+        var token: String = appData!!.getString("ID", "")
+
+        Log.d("뭐지", token)
+
+        if(token.isNotEmpty()) {
+            intentMandalart()
+        }
 
         // google
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -90,13 +108,20 @@ class LoginActivity : AppCompatActivity() {
         loginBtn.setOnClickListener {
             User.signIn = Signin(email.text.toString(), password.text.toString())
 
-            var call: Call<Message> = APIRequestManager.getInstance().requestServer().signIn(User.signIn)
+            var call: Call<SignInMessage> = APIRequestManager.getInstance().requestServer().signIn(User.signIn)
 
-            call.enqueue(object: Callback<Message> {
-                override fun onResponse(call: Call<Message>, response: Response<Message>) {
+            call.enqueue(object: Callback<SignInMessage> {
+                override fun onResponse(call: Call<SignInMessage>, response: Response<SignInMessage>) {
                     when(response.code()) {
                         200 -> {
-                            Log.d(TAG, "로그인 성공")
+                            val message: SignInMessage = response.body() as SignInMessage
+                            Log.d(TAG, "로그인 성공 ${message.token}")
+
+                            val editor = appData!!.edit()
+
+                            editor.putString("ID", message.token.trim())
+                            editor.apply()
+
                             intentMandalart()
                         }
                         404 -> {
@@ -106,7 +131,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<Message>, t: Throwable) {
+                override fun onFailure(call: Call<SignInMessage>, t: Throwable) {
                     Log.e("SignUpActivity", "에러: " + t.message)
                     t.printStackTrace()
                 }
