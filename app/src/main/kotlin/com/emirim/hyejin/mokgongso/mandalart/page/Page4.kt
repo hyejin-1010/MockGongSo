@@ -4,11 +4,13 @@ import android.os.Bundle
 import com.emirim.hyejin.mokgongso.model.Message
 import android.support.v4.app.Fragment
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.emirim.hyejin.mokgongso.R
 import com.emirim.hyejin.mokgongso.api.APIRequestManager
 import com.emirim.hyejin.mokgongso.mandalart.CreateMandalart
@@ -27,6 +29,7 @@ class Page4 : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -54,6 +57,17 @@ class Page4 : Fragment() {
 
             Mandalart.thirdCout[Mandalart.position - 1] ++
         }
+
+        /*constraintLayout.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if(keyCode == KeyEvent.KEYCODE_BACK) {
+                CreateMandalart.mViewPager.currentItem = 2
+                Toast.makeText(activity, "있잖아", Toast.LENGTH_LONG).show()
+
+                false
+            } else {
+                return@OnKeyListener true
+            }
+        })*/
 
         return constraintLayout
     }

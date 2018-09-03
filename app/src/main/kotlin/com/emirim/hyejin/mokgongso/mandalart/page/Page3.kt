@@ -36,45 +36,6 @@ class Page3 : Fragment() {
             CreateMandalart.mViewPager.currentItem = 1
         }
 
-        constraintLayout.rightArrow.setOnClickListener {
-            // var test: Array<String> = Array<String>(8, {""})
-            // var middleArray: Array<Middle> = Array<Middle>(8, {Middle("", test)})
-            var middle: ArrayList<Middle> = ArrayList()
-
-            for(i in 1..(Mandalart.count - 1)) {
-                middle.add(Middle(Mandalart.subMandalartTitle[i - 1], Mandalart.thirdContent[i - 1].toList().toString()))
-            }
-
-            // middleArray = middle.toArray(middleArray)
-
-            com.emirim.hyejin.mokgongso.Mandalart.makemandalart = com.emirim.hyejin.mokgongso.model.Mandalart(Mandalart.title.toString(), middle)
-
-            for(i in 1..middle.size) {
-                Log.d("Page3", com.emirim.hyejin.mokgongso.Mandalart.makemandalart.middle[i - 1].title)
-                Log.d("Page3", com.emirim.hyejin.mokgongso.Mandalart.makemandalart.middle[i - 1].small)
-            }
-
-            var call: Call<Message> = APIRequestManager.getInstance().requestServer().make(com.emirim.hyejin.mokgongso.Mandalart.makemandalart)
-
-            call.enqueue(object: Callback<Message> {
-                override fun onResponse(call: Call<Message>, response: Response<Message>) {
-                    when(response.code()) {
-                        200 -> {
-                            Log.d("Page4", "성공")
-                        }
-                        404 -> {
-                            Log.d("Page4", "반성공")
-                        }
-                    }
-                }
-
-                override fun onFailure(call: Call<Message>, t: Throwable) {
-                    Log.e("Page4", "실패: " + t.message)
-                    t.printStackTrace()
-                }
-            })
-        }
-
         return constraintLayout
     }
 
