@@ -17,4 +17,7 @@ interface API {
 
     @POST("/make/app/")
     fun make(@Body make: Mandalart): Call<Message>
+
+    @POST("/mandalChk/app/")
+    fun mandalChk(@Body mandalChk: MandalChk): Call<MandalChkMessage>
 }
