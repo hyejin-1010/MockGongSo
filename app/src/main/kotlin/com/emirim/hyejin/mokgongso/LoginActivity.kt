@@ -220,6 +220,7 @@ class LoginActivity : AppCompatActivity() {
     fun intentMandalart() {
         var intent = Intent(this, MandalartActivity::class.java)
         startActivity(intent)
+        finish()
     }
 }
 

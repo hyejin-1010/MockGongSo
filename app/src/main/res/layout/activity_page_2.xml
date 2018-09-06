@@ -67,71 +67,69 @@
         android:background="@drawable/mandalart_box_1"
         android:textColor="@color/colorPrimaryDark"
         android:layout_marginTop="30dp" />
-    <android.support.constraint.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="280dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/mandalartTitle">
-        <ScrollView
+        android:maxHeight="280dp"
+        android:minHeight="280dp"
+        app:layout_constraintTop_toBottomOf="@id/mandalartTitle"
+        android:layout_marginTop="20dp">
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <EditText
-                    android:id="@+id/mandalartSub1"
-                    android:layout_width="290dp"
-                    android:layout_height="45dp"
-                    android:visibility="gone"
-                    android:gravity="center"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:background="@drawable/mandalart_box_2"
-                    app:layout_constraintTop_toBottomOf="@id/mandalartTitle"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:layout_marginTop="15dp" />
-                <EditText
-                    android:id="@+id/mandalartSub2"
-                    android:layout_width="290dp"
-                    android:layout_height="45dp"
-                    android:visibility="gone"
-                    android:gravity="center"
-                    app:layout_constraintTop_toBottomOf="@id/mandalartSub1"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:background="@drawable/mandalart_box_2"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:layout_marginTop="15dp" />
-                <EditText
-                    android:id="@+id/mandalartSub3"
-                    android:layout_width="290dp"
-                    android:layout_height="45dp"
-                    android:visibility="gone"
-                    android:gravity="center"
-                    app:layout_constraintTop_toBottomOf="@id/mandalartSub2"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:background="@drawable/mandalart_box_2"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:layout_marginTop="15dp" />
-                <EditText
-                    android:id="@+id/mandalartSub4"
-                    android:layout_width="290dp"
-                    android:layout_height="45dp"
-                    android:visibility="gone"
-                    android:gravity="center"
-                    app:layout_constraintTop_toBottomOf="@id/mandalartSub3"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:background="@drawable/mandalart_box_2"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:layout_marginTop="15dp" />
-                <EditText
-                    android:id="@+id/mandalartSub5"
-                    android:layout_width="290dp"
-                    android:layout_height="45dp"
-                    android:visibility="gone"
-                    android:gravity="center"
+            <EditText
+                android:id="@+id/mandalartSub1"
+                android:layout_width="290dp"
+                android:layout_height="45dp"
+                android:visibility="gone"
+                android:gravity="center"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:background="@drawable/mandalart_box_2"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginTop="15dp" />
+            <EditText
+                android:id="@+id/mandalartSub2"
+                android:layout_width="290dp"
+                android:layout_height="45dp"
+                android:visibility="gone"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/mandalartSub1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:background="@drawable/mandalart_box_2"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginTop="15dp" />
+            <EditText
+                android:id="@+id/mandalartSub3"
+                android:layout_width="290dp"
+                android:layout_height="45dp"
+                android:visibility="gone"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/mandalartSub2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:background="@drawable/mandalart_box_2"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginTop="15dp" />
+            <EditText
+                android:id="@+id/mandalartSub4"
+                android:layout_width="290dp"
+                android:layout_height="45dp"
+                android:visibility="gone"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/mandalartSub3"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:background="@drawable/mandalart_box_2"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginTop="15dp" />
+            <EditText
+                android:id="@+id/mandalartSub5"
+                android:layout_width="290dp"
+                android:layout_height="45dp"
+                android:visibility="gone"
+                android:gravity="center"
                     app:layout_constraintTop_toBottomOf="@id/mandalartSub4"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -189,5 +187,4 @@
                     android:layout_marginTop="25dp"/>
             </android.support.constraint.ConstraintLayout>
         </ScrollView>
-    </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

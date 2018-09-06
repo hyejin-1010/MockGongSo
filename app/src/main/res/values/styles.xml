@@ -44,4 +44,8 @@
     <style name="TextStyle6">
         <item name="android:textSize">19sp</item>
     </style>
+    
+    <style name="EditText1">
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
 </resources>

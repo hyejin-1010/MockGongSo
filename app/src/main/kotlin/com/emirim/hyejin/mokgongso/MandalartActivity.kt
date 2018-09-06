@@ -10,8 +10,10 @@ import android.util.Log
 import android.view.MenuItem
 import com.emirim.hyejin.mokgongso.api.APIRequestManager
 import com.emirim.hyejin.mokgongso.fragment.MandalartFragment
+import com.emirim.hyejin.mokgongso.fragment.MandalartViewFragment
 import com.emirim.hyejin.mokgongso.fragment.SettingFragment
 import com.emirim.hyejin.mokgongso.helper.BottomNavigationViewHelper
+import com.emirim.hyejin.mokgongso.model.GetMandal
 import com.emirim.hyejin.mokgongso.model.MandalChk
 import com.emirim.hyejin.mokgongso.model.MandalChkMessage
 import kotlinx.android.synthetic.main.activity_mandalart.*
@@ -32,6 +34,26 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
 
         Mandalart.mandalChk = MandalChk(LoginActivity.appData!!.getString("ID", ""))
 
+        var call2: Call<GetMandal> = APIRequestManager.getInstance().requestServer().getMandal(Mandalart.mandalChk)
+
+        call2.enqueue(object: Callback<GetMandal> {
+            override fun onResponse(call: Call<GetMandal>, response: Response<GetMandal>) {
+                when(response.code()) {
+                    200 -> {
+                        val getMandal: GetMandal = response.body() as GetMandal
+                        Log.d("ServerMandal", getMandal.toString())
+                    }
+                    404 -> {
+                        Log.d("ServerMandal", "실패")
+                    }
+                }
+            }
+            override fun onFailure(call: Call<GetMandal>, t: Throwable) {
+                Log.e("ServerMandal", "에러: " + t.message)
+                t.printStackTrace()
+            }
+        })
+
         var call: Call<MandalChkMessage> = APIRequestManager.getInstance().requestServer().mandalChk(Mandalart.mandalChk)
 
         call.enqueue(object: Callback<MandalChkMessage> {
@@ -41,6 +63,11 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                         val message: MandalChkMessage = response.body() as MandalChkMessage
                         Log.d("MandalartActivity", "만다라트 유무 ${message.mandal.title}")
                         mandalBoolean = true
+                        supportFragmentManager
+                                .beginTransaction()
+                                .add(R.id.frameLayout, MandalartViewFragment.newInstance())
+                                .commit()
+                        rightButton.setImageResource(R.mipmap.pencil)
                     }
                     204 -> {
                         Log.d("MandalartActivity", "만다라트 없음")
@@ -81,6 +108,11 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         when(item.itemId) {
             R.id.action_mandalart -> {
                 if(mandalBoolean){
+                    supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.frameLayout, MandalartViewFragment.newInstance())
+                            .commit()
+                    rightButton.setImageResource(R.mipmap.pencil)
                 }
                 else {
                     supportFragmentManager

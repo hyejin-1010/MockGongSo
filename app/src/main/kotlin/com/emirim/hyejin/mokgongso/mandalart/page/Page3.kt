@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.TextView
 import com.emirim.hyejin.mokgongso.R
 import com.emirim.hyejin.mokgongso.api.APIRequestManager

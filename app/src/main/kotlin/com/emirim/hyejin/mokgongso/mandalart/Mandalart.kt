@@ -9,5 +9,10 @@ class Mandalart {
         var thirdCout = IntArray(8)
         var count: Int = 1
         var position: Int = 1
+
+        var secondSelect = -1
+        var thirdSelect = -1
+
+        var viewer = 0
     }
 }

@@ -45,7 +45,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".mandalart.CreateMandalart" />
+        <activity android:name=".mandalart.CreateMandalart" android:windowSoftInputMode="adjustResize|adjustPan" />
         <activity android:name=".SignUpActivity" />
     </application>
 </manifest>

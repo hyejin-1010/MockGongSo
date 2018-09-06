@@ -20,4 +20,7 @@ interface API {
 
     @POST("/mandalChk/app/")
     fun mandalChk(@Body mandalChk: MandalChk): Call<MandalChkMessage>
+
+    @POST("/getMandal/app/")
+    fun getMandal(@Body mandalChk: MandalChk): Call<GetMandal>
 }
