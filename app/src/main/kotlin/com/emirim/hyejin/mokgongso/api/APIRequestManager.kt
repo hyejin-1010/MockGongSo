@@ -1,5 +1,7 @@
 package com.emirim.hyejin.mokgongso.api
 
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -19,7 +21,12 @@ class APIRequestManager {
     }
 
     fun requestServer(): API {
-        retrofit = Retrofit.Builder().baseUrl(SERVER_URL).addConverterFactory(GsonConverterFactory.create()).build()
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+
+        val okHttpClient = OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build()
+
+        retrofit = Retrofit.Builder().baseUrl(SERVER_URL).client(okHttpClient).addConverterFactory(GsonConverterFactory.create()).build()
 
         return retrofit.create(API::class.java)
     }
