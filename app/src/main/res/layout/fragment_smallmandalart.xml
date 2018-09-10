@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="바라는 회사 취업하기"
+        android:gravity="center"
+        style="@style/textStyle5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/guideline"/>
+    <View
+        android:id="@+id/line"
+        android:layout_width="200dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        android:background="@color/colorPrimaryDark"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/canvasLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/line">
+
+        <com.emirim.hyejin.mokgongso.View.TriangleView
+            android:id="@+id/t1"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            app:color="@color/colorPrimaryDark"
+            app:direction="up"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <com.emirim.hyejin.mokgongso.View.TriangleView
+            android:id="@+id/t2"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            app:color="@color/colorPrimary"
+            app:direction="down"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/t1" />
+    </android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/canvasLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/canvasLayout1">
+        <com.emirim.hyejin.mokgongso.View.TriangleView
+            android:id="@+id/t3"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            app:color="@color/colorPrimaryDark"
+            app:direction="up"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginRight="160dp"/>
+
+        <com.emirim.hyejin.mokgongso.View.TriangleView
+            android:id="@+id/t4"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            app:color="@color/white"
+            app:direction="up"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="160dp"/>
+    </android.support.constraint.ConstraintLayout>
+    <!--
+    <TextView
+        android:id="@+id/t1"
+        android:layout_width="150dp"
+        android:layout_height="180dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line"
+        android:rotation="270"
+        android:background="@drawable/triangle"/>
+        -->
+
+
+
+</android.support.constraint.ConstraintLayout>

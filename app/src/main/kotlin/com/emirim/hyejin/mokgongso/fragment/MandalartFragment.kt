@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.emirim.hyejin.mokgongso.LoginActivity
 import com.emirim.hyejin.mokgongso.R
 import com.emirim.hyejin.mokgongso.mandalart.CreateMandalart
@@ -20,15 +21,19 @@ class MandalartFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater?.inflate(R.layout.fragment_mandalart, container, false)
+        val containtLayout: View = inflater?.inflate(R.layout.fragment_mandalart, container, false)
 
-        view.createBtn.setOnClickListener {
+        containtLayout.icon.setOnClickListener {
+            Toast.makeText(activity, "으", Toast.LENGTH_SHORT).show()
+        }
+
+        containtLayout.createBtn.setOnClickListener {
             Mandalart.count = 1
 
             var intent = Intent(activity, CreateMandalart::class.java)
             startActivity(intent)
         }
 
-        return view
+        return containtLayout
     }
 }

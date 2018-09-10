@@ -54,7 +54,6 @@
         </android.support.design.widget.BottomNavigationView>
     </android.support.constraint.ConstraintLayout>
 
-    <!--
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabBtn"
         android:layout_width="wrap_content"
@@ -64,9 +63,16 @@
         android:layout_marginBottom="8dp"
         android:elevation="6dp"
         app:layout_anchor="@id/bottomNavigation"
-        android:background="@mipmap/floating"
+        android:src="@mipmap/floating"
+        android:background="@color/colorPrimary"
+        android:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="@color/colorPrimaryDark"
         app:layout_anchorGravity="top|center"
-        android:scaleType="center"/> -->
+        app:borderWidth="2dp"
+        android:scaleType="center"/>
+
+    <include layout="@layout/fab_layout"/>
+    <!--
     <ImageView
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -75,5 +81,6 @@
         app:layout_anchor="@id/bottomNavigation"
         android:src="@mipmap/floating"
         app:layout_anchorGravity="top|center" />
+        -->
 
 </android.support.design.widget.CoordinatorLayout>

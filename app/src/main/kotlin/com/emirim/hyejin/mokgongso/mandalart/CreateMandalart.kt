@@ -10,6 +10,8 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
+import android.view.animation.AnimationUtils
+import android.widget.FrameLayout
 import android.widget.Toast
 
 import com.emirim.hyejin.mokgongso.R
@@ -21,6 +23,7 @@ import com.emirim.hyejin.mokgongso.mandalart.page.Page4
 import com.emirim.hyejin.mokgongso.model.Message
 import com.emirim.hyejin.mokgongso.model.Middle
 import kotlinx.android.synthetic.main.activity_mandalart_create.*
+import kotlinx.android.synthetic.main.fab_layout.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,6 +33,7 @@ class CreateMandalart : AppCompatActivity() {
         val MAX_PAGE = 4
         var curFragment = Fragment()
         lateinit var mViewPager: CustomViewPager
+        var boolean = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -101,8 +105,12 @@ class CreateMandalart : AppCompatActivity() {
             for(i in 1..(Mandalart.count - 1)) {
                 middle.add(Middle(Mandalart.subMandalartTitle[i - 1], Mandalart.thirdContent[i - 1].toList()))
             }
+            for(i in Mandalart.count .. 8) {
+                middle.add(Middle("", Mandalart.thirdContent[i - 1].toList()))
+            }
 
-            com.emirim.hyejin.mokgongso.Mandalart.makemandalart = com.emirim.hyejin.mokgongso.model.Mandalart(Mandalart.title.toString(), middle)
+            var appData = this.getSharedPreferences("Mandalart", 0)
+            com.emirim.hyejin.mokgongso.Mandalart.makemandalart = com.emirim.hyejin.mokgongso.model.Mandalart(Mandalart.title.toString(), appData.getString("ID", ""), middle)
 
             for(i in 1..middle.size) {
                 Log.d("Page3", com.emirim.hyejin.mokgongso.Mandalart.makemandalart.middle[i - 1].title)

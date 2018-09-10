@@ -12,6 +12,7 @@ import com.emirim.hyejin.mokgongso.api.APIRequestManager
 import com.emirim.hyejin.mokgongso.fragment.MandalartFragment
 import com.emirim.hyejin.mokgongso.fragment.MandalartViewFragment
 import com.emirim.hyejin.mokgongso.fragment.SettingFragment
+import com.emirim.hyejin.mokgongso.fragment.SmallMandalartFragment
 import com.emirim.hyejin.mokgongso.helper.BottomNavigationViewHelper
 import com.emirim.hyejin.mokgongso.model.GetMandal
 import com.emirim.hyejin.mokgongso.model.MandalChk
@@ -41,7 +42,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                 when(response.code()) {
                     200 -> {
                         val getMandal: GetMandal = response.body() as GetMandal
-                        Log.d("ServerMandal", getMandal.toString())
+                        Log.d("ServerMandal", response.body().toString())
                     }
                     404 -> {
                         Log.d("ServerMandal", "실패")
@@ -123,6 +124,11 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                 return true
             }
             R.id.action_smaill_mandalart -> {
+                supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frameLayout, SmallMandalartFragment.newInstance())
+                        .commit()
+
                 return true
             }
             R.id.action_store -> {
