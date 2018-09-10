@@ -13,15 +13,20 @@ import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import android.widget.Toast
+import com.emirim.hyejin.mokgongso.LoginActivity
 
 import com.emirim.hyejin.mokgongso.R
 import com.emirim.hyejin.mokgongso.api.APIRequestManager
+import com.emirim.hyejin.mokgongso.fragment.MandalartFragment
+import com.emirim.hyejin.mokgongso.fragment.MandalartViewFragment
 import com.emirim.hyejin.mokgongso.mandalart.page.Page1
 import com.emirim.hyejin.mokgongso.mandalart.page.Page2
 import com.emirim.hyejin.mokgongso.mandalart.page.Page3
 import com.emirim.hyejin.mokgongso.mandalart.page.Page4
+import com.emirim.hyejin.mokgongso.model.MandalChk
 import com.emirim.hyejin.mokgongso.model.Message
 import com.emirim.hyejin.mokgongso.model.Middle
+import com.emirim.hyejin.mokgongso.model.Re
 import kotlinx.android.synthetic.main.activity_mandalart_create.*
 import kotlinx.android.synthetic.main.fab_layout.*
 import retrofit2.Call
@@ -124,6 +129,25 @@ class CreateMandalart : AppCompatActivity() {
                     when(response.code()) {
                         200 -> {
                             Log.d("Page4", "성공")
+
+                            com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(LoginActivity.appData!!.getString("ID", ""))
+
+                            var call: Call<Re> = APIRequestManager.getInstance().requestServer().getMandal(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
+
+                            call.enqueue(object: Callback<Re> {
+                                override fun onResponse(call: Call<Re>, response: Response<Re>) {
+                                    when(response.code()) {
+                                        200 -> {
+                                            val re: Re = response.body() as Re
+                                            com.emirim.hyejin.mokgongso.Mandalart.re = re
+                                        }
+                                    }
+                                }
+                                override fun onFailure(call: Call<Re>, t: Throwable) {
+                                    Log.e("ServerMandal", "에러: " + t.message)
+                                    t.printStackTrace()
+                                }
+                            })
                         }
                         404 -> {
                             Log.d("Page4", "반성공")

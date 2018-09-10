@@ -3,8 +3,11 @@ package com.emirim.hyejin.mokgongso.mandalart
 class Mandalart {
     companion object {
         var title: String? = null
+        var achievement: Int = 0
+
         var subMandalartTitle = Array<String>(8, {""})
         var thirdContent = Array(8, { Array<String>(8, {""}) })
+        var thirdAchievement = Array(8, { IntArray(8) })
 
         var thirdCout = IntArray(8)
         var count: Int = 1

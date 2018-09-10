@@ -22,5 +22,5 @@ interface API {
     fun mandalChk(@Body mandalChk: MandalChk): Call<MandalChkMessage>
 
     @POST("/getMandal/app/")
-    fun getMandal(@Body mandalChk: MandalChk): Call<GetMandal>
+    fun getMandal(@Body mandalChk: MandalChk): Call<Re>
 }

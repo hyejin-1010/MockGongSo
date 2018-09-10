@@ -47,6 +47,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
 
+    // Wave Library
+    implementation 'me.itangqi.waveloadingview:library:0.3.5'
+
     testImplementation 'junit:junit:4.12'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

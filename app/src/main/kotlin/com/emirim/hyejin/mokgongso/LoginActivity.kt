@@ -10,10 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
 import com.emirim.hyejin.mokgongso.api.APIRequestManager
-import com.emirim.hyejin.mokgongso.model.Message
-import com.emirim.hyejin.mokgongso.model.SignInMessage
-import com.emirim.hyejin.mokgongso.model.Signin
-import com.emirim.hyejin.mokgongso.model.Signup
+import com.emirim.hyejin.mokgongso.model.*
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -42,6 +39,7 @@ class LoginActivity : AppCompatActivity() {
         const val TAG: String = "LoginActivity"
         const val RC_SIGN_IN: Int = 9001 // ?
         var appData: SharedPreferences? = null
+        var boolean = false
     }
 
     private var mGoogleSignInClient: GoogleSignInClient? = null
@@ -56,8 +54,6 @@ class LoginActivity : AppCompatActivity() {
 
         // 설정값 불러옴
         var token: String = appData!!.getString("ID", "")
-
-        Log.d("뭐지", token)
 
         if(token.isNotEmpty()) {
             intentMandalart()
@@ -219,6 +215,7 @@ class LoginActivity : AppCompatActivity() {
 
     fun intentMandalart() {
         var intent = Intent(this, MandalartActivity::class.java)
+
         startActivity(intent)
         finish()
     }
