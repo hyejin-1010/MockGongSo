@@ -11,13 +11,16 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import com.emirim.hyejin.mokgongso.api.APIRequestManager
 import com.emirim.hyejin.mokgongso.fragment.*
 import com.emirim.hyejin.mokgongso.helper.BottomNavigationViewHelper
 import com.emirim.hyejin.mokgongso.mandalart.CreateMandalart
 import com.emirim.hyejin.mokgongso.mandalart.Mandalart
 import com.emirim.hyejin.mokgongso.model.MandalChk
+import com.emirim.hyejin.mokgongso.model.Message
 import com.emirim.hyejin.mokgongso.model.Re
+import com.emirim.hyejin.mokgongso.model.SetLow
 import kotlinx.android.synthetic.main.activity_mandalart.*
 import kotlinx.android.synthetic.main.fab_layout.*
 import kotlinx.android.synthetic.main.fab_layout.view.*
@@ -147,8 +150,41 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                 // 작은 만다라트
             } else {
                 if(Mandalart.viewer == 2){
-                    Mandalart.viewer = 1
-                    Mandalart.thirdSelect = -1
+                    com.emirim.hyejin.mokgongso.Mandalart.setLow = SetLow(LoginActivity.appData!!.getString("ID", ""), Mandalart.secondSelect, Mandalart.thirdSelect, Mandalart.tmpAchievement)
+
+                    var call: Call<Message> = APIRequestManager.getInstance().requestServer().setLow(com.emirim.hyejin.mokgongso.Mandalart.setLow)
+
+                    call.enqueue(object: Callback<Message> {
+                        override fun onResponse(call: Call<Message>, response: Response<Message>) {
+                            when(response.code()) {
+                                200 -> {
+                                    Log.d("ThirdMandalart", response.body().toString())
+
+                                    Mandalart.thirdAchievement[Mandalart.secondSelect][Mandalart.thirdSelect] = Mandalart.tmpAchievement
+
+                                    Mandalart.viewer = 1
+                                    Mandalart.thirdSelect = -1
+
+                                    supportFragmentManager
+                                            .beginTransaction()
+                                            .replace(R.id.frameLayout, MandalartViewFragment.newInstance())
+                                            .commit()
+
+
+                                    MandalartActivity.rightButtonImageView.setImageResource(R.mipmap.pencil)
+                                }
+                                404 -> {
+                                }
+                                500 -> {
+                                    Log.d("ThirdMandalart", "실패")
+                                }
+                            }
+                        }
+                        override fun onFailure(call: Call<Message>, t: Throwable) {
+                            Log.e("ThirdMandalart", "에러: " + t.message)
+                            t.printStackTrace()
+                        }
+                    })
                 } else {
                     var intent = Intent(this, CreateMandalart::class.java)
                     startActivity(intent)
@@ -180,6 +216,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         when(item.itemId) {
             R.id.action_mandalart -> {
                 mandalartViewerInit()
+                titlebartxt.text = "만다라트"
 
                 if(mandalBoolean){
                     supportFragmentManager
@@ -203,6 +240,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                 return true
             }
             R.id.action_smaill_mandalart -> {
+                titlebartxt.text = "작은목표"
                 supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.frameLayout, SmallMandalartBeforeFragment.newInstance())
@@ -213,9 +251,11 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                 return true
             }
             R.id.action_store -> {
+                titlebartxt.text = "상점"
                 return true
             }
             R.id.action_setting -> {
+                titlebartxt.text = "환경설정"
                 supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.frameLayout, SettingFragment.newInstance())

@@ -30,15 +30,18 @@ class MandalartViewThirdFragment : Fragment() {
         fun newInstance(): MandalartViewThirdFragment {
             return MandalartViewThirdFragment()
         }
+
+        lateinit var containtLayout: View
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val containtLayout: View = inflater?.inflate(R.layout.fragment_mandalartviewthird, container, false)
+        containtLayout = inflater?.inflate(R.layout.fragment_mandalartviewthird, container, false)
 
         containtLayout.wave.progressValue = Mandalart.thirdAchievement[Mandalart.secondSelect][Mandalart.thirdSelect]
 
         containtLayout.title.text = Mandalart.thirdContent[Mandalart.secondSelect][Mandalart.thirdSelect]
         containtLayout.subTitle.text = Mandalart.thirdAchievement[Mandalart.secondSelect][Mandalart.thirdSelect].toString()
+
 
         var mHandler = Handler()
 
@@ -46,62 +49,21 @@ class MandalartViewThirdFragment : Fragment() {
             mHandler.postDelayed({
                 if(containtLayout.wave.progressValue < 100) {
                     containtLayout.wave.progressValue = containtLayout.wave.progressValue + 1
+                    Mandalart.tmpAchievement = containtLayout.wave.progressValue
                     containtLayout.wave.centerTitle = containtLayout.wave.progressValue.toString()
+
+                    /*try {
+                        Thread.sleep(100)
+                    } catch (e: InterruptedException){
+                        e.printStackTrace()
+                    }*/
                 }
-            }, 3000)
+            }, 0)
 
             return@OnTouchListener true
         })
 
         MandalartActivity.rightButtonImageView.setImageResource(R.drawable.confirm)
-
-        MandalartActivity.rightButtonImageView.setOnClickListener {
-            if(Mandalart.position == 2) {
-
-            } else {
-                if(Mandalart.viewer == 2){
-                    com.emirim.hyejin.mokgongso.Mandalart.setLow = SetLow(LoginActivity.appData!!.getString("ID", ""), Mandalart.secondSelect, Mandalart.thirdSelect, containtLayout.wave.progressValue)
-
-                    var call: Call<Message> = APIRequestManager.getInstance().requestServer().setLow(com.emirim.hyejin.mokgongso.Mandalart.setLow)
-
-                    call.enqueue(object: Callback<Message> {
-                        override fun onResponse(call: Call<Message>, response: Response<Message>) {
-                            when(response.code()) {
-                                200 -> {
-                                    Log.d("ThirdMandalart", response.body().toString())
-
-                                    Mandalart.thirdAchievement[Mandalart.secondSelect][Mandalart.thirdSelect] = containtLayout.wave.progressValue
-
-                                    Mandalart.viewer = 1
-                                    Mandalart.thirdSelect = -1
-
-                                    fragmentManager!!
-                                            .beginTransaction()
-                                            .replace(R.id.frameLayout, MandalartViewFragment.newInstance())
-                                            .commit()
-
-
-                                    MandalartActivity.rightButtonImageView.setImageResource(R.mipmap.pencil)
-                                }
-                                404 -> {
-                                }
-                                500 -> {
-                                    Log.d("ThirdMandalart", "실패")
-                                }
-                            }
-                        }
-                        override fun onFailure(call: Call<Message>, t: Throwable) {
-                            Log.e("ThirdMandalart", "에러: " + t.message)
-                            t.printStackTrace()
-                        }
-                    })
-                } else {
-                    var intent = Intent(activity, CreateMandalart::class.java)
-                    startActivity(intent)
-                }
-            }
-
-        }
 
         return containtLayout
     }

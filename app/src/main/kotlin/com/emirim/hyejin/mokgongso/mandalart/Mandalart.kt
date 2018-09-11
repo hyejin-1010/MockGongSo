@@ -17,5 +17,6 @@ class Mandalart {
         var thirdSelect = -1
 
         var viewer = 0
+        var tmpAchievement = 0
     }
 }

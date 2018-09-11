@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import com.emirim.hyejin.mokgongso.LoginActivity
 import com.emirim.hyejin.mokgongso.MainActivity
 import com.emirim.hyejin.mokgongso.MandalartActivity
@@ -30,7 +31,7 @@ class SettingFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater?.inflate(R.layout.fragment_setting, container, false)
-        val signOutBtn = view.findViewById<Button>(R.id.signOutBtn)
+        val signOutBtn = view.findViewById<TextView>(R.id.signOutBtn)
 
         var gso= GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
