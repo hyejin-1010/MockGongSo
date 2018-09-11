@@ -52,9 +52,11 @@ class Page4 : Fragment() {
             if(Mandalart.thirdCout[Mandalart.position - 1] == 7)
                 constraintLayout.mandalartAddBtn.visibility = View.GONE
 
-            constraintLayout.rightArrow.visibility = View.GONE
+            else {
+                constraintLayout.rightArrow.visibility = View.GONE
 
-            Mandalart.thirdCout[Mandalart.position - 1] ++
+                Mandalart.thirdCout[Mandalart.position - 1]++
+            }
         }
 
         /*constraintLayout.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->

@@ -71,7 +71,8 @@
         app:borderWidth="2dp"
         android:scaleType="center"/>
 
-    <include layout="@layout/fab_layout"/>
+    <include layout="@layout/fab_layout" android:id="@+id/subFloating"
+        android:visibility="gone"/>
     <!--
     <ImageView
         android:layout_width="70dp"

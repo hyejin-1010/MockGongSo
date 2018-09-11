@@ -25,9 +25,19 @@ class Page1 : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val constraintLayout = inflater.inflate(R.layout.activity_page_1, container, false) as ConstraintLayout
 
+        if(Mandalart.title != null) {
+            constraintLayout.mandalartTitle.setText(Mandalart.title)
+            constraintLayout.mandalartTitle.isFocusableInTouchMode = false
+            constraintLayout.mandalartTitle.isClickable = false
+
+            CreateMandalart.mViewPager.currentItem = 1
+        } else {
+            constraintLayout.rightArrow.visibility = View.GONE
+        }
+
+
         // getWindow().setSoftInputMode(WindowManager.LayoutParams.Soft_INPUT_ADJUST_RESIZE);
         constraintLayout.setBackgroundResource(R.color.backgroundColor)
-        constraintLayout.rightArrow.visibility = View.GONE
 
         constraintLayout.mandalartTitle.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) { }

@@ -23,4 +23,7 @@ interface API {
 
     @POST("/getMandal/app/")
     fun getMandal(@Body mandalChk: MandalChk): Call<Re>
+
+    @POST("/setLow/app/")
+    fun setLow(@Body setLow: SetLow): Call<Message>
 }

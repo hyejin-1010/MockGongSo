@@ -43,15 +43,18 @@ class Page3 : Fragment() {
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
 
-        for(i in 1..(Mandalart.count - 1)) {
-            mandalartSub[i - 1].setText("2")
-            mandalartSub[i - 1].setBackgroundResource(R.drawable.mandalart_box_1)
-        }
+        if(isVisibleToUser) {
+            for (i in 1..(Mandalart.count - 1)) {
+                mandalartSub[i - 1].text = "2"
+                mandalartSub[i - 1].setBackgroundResource(R.drawable.mandalart_box_1)
+                // mandalartSub[i - 1].setBackgroundResource(R.drawable.mandalart_box_1)
+            }
 
-        for(i in 1..(Mandalart.count - 1)){
-            mandalartSub[i - 1].setOnClickListener {
-                Mandalart.position = i
-                CreateMandalart.mViewPager.currentItem = 3
+            for (i in 1..(Mandalart.count - 1)) {
+                mandalartSub[i - 1].setOnClickListener {
+                    Mandalart.position = i
+                    CreateMandalart.mViewPager.currentItem = 3
+                }
             }
         }
     }

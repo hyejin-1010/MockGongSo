@@ -1,27 +1,19 @@
-package com.emirim.hyejin.mokgongso.mandalart.page
+package com.emirim.hyejin.mokgongso.smallMandalart.page
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.widget.TextView
 import com.emirim.hyejin.mokgongso.R
-import com.emirim.hyejin.mokgongso.api.APIRequestManager
-import com.emirim.hyejin.mokgongso.mandalart.CreateMandalart
-import com.emirim.hyejin.mokgongso.mandalart.Mandalart
-import com.emirim.hyejin.mokgongso.model.Message
-import com.emirim.hyejin.mokgongso.model.Middle
-import kotlinx.android.synthetic.main.activity_page_3.view.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.emirim.hyejin.mokgongso.View.TriangleView
+import com.emirim.hyejin.mokgongso.smallMandalart.CreateMandalart
+import kotlinx.android.synthetic.main.activity_small_page_3.view.*
 
 class Page3 : Fragment() {
     companion object {
-        lateinit var mandalartSub: Array<TextView>
+        lateinit var mandalartSub: Array<TriangleView>
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,9 +21,9 @@ class Page3 : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val constraintLayout = inflater.inflate(R.layout.activity_page_3, container, false)
+        val constraintLayout = inflater.inflate(R.layout.activity_small_page_3, container, false)
 
-        mandalartSub = arrayOf(constraintLayout.secondTitle1, constraintLayout.secondTitle2, constraintLayout.secondTitle3, constraintLayout.secondTitle4, constraintLayout.secondTitle5, constraintLayout.secondTitle6, constraintLayout.secondTitle7,constraintLayout.secondTitle8)
+        mandalartSub = arrayOf(constraintLayout.leftTriangle, constraintLayout.topTriangle, constraintLayout.rightTriangle)
 
         constraintLayout.leftArrow.setOnClickListener {
             CreateMandalart.mViewPager.currentItem = 1
@@ -44,8 +36,7 @@ class Page3 : Fragment() {
         super.setUserVisibleHint(isVisibleToUser)
 
         for(i in 1..(Mandalart.count - 1)) {
-            mandalartSub[i - 1].setText("2")
-            mandalartSub[i - 1].setBackgroundResource(R.drawable.mandalart_box_1)
+            mandalartSub[i - 1].setColor(R.color.white)
         }
 
         for(i in 1..(Mandalart.count - 1)){

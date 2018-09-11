@@ -47,5 +47,6 @@
         </activity>
         <activity android:name=".mandalart.CreateMandalart" android:windowSoftInputMode="adjustResize|adjustPan" />
         <activity android:name=".SignUpActivity" />
+        <activity android:name=".smallMandalart.CreateMandalart" />
     </application>
 </manifest>

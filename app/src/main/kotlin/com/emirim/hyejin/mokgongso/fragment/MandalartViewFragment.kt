@@ -50,6 +50,7 @@ class MandalartViewFragment : Fragment() {
 
         constraintLayout.firstTitle.setOnClickListener {
             if(Mandalart.viewer == 1) {
+                Mandalart.thirdSelect = -1
                 Mandalart.viewer = 0
                 secondInit()
             }

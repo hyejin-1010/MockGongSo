@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_page_2.view.*
 class Page2 : Fragment() {
     companion object {
         lateinit var constraintLayout: View
+        lateinit var mandalartSub: Array<EditText>
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,10 +37,10 @@ class Page2 : Fragment() {
             CreateMandalart.mViewPager.currentItem = 0
         }
 
-        var mandalartSub = arrayOf<EditText>(constraintLayout.mandalartSub1,constraintLayout.mandalartSub2,constraintLayout.mandalartSub3, constraintLayout.mandalartSub4, constraintLayout.mandalartSub5, constraintLayout.mandalartSub6, constraintLayout.mandalartSub7, constraintLayout.mandalartSub8)
+        mandalartSub = arrayOf<EditText>(constraintLayout.mandalartSub1,constraintLayout.mandalartSub2,constraintLayout.mandalartSub3, constraintLayout.mandalartSub4, constraintLayout.mandalartSub5, constraintLayout.mandalartSub6, constraintLayout.mandalartSub7, constraintLayout.mandalartSub8)
 
         constraintLayout.rightArrow.setOnClickListener {
-            for(i in 1..(Mandalart.count)) {
+            for(i in 1..(Mandalart.count - 1)) {
                 Mandalart.subMandalartTitle[i - 1] = mandalartSub[i-1].text.toString()
             }
 
@@ -54,7 +55,7 @@ class Page2 : Fragment() {
 
             constraintLayout.rightArrow.visibility = View.GONE
 
-            Mandalart.count ++
+            Mandalart.count++
         }
 
         for(x in 1..8) {
@@ -90,6 +91,11 @@ class Page2 : Fragment() {
             val mandalartTitle: TextView = constraintLayout.findViewById(R.id.mandalartTitle)
 
             mandalartTitle.text = Mandalart.title
+
+            for(i in 1..(Mandalart.count - 1)) {
+                mandalartSub[i-1].visibility = View.VISIBLE
+                mandalartSub[i-1].setText(Mandalart.subMandalartTitle[i - 1])
+            }
         } else {
             // preload 될 때 (전 페이지에 있을 때)
         }

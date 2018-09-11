@@ -1,22 +1,16 @@
-package com.emirim.hyejin.mokgongso.mandalart.page
+package com.emirim.hyejin.mokgongso.smallMandalart.page
 
 import android.os.Bundle
-import com.emirim.hyejin.mokgongso.model.Message
 import android.support.v4.app.Fragment
-import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import com.emirim.hyejin.mokgongso.R
-import com.emirim.hyejin.mokgongso.api.APIRequestManager
-import com.emirim.hyejin.mokgongso.mandalart.CreateMandalart
-import com.emirim.hyejin.mokgongso.mandalart.Mandalart
-import kotlinx.android.synthetic.main.activity_page_4.view.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.util.ArrayList
+import com.emirim.hyejin.mokgongso.smallMandalart.CreateMandalart
+import kotlinx.android.synthetic.main.activity_small_page_4.view.*
 
 class Page4 : Fragment() {
     companion object {
@@ -30,16 +24,16 @@ class Page4 : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        constraintLayout = inflater.inflate(R.layout.activity_page_4, container, false)
+        constraintLayout = inflater.inflate(R.layout.activity_small_page_4, container, false)
 
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
-        mandalartSub = arrayOf<EditText>(constraintLayout.mandalartSub1,constraintLayout.mandalartSub2,constraintLayout.mandalartSub3, constraintLayout.mandalartSub4, constraintLayout.mandalartSub5, constraintLayout.mandalartSub6, constraintLayout.mandalartSub7, constraintLayout.mandalartSub8)
+        mandalartSub = arrayOf<EditText>(constraintLayout.mandalartSub1,constraintLayout.mandalartSub2,constraintLayout.mandalartSub3)
 
         constraintLayout.leftArrow.setOnClickListener {
             CreateMandalart.mViewPager.currentItem = 2
 
-            for(i in 0..7) {
+            for(i in 0..2) {
                 if(i < Mandalart.thirdCout[Mandalart.position - 1]) {
                     Mandalart.thirdContent[Mandalart.position - 1][i] = mandalartSub[i].text.toString()
                 }
@@ -49,12 +43,14 @@ class Page4 : Fragment() {
         constraintLayout.mandalartAddBtn.setOnClickListener {
             mandalartSub[Mandalart.thirdCout[Mandalart.position - 1]].visibility = View.VISIBLE
             mandalartSub[Mandalart.thirdCout[Mandalart.position - 1]].setText("")
-            if(Mandalart.thirdCout[Mandalart.position - 1] == 7)
+            if(Mandalart.thirdCout[Mandalart.position - 1] == 2)
                 constraintLayout.mandalartAddBtn.visibility = View.GONE
 
-            constraintLayout.rightArrow.visibility = View.GONE
+            else {
+                constraintLayout.rightArrow.visibility = View.GONE
 
-            Mandalart.thirdCout[Mandalart.position - 1] ++
+                Mandalart.thirdCout[Mandalart.position - 1]++
+            }
         }
 
         /*constraintLayout.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
@@ -79,7 +75,7 @@ class Page4 : Fragment() {
 
             subTitle.text = Mandalart.subMandalartTitle[Mandalart.position - 1]
 
-            for(i in 0..7) {
+            for(i in 0..2) {
                 mandalartSub[i].visibility = View.GONE
 
                 if(i < Mandalart.thirdCout[Mandalart.position - 1]) {

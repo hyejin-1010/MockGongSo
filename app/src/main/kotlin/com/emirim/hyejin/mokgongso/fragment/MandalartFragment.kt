@@ -23,10 +23,6 @@ class MandalartFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val containtLayout: View = inflater?.inflate(R.layout.fragment_mandalart, container, false)
 
-        containtLayout.icon.setOnClickListener {
-            Toast.makeText(activity, "으", Toast.LENGTH_SHORT).show()
-        }
-
         containtLayout.createBtn.setOnClickListener {
             Mandalart.count = 1
 

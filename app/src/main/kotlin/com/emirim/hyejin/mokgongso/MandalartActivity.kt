@@ -1,5 +1,7 @@
 package com.emirim.hyejin.mokgongso
 
+import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
@@ -7,17 +9,18 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import com.emirim.hyejin.mokgongso.api.APIRequestManager
-import com.emirim.hyejin.mokgongso.fragment.MandalartFragment
-import com.emirim.hyejin.mokgongso.fragment.MandalartViewFragment
-import com.emirim.hyejin.mokgongso.fragment.SettingFragment
-import com.emirim.hyejin.mokgongso.fragment.SmallMandalartFragment
+import com.emirim.hyejin.mokgongso.fragment.*
 import com.emirim.hyejin.mokgongso.helper.BottomNavigationViewHelper
+import com.emirim.hyejin.mokgongso.mandalart.CreateMandalart
 import com.emirim.hyejin.mokgongso.mandalart.Mandalart
 import com.emirim.hyejin.mokgongso.model.MandalChk
 import com.emirim.hyejin.mokgongso.model.Re
 import kotlinx.android.synthetic.main.activity_mandalart.*
+import kotlinx.android.synthetic.main.fab_layout.*
+import kotlinx.android.synthetic.main.fab_layout.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,6 +29,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
     var currentFragment: Fragment? = null
     var ft: FragmentTransaction? = null
     var mandalBoolean: Boolean = false
+    var position = 0
 
     companion object {
         lateinit var rightButtonImageView: ImageView
@@ -93,11 +97,14 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                         }
 
                         mandalBoolean = true
+                        position = 1
 
                         supportFragmentManager
                                 .beginTransaction()
                                 .add(R.id.frameLayout, MandalartViewFragment.newInstance())
                                 .commit()
+
+                        rightButtonImageView.setImageResource(R.mipmap.pencil)
 
                         Log.d("ServerMandal", response.body().toString())
                     }
@@ -106,6 +113,8 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                                 .beginTransaction()
                                 .add(R.id.frameLayout, MandalartFragment.newInstance())
                                 .commit()
+
+                        position = 0
                     }
                     404 -> {
                         Log.d("ServerMandal", "실패")
@@ -113,6 +122,8 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                                 .beginTransaction()
                                 .add(R.id.frameLayout, MandalartFragment.newInstance())
                                 .commit()
+
+                        position = 0
                     }
                 }
             }
@@ -132,37 +143,62 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         */
 
         rightButtonImageView.setOnClickListener {
-            if(Mandalart.viewer == 2){
-
+            if(position == 2) {
+                // 작은 만다라트
             } else {
-
+                if(Mandalart.viewer == 2){
+                    Mandalart.viewer = 1
+                    Mandalart.thirdSelect = -1
+                } else {
+                    var intent = Intent(this, CreateMandalart::class.java)
+                    startActivity(intent)
+                }
             }
+
         }
+
+
+        fun floatingVisible(){
+        }
+
+        fabBtn.setOnClickListener {
+            subFloating.visibility = View.VISIBLE
+        }
+
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.action_mandalart -> {
+                mandalartViewerInit()
+
                 if(mandalBoolean){
                     supportFragmentManager
                             .beginTransaction()
                             .replace(R.id.frameLayout, MandalartViewFragment.newInstance())
                             .commit()
                     rightButtonImageView.setImageResource(R.mipmap.pencil)
+
+                    position = 1
                 }
                 else {
                     supportFragmentManager
                             .beginTransaction()
                             .replace(R.id.frameLayout, MandalartFragment.newInstance())
                             .commit()
+
+                    position = 0
                 }
                 return true
             }
             R.id.action_smaill_mandalart -> {
                 supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.frameLayout, SmallMandalartFragment.newInstance())
+                        .replace(R.id.frameLayout, SmallMandalartBeforeFragment.newInstance())
                         .commit()
+
+                position = 2
 
                 return true
             }
@@ -197,16 +233,12 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                         .commit()
                 rightButtonImageView.setImageResource(R.mipmap.pencil)
             }
-
-
         }
     }
 
     override fun onBackPressed() {
         if(Mandalart.viewer == 1) {
-            Mandalart.viewer = 0
-            Mandalart.secondSelect = -1
-            Mandalart.thirdSelect = -1
+            mandalartViewerInit()
             supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.frameLayout, MandalartViewFragment.newInstance())
@@ -223,5 +255,11 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         } else {
             super.onBackPressed()
         }
+    }
+
+    fun mandalartViewerInit() {
+        Mandalart.viewer = 0
+        Mandalart.secondSelect = -1
+        Mandalart.thirdSelect = -1
     }
  }

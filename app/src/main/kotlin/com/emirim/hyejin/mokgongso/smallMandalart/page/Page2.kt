@@ -1,7 +1,6 @@
-package com.emirim.hyejin.mokgongso.mandalart.page
+package com.emirim.hyejin.mokgongso.smallMandalart.page
 
 import android.os.Bundle
-import android.support.constraint.ConstraintLayout
 import android.support.v4.app.Fragment
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,10 +11,8 @@ import android.view.WindowManager
 import android.widget.EditText
 import android.widget.TextView
 import com.emirim.hyejin.mokgongso.R
-import com.emirim.hyejin.mokgongso.mandalart.CreateMandalart
-import com.emirim.hyejin.mokgongso.mandalart.Mandalart
-import kotlinx.android.synthetic.main.activity_page_1.*
-import kotlinx.android.synthetic.main.activity_page_2.view.*
+import com.emirim.hyejin.mokgongso.smallMandalart.CreateMandalart
+import kotlinx.android.synthetic.main.activity_small_page_2.view.*
 
 class Page2 : Fragment() {
     companion object {
@@ -27,7 +24,7 @@ class Page2 : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        constraintLayout = inflater.inflate(R.layout.activity_page_2, container, false)
+        constraintLayout = inflater.inflate(R.layout.activity_small_page_2, container, false)
 
         //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
@@ -36,10 +33,10 @@ class Page2 : Fragment() {
             CreateMandalart.mViewPager.currentItem = 0
         }
 
-        var mandalartSub = arrayOf<EditText>(constraintLayout.mandalartSub1,constraintLayout.mandalartSub2,constraintLayout.mandalartSub3, constraintLayout.mandalartSub4, constraintLayout.mandalartSub5, constraintLayout.mandalartSub6, constraintLayout.mandalartSub7, constraintLayout.mandalartSub8)
+        var mandalartSub = arrayOf<EditText>(constraintLayout.mandalartSub1,constraintLayout.mandalartSub2,constraintLayout.mandalartSub3)
 
         constraintLayout.rightArrow.setOnClickListener {
-            for(i in 1..(Mandalart.count)) {
+            for(i in 1..(Mandalart.count - 1)) {
                 Mandalart.subMandalartTitle[i - 1] = mandalartSub[i-1].text.toString()
             }
 
@@ -49,15 +46,15 @@ class Page2 : Fragment() {
         // EditText 추가
         constraintLayout.mandalartAddBtn.setOnClickListener {
             mandalartSub[Mandalart.count - 1].visibility = View.VISIBLE
-            if(Mandalart.count == 8)
+            if(Mandalart.count == 3)
                 constraintLayout.mandalartAddBtn.visibility = View.GONE
 
             constraintLayout.rightArrow.visibility = View.GONE
 
-            Mandalart.count ++
+            Mandalart.count++
         }
 
-        for(x in 1..8) {
+        for(x in 1..3) {
             mandalartSub[x-1].addTextChangedListener(object: TextWatcher {
                 override fun afterTextChanged(s: Editable?) { }
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
