@@ -23,7 +23,7 @@ class Page3 : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val constraintLayout = inflater.inflate(R.layout.activity_small_page_3, container, false)
 
-        mandalartSub = arrayOf(constraintLayout.leftTriangle, constraintLayout.topTriangle, constraintLayout.rightTriangle)
+        mandalartSub = arrayOf(constraintLayout.topTriangle, constraintLayout.leftTriangle, constraintLayout.rightTriangle)
 
         constraintLayout.leftArrow.setOnClickListener {
             CreateMandalart.mViewPager.currentItem = 1
@@ -35,14 +35,18 @@ class Page3 : Fragment() {
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
 
-        for(i in 1..(Mandalart.count - 1)) {
-            mandalartSub[i - 1].setColor(R.color.white)
-        }
+        if(isVisibleToUser) {
+            for (i in 1..(Mandalart.count - 1)) {
+                // mandalartSub[i - 1].setColor(R.color.white)
+                // mandalartSub[i - 1].background = resources.getDrawable(R.color.white)
+                mandalartSub[i - 1].setColor(R.color.white)
+            }
 
-        for(i in 1..(Mandalart.count - 1)){
-            mandalartSub[i - 1].setOnClickListener {
-                Mandalart.position = i
-                CreateMandalart.mViewPager.currentItem = 3
+            for (i in 1..(Mandalart.count - 1)) {
+                mandalartSub[i - 1].setOnClickListener {
+                    Mandalart.position = i
+                    CreateMandalart.mViewPager.currentItem = 3
+                }
             }
         }
     }

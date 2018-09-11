@@ -64,9 +64,7 @@
         android:elevation="6dp"
         app:layout_anchor="@id/bottomNavigation"
         android:src="@mipmap/floating"
-        android:background="@color/colorPrimary"
-        android:backgroundTint="@color/colorPrimary"
-        app:backgroundTint="@color/colorPrimaryDark"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_anchorGravity="top|center"
         app:borderWidth="2dp"
         android:scaleType="center"/>

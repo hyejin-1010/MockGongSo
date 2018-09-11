@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_small_page_2.view.*
 class Page2 : Fragment() {
     companion object {
         lateinit var constraintLayout: View
+        lateinit var mandalartSub: Array<EditText>
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +34,7 @@ class Page2 : Fragment() {
             CreateMandalart.mViewPager.currentItem = 0
         }
 
-        var mandalartSub = arrayOf<EditText>(constraintLayout.mandalartSub1,constraintLayout.mandalartSub2,constraintLayout.mandalartSub3)
+        mandalartSub = arrayOf<EditText>(constraintLayout.mandalartSub1,constraintLayout.mandalartSub2,constraintLayout.mandalartSub3)
 
         constraintLayout.rightArrow.setOnClickListener {
             for(i in 1..(Mandalart.count - 1)) {
@@ -87,6 +88,11 @@ class Page2 : Fragment() {
             val mandalartTitle: TextView = constraintLayout.findViewById(R.id.mandalartTitle)
 
             mandalartTitle.text = Mandalart.title
+
+            for(i in 1..(Mandalart.count - 1)) {
+                mandalartSub[i-1].visibility = View.VISIBLE
+                mandalartSub[i-1].setText(Mandalart.subMandalartTitle[i - 1])
+            }
         } else {
             // preload 될 때 (전 페이지에 있을 때)
         }

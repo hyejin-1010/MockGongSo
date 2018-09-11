@@ -157,14 +157,22 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
 
         }
 
-
-        fun floatingVisible(){
-        }
-
         fabBtn.setOnClickListener {
-            subFloating.visibility = View.VISIBLE
+            if(subFloating.visibility == View.GONE) {
+                subFloating.visibility = View.VISIBLE
+                fabBtn.backgroundTintList = resources.getColorStateList(R.color.colorPrimaryDark)
+            } else {
+                subFloating.visibility = View.GONE
+                fabBtn.backgroundTintList = resources.getColorStateList(R.color.colorPrimary)
+            }
         }
 
+        fab1.setOnClickListener {
+            subFloating.visibility = View.GONE
+        }
+        fab2.setOnClickListener {
+            subFloating.visibility = View.GONE
+        }
 
     }
 
@@ -187,6 +195,8 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                             .beginTransaction()
                             .replace(R.id.frameLayout, MandalartFragment.newInstance())
                             .commit()
+
+                    rightButtonImageView.setImageResource(0)
 
                     position = 0
                 }

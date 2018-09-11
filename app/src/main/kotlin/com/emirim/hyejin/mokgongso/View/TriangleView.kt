@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 
 import com.emirim.hyejin.mokgongso.R
@@ -51,6 +52,12 @@ class TriangleView : View {
     fun setColor(color: Int) {
         mPaint.color = color
 
+        if(color == 2131034285) {
+            boolean = 1
+            Log.d("TriangleView change ", "white")
+        }
+        Log.d("TriangleView change2 ", color.toString())
+
         invalidate()
     }
 
@@ -71,21 +78,32 @@ class TriangleView : View {
         strokePaint.color = resources.getColor(R.color.colorPrimaryDark)
         strokePaint.strokeWidth = 5f
 
-        if(mColor!!.defaultColor == resources.getColor(R.color.colorPrimaryDark)) {
+        Log.d("TriangleView color ", "${mPaint.color.toString()}")
+
+        /*if(mColor!!.defaultColor == resources.getColor(R.color.colorPrimaryDark)) {
             mPaint.strokeWidth = 5f
             mPaint.style = Paint.Style.STROKE
-        } else if(mColor!!.defaultColor == resources.getColor(R.color.white)) {
+        } else */if(mColor!!.defaultColor == resources.getColor(R.color.white)) {
             boolean = 1
         }
     }
 
     override fun onDraw(canvas: Canvas?) {
-        mPath = calculate(direction)
-        canvas!!.drawPath(mPath, mPaint)
+        Log.d("TriangleView color ", "draw")
 
         if(boolean == 1) {
+            mPath = calculate(direction)
+            mPaint.color = resources.getColor(R.color.white)
+            canvas!!.drawPath(mPath, mPaint)
+
             boolean = 0
             canvas!!.drawPath(mPath, strokePaint)
+        } else if(mColor!!.defaultColor == resources.getColor(R.color.colorPrimaryDark)) {
+            mPath = calculate(direction)
+            canvas!!.drawPath(mPath, strokePaint)
+        } else {
+            mPath = calculate(direction)
+            canvas!!.drawPath(mPath, mPaint)
         }
     }
 

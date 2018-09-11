@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@id/line">
 
         <com.emirim.hyejin.mokgongso.View.TriangleView
-            android:id="@+id/t1"
+            android:id="@+id/topTriangle"
             android:layout_width="120dp"
             android:layout_height="100dp"
             android:layout_margin="10dp"
@@ -53,7 +53,7 @@
             app:layout_constraintRight_toRightOf="parent" />
 
         <com.emirim.hyejin.mokgongso.View.TriangleView
-            android:id="@+id/t2"
+            android:id="@+id/centerTriangle"
             android:layout_width="120dp"
             android:layout_height="100dp"
             android:layout_marginTop="20dp"
@@ -62,7 +62,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/t1" />
+            app:layout_constraintTop_toBottomOf="@id/topTriangle" />
     </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
         android:id="@+id/canvasLayout2"
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/canvasLayout1">
         <com.emirim.hyejin.mokgongso.View.TriangleView
-            android:id="@+id/t3"
+            android:id="@+id/leftTriangle"
             android:layout_width="120dp"
             android:layout_height="100dp"
             app:color="@color/colorPrimaryDark"
@@ -81,7 +81,7 @@
             android:layout_marginRight="160dp"/>
 
         <com.emirim.hyejin.mokgongso.View.TriangleView
-            android:id="@+id/t4"
+            android:id="@+id/rightTriangle"
             android:layout_width="120dp"
             android:layout_height="100dp"
             app:color="@color/white"
