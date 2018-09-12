@@ -195,12 +195,23 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
 
         fabBtn.setOnClickListener {
             if(subFloating.visibility == View.GONE) {
-                subFloating.visibility = View.VISIBLE
-                fabBtn.backgroundTintList = resources.getColorStateList(R.color.colorPrimaryDark)
+                titlebartxt.text = "메인"
+                rightButtonImageView.setImageResource(0)
+                supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frameLayout, MainFragment.newInstance())
+                        .commit()
+                position = -1
             } else {
                 subFloating.visibility = View.GONE
                 fabBtn.backgroundTintList = resources.getColorStateList(R.color.colorPrimary)
             }
+        }
+
+        fabBtn.setOnLongClickListener {
+            fabVisible()
+
+            return@setOnLongClickListener true
         }
 
         fab1.setOnClickListener {
@@ -209,7 +220,16 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         fab2.setOnClickListener {
             subFloating.visibility = View.GONE
         }
+    }
 
+    fun fabVisible() {
+        if(subFloating.visibility == View.GONE) {
+            subFloating.visibility = View.VISIBLE
+            fabBtn.backgroundTintList = resources.getColorStateList(R.color.colorPrimaryDark)
+        } else {
+            subFloating.visibility = View.GONE
+            fabBtn.backgroundTintList = resources.getColorStateList(R.color.colorPrimary)
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -252,6 +272,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
             }
             R.id.action_store -> {
                 titlebartxt.text = "상점"
+                position = 3
                 return true
             }
             R.id.action_setting -> {
@@ -260,7 +281,19 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                         .beginTransaction()
                         .replace(R.id.frameLayout, SettingFragment.newInstance())
                         .commit()
+                position = 4
                 return true
+            }
+            else -> {
+                supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frameLayout, MainFragment.newInstance())
+                        .commit()
+
+                rightButtonImageView.setImageResource(0)
+
+                position = -1
+                titlebartxt.text = "메인"
             }
         }
 
@@ -281,27 +314,32 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                         .beginTransaction()
                         .replace(R.id.frameLayout, MandalartViewFragment.newInstance())
                         .commit()
+                position = 1
                 rightButtonImageView.setImageResource(R.mipmap.pencil)
             }
         }
     }
 
     override fun onBackPressed() {
-        if(Mandalart.viewer == 1) {
-            mandalartViewerInit()
-            supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.frameLayout, MandalartViewFragment.newInstance())
-                    .commit()
-            rightButtonImageView.setImageResource(R.mipmap.pencil)
-        } else if(Mandalart.viewer == 2) {
-            Mandalart.viewer = 1
-            Mandalart.thirdSelect = -1
-            supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.frameLayout, MandalartViewFragment.newInstance())
-                    .commit()
-            rightButtonImageView.setImageResource(R.mipmap.pencil)
+        if(position == 1) {
+            if (Mandalart.viewer == 1) {
+                mandalartViewerInit()
+                supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frameLayout, MandalartViewFragment.newInstance())
+                        .commit()
+                rightButtonImageView.setImageResource(R.mipmap.pencil)
+            } else if (Mandalart.viewer == 2) {
+                Mandalart.viewer = 1
+                Mandalart.thirdSelect = -1
+                supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frameLayout, MandalartViewFragment.newInstance())
+                        .commit()
+                rightButtonImageView.setImageResource(R.mipmap.pencil)
+            } else {
+                super.onBackPressed()
+            }
         } else {
             super.onBackPressed()
         }
