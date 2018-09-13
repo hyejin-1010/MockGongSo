@@ -216,6 +216,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
 
         fab1.setOnClickListener {
             subFloating.visibility = View.GONE
+            fabBtn.backgroundTintList = resources.getColorStateList(R.color.colorPrimary)
 
             titlebartxt.text = "일기"
             rightButtonImageView.setImageResource(0)
@@ -227,6 +228,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         }
         fab2.setOnClickListener {
             subFloating.visibility = View.GONE
+            fabBtn.backgroundTintList = resources.getColorStateList(R.color.colorPrimary)
         }
     }
 
@@ -331,6 +333,9 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
     override fun onBackPressed() {
         if(position == 1) {
             if (Mandalart.viewer == 1) {
+                Mandalart.viewer = 0
+                Mandalart.secondSelect = -1
+                Mandalart.thirdSelect = -1
                 mandalartViewerInit()
                 supportFragmentManager
                         .beginTransaction()

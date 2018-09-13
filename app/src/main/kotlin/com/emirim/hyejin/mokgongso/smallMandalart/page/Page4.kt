@@ -83,6 +83,12 @@ class Page4 : Fragment() {
                     mandalartSub[i].setText(Mandalart.thirdContent[Mandalart.position - 1][i])
                     //mandalartSub[i].setText("s")
                 }
+
+                if(Mandalart.thirdCout[Mandalart.position - 1] == 7) {
+                    constraintLayout.mandalartAddBtn.visibility = View.GONE
+                } else {
+                    constraintLayout.mandalartAddBtn.visibility = View.VISIBLE
+                }
             }
         }
     }

@@ -26,4 +26,10 @@ interface API {
 
     @POST("/setLow/app/")
     fun setLow(@Body setLow: SetLow): Call<Message>
+
+    @POST("/addDay/app")
+    fun addDay(@Body addDay: AddDay): Call<Message>
+
+    @POST("/tmake/app/")
+    fun tmake(@Body tmake: TMake): Call<Message>
 }

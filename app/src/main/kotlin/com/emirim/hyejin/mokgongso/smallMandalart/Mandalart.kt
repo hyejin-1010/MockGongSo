@@ -7,7 +7,6 @@ class Mandalart {
 
         var subMandalartTitle = Array<String>(3, {""})
         var thirdContent = Array(3, { Array<String>(3, {""}) })
-        var thirdAchievement = Array(3, { IntArray(3) })
 
         var thirdCout = IntArray(3)
         var count: Int = 1

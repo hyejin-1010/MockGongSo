@@ -111,11 +111,14 @@ class LoginActivity : AppCompatActivity() {
                     when(response.code()) {
                         200 -> {
                             val message: SignInMessage = response.body() as SignInMessage
-                            Log.d(TAG, "로그인 성공 ${message.token}")
+                            Log.d(TAG, "로그인 성공 ${message.data.token}")
 
                             val editor = appData!!.edit()
 
-                            editor.putString("ID", message.token.trim())
+                            editor.putString("ID", message.data.token.trim())
+                            editor.putString("name", message.data.name.trim())
+                            editor.putString("startDay", message.data.startDay.trim())
+
                             editor.apply()
 
                             intentMandalart()

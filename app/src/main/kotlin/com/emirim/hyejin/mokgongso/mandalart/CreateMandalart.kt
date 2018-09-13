@@ -23,15 +23,14 @@ import com.emirim.hyejin.mokgongso.mandalart.page.Page1
 import com.emirim.hyejin.mokgongso.mandalart.page.Page2
 import com.emirim.hyejin.mokgongso.mandalart.page.Page3
 import com.emirim.hyejin.mokgongso.mandalart.page.Page4
-import com.emirim.hyejin.mokgongso.model.MandalChk
-import com.emirim.hyejin.mokgongso.model.Message
-import com.emirim.hyejin.mokgongso.model.Middle
-import com.emirim.hyejin.mokgongso.model.Re
+import com.emirim.hyejin.mokgongso.model.*
 import kotlinx.android.synthetic.main.activity_mandalart_create.*
 import kotlinx.android.synthetic.main.fab_layout.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CreateMandalart : AppCompatActivity() {
     companion object {
@@ -106,6 +105,7 @@ class CreateMandalart : AppCompatActivity() {
             CreateMandalart.mViewPager.currentItem = 2
         } else {
             val middle: ArrayList<Middle> = ArrayList()
+            var first = false
 
             for(i in 1..(Mandalart.count - 1)) {
                 middle.add(Middle(Mandalart.subMandalartTitle[i - 1], Mandalart.thirdContent[i - 1].toList()))
@@ -113,6 +113,28 @@ class CreateMandalart : AppCompatActivity() {
             for(i in Mandalart.count .. 8) {
                 middle.add(Middle("", Mandalart.thirdContent[i - 1].toList()))
             }
+
+            var call3: Call<Re> = APIRequestManager.getInstance().requestServer().getMandal(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
+
+            call3.enqueue(object: Callback<Re> {
+                override fun onResponse(call3: Call<Re>, response: Response<Re>) {
+                    when(response.code()) {
+                        200 -> {
+                            first = false
+                        }
+                        401 -> {
+                            first = true
+                        }
+                        404 -> {
+                            first = true
+                        }
+                    }
+                }
+                override fun onFailure(call3: Call<Re>, t: Throwable) {
+                    Log.e("ServerMandal", "에러: " + t.message)
+                    t.printStackTrace()
+                }
+            })
 
             var appData = this.getSharedPreferences("Mandalart", 0)
             com.emirim.hyejin.mokgongso.Mandalart.makemandalart = com.emirim.hyejin.mokgongso.model.Mandalart(Mandalart.title.toString(), appData.getString("ID", ""), middle)
@@ -130,6 +152,33 @@ class CreateMandalart : AppCompatActivity() {
                         200 -> {
                             Log.d("Page4", "성공")
 
+                            if(first) {
+                                val date = Date()
+                                val sdf = SimpleDateFormat("yyyy-mm-dd")
+
+                                com.emirim.hyejin.mokgongso.Mandalart.addDay = AddDay(LoginActivity.appData!!.getString("ID", ""), sdf.format(date).toString())
+
+                                var call4: Call<Message> = APIRequestManager.getInstance().requestServer().addDay(com.emirim.hyejin.mokgongso.Mandalart.addDay)
+
+                                call4.enqueue(object: Callback<Message>{
+                                    override fun onResponse(call: Call<Message>, response: Response<Message>) {
+                                        when(response.code()) {
+                                            200 -> {
+                                                Log.d("Add Day", sdf.format(date).toString())
+                                            }
+                                            500 -> {
+                                                Log.d("Add Day", "500")
+                                            }
+                                        }
+                                    }
+
+                                    override fun onFailure(call: Call<Message>, t: Throwable) {
+                                        Log.e("Page4", "실패: " + t.message)
+                                        t.printStackTrace()
+                                    }
+                                })
+                            }
+
                             com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(LoginActivity.appData!!.getString("ID", ""))
 
                             var call: Call<Re> = APIRequestManager.getInstance().requestServer().getMandal(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
@@ -140,6 +189,12 @@ class CreateMandalart : AppCompatActivity() {
                                         200 -> {
                                             val re: Re = response.body() as Re
                                             com.emirim.hyejin.mokgongso.Mandalart.re = re
+                                        }
+                                        401 -> {
+
+                                        }
+                                        404 -> {
+
                                         }
                                     }
                                 }

@@ -9,12 +9,17 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.WindowManager
 import com.emirim.hyejin.mokgongso.R
+import com.emirim.hyejin.mokgongso.api.APIRequestManager
 import com.emirim.hyejin.mokgongso.mandalart.CustomViewPager
-import com.emirim.hyejin.mokgongso.smallMandalart.page.Page1
-import com.emirim.hyejin.mokgongso.smallMandalart.page.Page2
-import com.emirim.hyejin.mokgongso.smallMandalart.page.Page3
-import com.emirim.hyejin.mokgongso.smallMandalart.page.Page4
+import com.emirim.hyejin.mokgongso.model.Message
+import com.emirim.hyejin.mokgongso.model.TMiddle
+import com.emirim.hyejin.mokgongso.smallMandalart.page.*
 import kotlinx.android.synthetic.main.activity_mandalart_create.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CreateMandalart : AppCompatActivity() {
     companion object {
@@ -89,6 +94,39 @@ class CreateMandalart : AppCompatActivity() {
             CreateMandalart.mViewPager.currentItem = 2
         } else {
             // 데이터 전송
+            val middle: ArrayList<TMiddle> = ArrayList()
+
+            for(i in 1..(Mandalart.count - 1)) {
+                middle.add(TMiddle(Mandalart.subMandalartTitle[i - 1], Mandalart.thirdContent[i - 1].toList()))
+            }
+            for(i in Mandalart.count .. 3) {
+                middle.add(TMiddle("", Mandalart.thirdContent[i - 1].toList()))
+            }
+
+            val date = Date()
+            val sdf = SimpleDateFormat("yyyy-mm-dd")
+
+            var appData = this.getSharedPreferences("Mandalart", 0)
+            com.emirim.hyejin.mokgongso.Mandalart.tMake = com.emirim.hyejin.mokgongso.model.TMake(Mandalart.title.toString(), appData.getString("ID", ""), sdf.format(date).toString(), middle)
+
+            val call: Call<Message> = APIRequestManager.getInstance().requestServer().tmake(com.emirim.hyejin.mokgongso.Mandalart.tMake)
+
+            call.enqueue(object: Callback<Message> {
+                override fun onResponse(call: Call<Message>, response: Response<Message>) {
+                    when(response.code()) {
+                        200 -> {
+                            Log.d("Tmake", "성공")
+                        }
+                        500 -> {
+                            Log.d("Page4", "실패")
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<Message>, t: Throwable) {
+                    Log.e("Page4", "실패: " + t.message)
+                    t.printStackTrace()
+                }
+            })
 
             super.onBackPressed()
         }

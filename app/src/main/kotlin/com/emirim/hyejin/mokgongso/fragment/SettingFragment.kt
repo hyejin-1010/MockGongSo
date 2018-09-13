@@ -17,6 +17,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.fragment_setting.view.*
 
 class SettingFragment : Fragment() {
     companion object {
@@ -30,8 +31,8 @@ class SettingFragment : Fragment() {
     private var mGoogleSignInClient: GoogleSignInClient? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater?.inflate(R.layout.fragment_setting, container, false)
-        val signOutBtn = view.findViewById<TextView>(R.id.signOutBtn)
+        val layout: View = inflater?.inflate(R.layout.fragment_setting, container, false)
+        val signOutBtn = layout.findViewById<TextView>(R.id.signOutBtn)
 
         var gso= GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -51,7 +52,9 @@ class SettingFragment : Fragment() {
             signOut()
         }
 
-        return view
+        layout.username.text = LoginActivity.appData!!.getString("name", "")
+
+        return layout
     }
 
     private fun signOut() {
