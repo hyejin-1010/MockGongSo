@@ -50,6 +50,8 @@ dependencies {
     // Wave Library
     implementation 'me.itangqi.waveloadingview:library:0.3.5'
 
+    implementation 'com.bignerdranch.android:expandablerecyclerview:1.0.3'
+
     testImplementation 'junit:junit:4.12'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

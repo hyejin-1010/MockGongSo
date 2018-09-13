@@ -216,6 +216,14 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
 
         fab1.setOnClickListener {
             subFloating.visibility = View.GONE
+
+            titlebartxt.text = "일기"
+            rightButtonImageView.setImageResource(0)
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.frameLayout, DiaryFragment.newInstance())
+                    .commit()
+            position = 5
         }
         fab2.setOnClickListener {
             subFloating.visibility = View.GONE

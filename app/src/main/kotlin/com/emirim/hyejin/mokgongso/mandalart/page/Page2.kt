@@ -96,6 +96,13 @@ class Page2 : Fragment() {
                 mandalartSub[i-1].visibility = View.VISIBLE
                 mandalartSub[i-1].setText(Mandalart.subMandalartTitle[i - 1])
             }
+
+
+            if((Mandalart.count - 1) == 8) {
+                constraintLayout.mandalartAddBtn.visibility = View.GONE
+            } else {
+                constraintLayout.mandalartAddBtn.visibility = View.VISIBLE
+            }
         } else {
             // preload 될 때 (전 페이지에 있을 때)
         }

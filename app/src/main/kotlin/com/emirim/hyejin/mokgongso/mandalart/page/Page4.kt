@@ -90,6 +90,12 @@ class Page4 : Fragment() {
                     //mandalartSub[i].setText("s")
                 }
             }
+
+            if(Mandalart.thirdCout[Mandalart.position - 1] == 7) {
+                constraintLayout.mandalartAddBtn.visibility = View.GONE
+            } else {
+                constraintLayout.mandalartAddBtn.visibility = View.VISIBLE
+            }
         }
     }
 }
