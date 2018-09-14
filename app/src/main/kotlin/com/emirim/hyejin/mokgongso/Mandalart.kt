@@ -11,5 +11,6 @@ class Mandalart {
         lateinit var setLow: SetLow
         lateinit var addDay: AddDay
         lateinit var tMake: TMake
+        lateinit var tRe: TRe
     }
 }

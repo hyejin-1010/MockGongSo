@@ -91,7 +91,7 @@ class Page4 : Fragment() {
                 }
             }
 
-            if(Mandalart.thirdCout[Mandalart.position - 1] == 7) {
+            if(Mandalart.thirdCout[Mandalart.position - 1] == 8) {
                 constraintLayout.mandalartAddBtn.visibility = View.GONE
             } else {
                 constraintLayout.mandalartAddBtn.visibility = View.VISIBLE

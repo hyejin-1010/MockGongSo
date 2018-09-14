@@ -43,13 +43,13 @@ class SignUpActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<Message>, response: Response<Message>) {
                         when(response.code()) {
                             200 -> {
-                                Log.d("SignUpActivity", "아이디 존재 X")
+                                Log.d("duplicatechk", "200")
                                 emailCheck.setImageResource(R.mipmap.shape_3)
                                 emailEdt.setBackgroundResource(R.drawable.solid)
                                 emailBoolean = true
                             }
                             409 -> {
-                                Log.d("SignUpActivity", "아이디 존재 O")
+                                Log.d("duplicatechk", "409")
                                 emailEdt.setBackgroundResource(R.drawable.dotted)
                                 emailCheck.setImageResource(R.mipmap.shape_4)
                                 emailBoolean = false
@@ -106,14 +106,14 @@ class SignUpActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<Message>, response: Response<Message>) {
                         when(response.code()) {
                             200 -> {
-                                Log.d("SignUpActivity", "회원가입 성공")
+                                Log.d("signup", "200")
                                 finish()
                             }
                             400 -> {
-                                Log.d("SignUpActivity", "회원가입 Error")
+                                Log.d("signup", "400")
                             }
                             409 -> {
-                                Log.d("SignUpActivity", "이메일 중복")
+                                Log.d("signup", "409")
                                 emailEdt.requestFocus()
                             }
                         }

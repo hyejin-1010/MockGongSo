@@ -18,6 +18,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_setting.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class SettingFragment : Fragment() {
     companion object {
@@ -43,7 +45,8 @@ class SettingFragment : Fragment() {
 
         mAuth = FirebaseAuth.getInstance()
 
-        signOutBtn.setOnClickListener {
+
+        layout.logoutlayout.setOnClickListener {
             var editor = LoginActivity.appData!!.edit()
 
             editor.clear()
@@ -51,8 +54,27 @@ class SettingFragment : Fragment() {
 
             signOut()
         }
+        /*signOutBtn.setOnClickListener {
+            var editor = LoginActivity.appData!!.edit()
 
-        layout.username.text = LoginActivity.appData!!.getString("name", "")
+            editor.clear()
+            editor.commit()
+
+            signOut()
+        }*/
+
+        val sdf = SimpleDateFormat("yyyy-mm-dd")
+        val startDay = sdf.parse(LoginActivity.appData!!.getString("name", ""))
+        val today = Date()
+
+        val startCal = GregorianCalendar()
+        val toCal = GregorianCalendar()
+
+        startCal.time = startDay
+        startCal.time = today
+
+        layout.username.text = LoginActivity.appData!!.getString("startDay", "")
+        layout.day
 
         return layout
     }

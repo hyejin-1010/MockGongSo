@@ -94,7 +94,7 @@ class Page2 : Fragment() {
                 mandalartSub[i-1].setText(Mandalart.subMandalartTitle[i - 1])
             }
 
-            if((Mandalart.count - 1) == 8) {
+            if((Mandalart.count - 1) == 3) {
                 constraintLayout.mandalartAddBtn.visibility = View.GONE
             } else {
                 constraintLayout.mandalartAddBtn.visibility = View.VISIBLE

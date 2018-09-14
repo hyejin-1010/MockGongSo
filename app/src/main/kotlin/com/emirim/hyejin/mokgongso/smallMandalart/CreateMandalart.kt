@@ -8,11 +8,15 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.WindowManager
+import com.emirim.hyejin.mokgongso.LoginActivity
+import com.emirim.hyejin.mokgongso.MandalartActivity
 import com.emirim.hyejin.mokgongso.R
 import com.emirim.hyejin.mokgongso.api.APIRequestManager
 import com.emirim.hyejin.mokgongso.mandalart.CustomViewPager
+import com.emirim.hyejin.mokgongso.model.MandalChk
 import com.emirim.hyejin.mokgongso.model.Message
 import com.emirim.hyejin.mokgongso.model.TMiddle
+import com.emirim.hyejin.mokgongso.model.TRe
 import com.emirim.hyejin.mokgongso.smallMandalart.page.*
 import kotlinx.android.synthetic.main.activity_mandalart_create.*
 import retrofit2.Call
@@ -107,7 +111,7 @@ class CreateMandalart : AppCompatActivity() {
             val sdf = SimpleDateFormat("yyyy-mm-dd")
 
             var appData = this.getSharedPreferences("Mandalart", 0)
-            com.emirim.hyejin.mokgongso.Mandalart.tMake = com.emirim.hyejin.mokgongso.model.TMake(Mandalart.title.toString(), appData.getString("ID", ""), sdf.format(date).toString(), middle)
+            com.emirim.hyejin.mokgongso.Mandalart.tMake = com.emirim.hyejin.mokgongso.model.TMake(appData.getString("ID", ""), Mandalart.title.toString(), sdf.format(date).toString(), middle)
 
             val call: Call<Message> = APIRequestManager.getInstance().requestServer().tmake(com.emirim.hyejin.mokgongso.Mandalart.tMake)
 
@@ -115,15 +119,44 @@ class CreateMandalart : AppCompatActivity() {
                 override fun onResponse(call: Call<Message>, response: Response<Message>) {
                     when(response.code()) {
                         200 -> {
-                            Log.d("Tmake", "성공")
+                            Log.d("Tmake", "성공 ${middle.toString()}")
                         }
                         500 -> {
-                            Log.d("Page4", "실패")
+                            Log.d("Tmake", "실패")
                         }
                     }
                 }
                 override fun onFailure(call: Call<Message>, t: Throwable) {
-                    Log.e("Page4", "실패: " + t.message)
+                    Log.e("Tmake", "실패: " + t.message)
+                    t.printStackTrace()
+                }
+            })
+
+            com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(LoginActivity.appData!!.getString("ID", ""))
+
+            val call2: Call<TRe> = APIRequestManager.getInstance().requestServer().getTMandalChk(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
+
+            call2.enqueue(object: Callback<TRe> {
+                override fun onResponse(call: Call<TRe>, response: Response<TRe>) {
+                    when(response.code()) {
+                        200 -> {
+                            val tRe: TRe = response.body() as TRe
+                            com.emirim.hyejin.mokgongso.Mandalart.tRe = tRe
+                            Log.d("TMandal", response.body().toString())
+                            MandalartActivity.smallBoolean = true
+                        }
+                        401 -> {
+                            Log.d("TMandal", "401")
+
+                        }
+                        404 -> {
+                            Log.d("TMandal", "404")
+
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<TRe>, t: Throwable) {
+                    Log.e("TMandal", "에러: " + t.message)
                     t.printStackTrace()
                 }
             })
@@ -140,8 +173,6 @@ class CreateMandalart : AppCompatActivity() {
                 return curFragment
 
             this.position = position
-
-            Log.d("Mandalart", position.toString())
 
             when(position) {
                 0 -> {

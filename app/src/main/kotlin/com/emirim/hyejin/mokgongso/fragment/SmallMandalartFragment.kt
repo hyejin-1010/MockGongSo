@@ -24,13 +24,6 @@ class SmallMandalartFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         constraintLayout = inflater?.inflate(R.layout.fragment_smallmandalart, container, false)
 
-        constraintLayout.centerTriangle.setOnTouchListener(View.OnTouchListener { v, event ->
-            Toast.makeText(activity, "${event.x}, ${event.y} = ${v.width}" , Toast.LENGTH_SHORT).show()
-
-            return@OnTouchListener true
-        })
-
-
         constraintLayout.title.text = Mandalart.title
 
         secondSelector = arrayOf(constraintLayout.topTriangle, constraintLayout.leftTriangle, constraintLayout.rightTriangle)
@@ -51,13 +44,13 @@ class SmallMandalartFragment : Fragment() {
             }
         }
 
-        constraintLayout.centerTriangle.setOnClickListener {
+        /*constraintLayout.centerTriangle.setOnClickListener {
             if(Mandalart.viewer == 1) {
                 Mandalart.thirdSelect = -1
                 Mandalart.viewer = 0
                 secondInit()
             }
-        }
+        }*/
 
         return constraintLayout
     }
@@ -82,25 +75,26 @@ class SmallMandalartFragment : Fragment() {
         }
     }
 
-    fun secondClick(i: Int) {
-        if(i > Mandalart.count - 2) {
+    fun secondClick(i: Int) { // 4
+        if(i > Mandalart.count - 1) {
             return
         }
 
         if(Mandalart.secondSelect == i) {
             Mandalart.viewer = 1
 
-            for (j in 0..(Mandalart.count - 2)) {
+            /*for (j in 0..(Mandalart.count - 2)) {
                 secondSelector[j].setColor(R.color.colorPrimaryDark)
             }
 
             for(j in 0..(Mandalart.thirdCout[Mandalart.secondSelect] - 1)) {
                 secondSelector[i].setColor(R.color.white)
-            }
+            }*/
 
+            thirdInit()
         } else {
             if(Mandalart.secondSelect != -1) {
-                secondSelector[i].setColor(R.color.white)
+                secondSelector[Mandalart.secondSelect].setColor(R.color.white)
             }
 
             secondSelector[i].setColor(R.color.colorAccent)
@@ -116,14 +110,8 @@ class SmallMandalartFragment : Fragment() {
 
         if(Mandalart.thirdSelect == i) {
             // 이동
-            Mandalart.viewer = 2
-            //
-            fragmentManager!!
-                    .beginTransaction()
-                    .replace(R.id.frameLayout, MandalartViewThirdFragment.newInstance())
-                    .commit()
         } else if(Mandalart.thirdSelect != -1) {
-            secondSelector[i].setColor(R.color.white)
+            secondSelector[Mandalart.thirdSelect].setColor(R.color.white)
         }
 
         secondSelector[i].setColor(R.color.colorAccent)

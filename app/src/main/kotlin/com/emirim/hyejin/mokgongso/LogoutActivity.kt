@@ -37,9 +37,6 @@ class LogoutActivity : AppCompatActivity() {
              editor.commit()
 
              var token: String = LoginActivity.appData!!.getString("ID", "")
-
-             Log.d("뭘까", "ss")
-
             // signOut()
         }
     }

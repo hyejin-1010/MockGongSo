@@ -54,7 +54,10 @@ class TriangleView : View {
 
         if(color == 2131034285) {
             boolean = 1
-            Log.d("TriangleView change ", "white")
+        } else if(color == 2131034160) {
+            boolean = 2
+        } else if(color == 2131034162) {
+            boolean = 3
         }
         Log.d("TriangleView change2 ", color.toString())
 
@@ -78,8 +81,6 @@ class TriangleView : View {
         strokePaint.color = resources.getColor(R.color.colorPrimaryDark)
         strokePaint.strokeWidth = 5f
 
-        Log.d("TriangleView color ", "${mPaint.color.toString()}")
-
         /*if(mColor!!.defaultColor == resources.getColor(R.color.colorPrimaryDark)) {
             mPaint.strokeWidth = 5f
             mPaint.style = Paint.Style.STROKE
@@ -89,8 +90,6 @@ class TriangleView : View {
     }
 
     override fun onDraw(canvas: Canvas?) {
-        Log.d("TriangleView color ", "draw")
-
         if(boolean == 1) {
             mPath = calculate(direction)
             mPaint.color = resources.getColor(R.color.white)
@@ -98,7 +97,14 @@ class TriangleView : View {
 
             boolean = 0
             canvas!!.drawPath(mPath, strokePaint)
-        } else if(mColor!!.defaultColor == resources.getColor(R.color.colorPrimaryDark)) {
+        } else if(boolean == 2) {
+            mPath = calculate(direction)
+            mPaint.color = resources.getColor(R.color.colorPrimary)
+            canvas!!.drawPath(mPath, mPaint)
+
+            boolean = 0
+            canvas!!.drawPath(mPath, strokePaint)
+        } else if(mColor!!.defaultColor == resources.getColor(R.color.colorPrimaryDark) || boolean == 3) {
             mPath = calculate(direction)
             canvas!!.drawPath(mPath, strokePaint)
         } else {

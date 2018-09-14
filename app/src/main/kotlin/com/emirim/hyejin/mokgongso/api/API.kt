@@ -32,4 +32,10 @@ interface API {
 
     @POST("/tmake/app/")
     fun tmake(@Body tmake: TMake): Call<Message>
+
+    @POST("/getTMandalChk/app/")
+    fun getTMandalChk(@Body mandalChk: MandalChk): Call<TRe>
+
+    @POST("/delSub/app")
+    fun delSub(@Body mandalChk: MandalChk): Call<Message>
 }

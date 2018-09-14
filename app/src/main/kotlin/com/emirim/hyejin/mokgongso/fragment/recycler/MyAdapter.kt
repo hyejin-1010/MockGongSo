@@ -46,4 +46,17 @@ class MyAdapter: ExpandableRecyclerAdapter<TitleParentViewHolder, TitleChildView
         var adapter: ListViewAdapter = ListViewAdapter(context , R.layout.listview, title.data)
         p0?.listview?.adapter = adapter
     }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        super.onBindViewHolder(holder, position)
+
+        Log.d("onBindViewHolder", "position : ${position}")
+    }
+
+    override fun onParentItemClickListener(position: Int) {
+        super.onParentItemClickListener(position)
+
+        Log.d("onBindViewHolder", "Parent position : ${position}")
+    }
+
 }

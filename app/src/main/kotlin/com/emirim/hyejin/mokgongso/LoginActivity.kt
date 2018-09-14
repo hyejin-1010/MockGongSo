@@ -111,9 +111,9 @@ class LoginActivity : AppCompatActivity() {
                     when(response.code()) {
                         200 -> {
                             val message: SignInMessage = response.body() as SignInMessage
-                            Log.d(TAG, "로그인 성공 ${message.data.token}")
-
                             val editor = appData!!.edit()
+
+                            Log.d(TAG, "Login Success")
 
                             editor.putString("ID", message.data.token.trim())
                             editor.putString("name", message.data.name.trim())
@@ -124,7 +124,7 @@ class LoginActivity : AppCompatActivity() {
                             intentMandalart()
                         }
                         404 -> {
-                            Log.d(TAG, "로그인 실패")
+                            Log.d(TAG, "Login Fail")
                             password.requestFocus()
                         }
                     }

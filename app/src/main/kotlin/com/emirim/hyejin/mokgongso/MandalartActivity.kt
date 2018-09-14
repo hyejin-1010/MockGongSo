@@ -17,10 +17,7 @@ import com.emirim.hyejin.mokgongso.fragment.*
 import com.emirim.hyejin.mokgongso.helper.BottomNavigationViewHelper
 import com.emirim.hyejin.mokgongso.mandalart.CreateMandalart
 import com.emirim.hyejin.mokgongso.mandalart.Mandalart
-import com.emirim.hyejin.mokgongso.model.MandalChk
-import com.emirim.hyejin.mokgongso.model.Message
-import com.emirim.hyejin.mokgongso.model.Re
-import com.emirim.hyejin.mokgongso.model.SetLow
+import com.emirim.hyejin.mokgongso.model.*
 import kotlinx.android.synthetic.main.activity_mandalart.*
 import kotlinx.android.synthetic.main.fab_layout.*
 import kotlinx.android.synthetic.main.fab_layout.view.*
@@ -36,6 +33,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
 
     companion object {
         lateinit var rightButtonImageView: ImageView
+        var smallBoolean = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -136,6 +134,66 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
             }
         })
 
+        // 작은 만다라트
+        var call2: Call<TRe> = APIRequestManager.getInstance().requestServer().getTMandalChk(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
+
+        call2.enqueue(object: Callback<TRe> {
+            override fun onResponse(call: Call<TRe>, response: Response<TRe>) {
+                when(response.code()) {
+                    200 -> {
+                        val tRe: TRe = response.body() as TRe
+                        com.emirim.hyejin.mokgongso.Mandalart.tRe = tRe
+                        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.title = tRe.re.title
+                        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.achievement = tRe.re.achievement
+
+                        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.count = 1
+
+                        for(i in 0..2) {
+                            com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.subMandalartTitle[tRe.re.mandal[i].order] = tRe.re.mandal[i].middleTitle
+
+                            var strArray = Array<String>(3, {""})
+                            strArray[0] = tRe.re.mandal[i].smallMandalArt1.title
+                            strArray[1] = tRe.re.mandal[i].smallMandalArt2.title
+                            strArray[2] = tRe.re.mandal[i].smallMandalArt3.title
+
+                            com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdCout[i] = 0
+
+                            for(j in 0..2) {
+                                if(strArray[j].isNotEmpty()) com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdCout[i]++
+                                else break
+                            }
+
+                            com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdContent[i] = strArray
+
+                            if(tRe.re.mandal[i].middleTitle.isNotEmpty()) {
+                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.count ++
+                            }
+                        }
+
+                        smallBoolean = true
+                        position = 2
+
+                        rightButtonImageView.setImageResource(R.mipmap.pencil)
+
+                        Log.d("TMandal", response.body().toString())
+                    }
+                    401 -> {
+                        rightButtonImageView.setImageResource(0)
+                        position = -2
+                    }
+                    404 -> {
+                        Log.d("TMandal", "실패")
+                        rightButtonImageView.setImageResource(0)
+                        position = -2
+                    }
+                }
+            }
+            override fun onFailure(call: Call<TRe>, t: Throwable) {
+                Log.e("TMandal", "에러: " + t.message)
+                t.printStackTrace()
+            }
+        })
+
         /*
         if(savedInstanceState == null) {
             supportFragmentManager
@@ -148,6 +206,28 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         rightButtonImageView.setOnClickListener {
             if(position == 2) {
                 // 작은 만다라트
+                com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(LoginActivity.appData!!.getString("ID", ""))
+
+                var call: Call<Message> = APIRequestManager.getInstance().requestServer().delSub(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
+
+                call.enqueue(object: Callback<Message> {
+                    override fun onResponse(call: Call<Message>, response: Response<Message>) {
+                        when(response.code()) {
+                            200 -> {
+                                Log.d("DelSub", "Success")
+
+
+                            }
+                            500 -> {
+
+                            }
+                        }
+                    }
+                    override fun onFailure(call: Call<Message>, t: Throwable) {
+                        Log.e("ThirdMandalart", "에러: " + t.message)
+                        t.printStackTrace()
+                    }g
+                })
             } else {
                 if(Mandalart.viewer == 2){
                     com.emirim.hyejin.mokgongso.Mandalart.setLow = SetLow(LoginActivity.appData!!.getString("ID", ""), Mandalart.secondSelect, Mandalart.thirdSelect, Mandalart.tmpAchievement)
@@ -270,13 +350,28 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                 return true
             }
             R.id.action_smaill_mandalart -> {
+                smallMandalartViewerInit()
                 titlebartxt.text = "작은목표"
-                supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.frameLayout, SmallMandalartBeforeFragment.newInstance())
-                        .commit()
 
-                position = 2
+                if(smallBoolean){
+                    supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.frameLayout, SmallMandalartFragment.newInstance())
+                            .commit()
+                    rightButtonImageView.setImageResource(R.mipmap.pencil)
+
+                    position = 2
+                }
+                else {
+                    supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.frameLayout, SmallMandalartBeforeFragment.newInstance())
+                            .commit()
+
+                    rightButtonImageView.setImageResource(0)
+
+                    position = -2
+                }
 
                 return true
             }
@@ -327,15 +422,18 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                 position = 1
                 rightButtonImageView.setImageResource(R.mipmap.pencil)
             }
+
+            if(com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.title != null) {
+                position = 2
+                smallBoolean = true
+                rightButtonImageView.setImageResource(R.mipmap.pencil)
+            }
         }
     }
 
     override fun onBackPressed() {
         if(position == 1) {
             if (Mandalart.viewer == 1) {
-                Mandalart.viewer = 0
-                Mandalart.secondSelect = -1
-                Mandalart.thirdSelect = -1
                 mandalartViewerInit()
                 supportFragmentManager
                         .beginTransaction()
@@ -353,7 +451,29 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
             } else {
                 super.onBackPressed()
             }
-        } else {
+        } else if(position == 2){
+            if(com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.viewer == 1){
+                smallMandalartViewerInit()
+
+                supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frameLayout, SmallMandalartFragment.newInstance())
+                        .commit()
+
+                rightButtonImageView.setImageResource(R.mipmap.pencil)
+            }else if(com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.viewer == 2) {
+                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.viewer = 1
+                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdSelect = -1
+
+                supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frameLayout, SmallMandalartFragment.newInstance())
+                        .commit()
+
+                rightButtonImageView.setImageResource(R.mipmap.pencil)
+            }
+        }
+        else {
             super.onBackPressed()
         }
     }
@@ -362,5 +482,11 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         Mandalart.viewer = 0
         Mandalart.secondSelect = -1
         Mandalart.thirdSelect = -1
+    }
+
+    fun smallMandalartViewerInit() {
+        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.viewer = 0
+        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.secondSelect = -1
+        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdSelect = -1
     }
  }
