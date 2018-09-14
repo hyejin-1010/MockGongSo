@@ -54,9 +54,8 @@ class Page4 : Fragment() {
 
             else {
                 constraintLayout.rightArrow.visibility = View.GONE
-
-                Mandalart.thirdCout[Mandalart.position - 1]++
             }
+            Mandalart.thirdCout[Mandalart.position - 1]++
         }
 
         /*constraintLayout.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->

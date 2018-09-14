@@ -64,17 +64,17 @@ class SettingFragment : Fragment() {
         }*/
 
         val sdf = SimpleDateFormat("yyyy-mm-dd")
-        val startDay = sdf.parse(LoginActivity.appData!!.getString("name", ""))
+        //val startDay = sdf.parse(LoginActivity.appData!!.getString("startDay", ""))
         val today = Date()
 
         val startCal = GregorianCalendar()
         val toCal = GregorianCalendar()
 
-        startCal.time = startDay
-        startCal.time = today
+        //startCal.time = startDay
+        //startCal.time = today
 
-        layout.username.text = LoginActivity.appData!!.getString("startDay", "")
-        layout.day
+        layout.username.text = LoginActivity.appData!!.getString("name", "")
+        //layout.day
 
         return layout
     }

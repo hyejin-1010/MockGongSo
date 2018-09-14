@@ -216,17 +216,33 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                             200 -> {
                                 Log.d("DelSub", "Success")
 
+                                smallBoolean = false
+                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.title = null
+                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.achievement = 0
+                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdContent = Array(3, { Array<String>(3, {""}) })
+                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.subMandalartTitle = Array<String>(3, {""})
 
+                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdCout = IntArray(3)
+                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.count = 1
+                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.position = 1
+                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.secondSelect = -1
+                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdSelect = -1
+                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.viewer = 0
+
+                                supportFragmentManager
+                                        .beginTransaction()
+                                        .replace(R.id.frameLayout, SmallMandalartBeforeFragment.newInstance())
+                                        .commit()
                             }
                             500 -> {
-
+                                Log.d("DelSub", "Failed")
                             }
                         }
                     }
                     override fun onFailure(call: Call<Message>, t: Throwable) {
                         Log.e("ThirdMandalart", "에러: " + t.message)
                         t.printStackTrace()
-                    }g
+                    }
                 })
             } else {
                 if(Mandalart.viewer == 2){
@@ -414,20 +430,28 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         super.onWindowFocusChanged(hasFocus)
 
         if(hasFocus) {
-            if(Mandalart.title != null) {
-                supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.frameLayout, MandalartViewFragment.newInstance())
-                        .commit()
-                position = 1
-                rightButtonImageView.setImageResource(R.mipmap.pencil)
+            if(position == 1) {
+                if (Mandalart.title != null) {
+                    supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.frameLayout, MandalartViewFragment.newInstance())
+                            .commit()
+                    position = 1
+                    rightButtonImageView.setImageResource(R.mipmap.pencil)
+                }
+            } else if(position == 2) {
+                if (com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.title != null) {
+                    position = 2
+                    smallBoolean = true
+                    rightButtonImageView.setImageResource(R.mipmap.pencil)
+                    supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.frameLayout, SmallMandalartFragment.newInstance())
+                            .commit()
+                }
             }
 
-            if(com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.title != null) {
-                position = 2
-                smallBoolean = true
-                rightButtonImageView.setImageResource(R.mipmap.pencil)
-            }
+            Log.d("onWindowFocusChanged", "onWindowFocusChanged")
         }
     }
 

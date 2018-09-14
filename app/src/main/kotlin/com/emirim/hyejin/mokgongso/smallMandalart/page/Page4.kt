@@ -2,6 +2,7 @@ package com.emirim.hyejin.mokgongso.smallMandalart.page
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,6 +37,7 @@ class Page4 : Fragment() {
             for(i in 0..2) {
                 if(i < Mandalart.thirdCout[Mandalart.position - 1]) {
                     Mandalart.thirdContent[Mandalart.position - 1][i] = mandalartSub[i].text.toString()
+                    Log.d("test tmake", "content[${Mandalart.position - 1}][${i}] : ${mandalartSub[i].text.toString()}")
                 }
             }
         }
@@ -48,9 +50,8 @@ class Page4 : Fragment() {
 
             else {
                 constraintLayout.rightArrow.visibility = View.GONE
-
-                Mandalart.thirdCout[Mandalart.position - 1]++
             }
+            Mandalart.thirdCout[Mandalart.position - 1]++
         }
 
         /*constraintLayout.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
@@ -84,7 +85,7 @@ class Page4 : Fragment() {
                     //mandalartSub[i].setText("s")
                 }
 
-                if(Mandalart.thirdCout[Mandalart.position - 1] == 7) {
+                if(Mandalart.thirdCout[Mandalart.position - 1] == 2) {
                     constraintLayout.mandalartAddBtn.visibility = View.GONE
                 } else {
                     constraintLayout.mandalartAddBtn.visibility = View.VISIBLE
