@@ -6,13 +6,13 @@ import java.util.*
 class TitleParent: ParentObject {
 
     lateinit var mChildrenList: ArrayList<TitleChild>
-    lateinit var _id: UUID
-    lateinit var title: String
-    lateinit var subTitle: String
+    var _id: UUID
+    var title: String
+    // var subTitle: String
 
-    constructor(title: String, subTitle: String) {
+    constructor(title: String) {
         this.title = title
-        this.subTitle = subTitle
+        // this.subTitle = subTitle
         _id = UUID.randomUUID()
     }
 

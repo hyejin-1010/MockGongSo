@@ -3,7 +3,7 @@ package com.emirim.hyejin.mokgongso.fragment.recycler
 import android.content.Context
 
 class TitleCreator {
-    lateinit var _titleParents: ArrayList<TitleParent>
+    /*lateinit var _titleParents: ArrayList<TitleParent>
 
 
     companion object {
@@ -24,5 +24,5 @@ class TitleCreator {
             var title: TitleParent = TitleParent(String.format("Caller #&d", i), String.format("Caller #&d", i))
             _titleParents.add(title)
         }
-    }
+    }*/
 }

@@ -1,5 +1,7 @@
 package com.emirim.hyejin.mokgongso
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
 import android.opengl.Visibility
 import android.os.Bundle
@@ -8,8 +10,10 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.Toast
 import com.emirim.hyejin.mokgongso.api.APIRequestManager
@@ -19,8 +23,12 @@ import com.emirim.hyejin.mokgongso.mandalart.CreateMandalart
 import com.emirim.hyejin.mokgongso.mandalart.Mandalart
 import com.emirim.hyejin.mokgongso.model.*
 import kotlinx.android.synthetic.main.activity_mandalart.*
+import kotlinx.android.synthetic.main.dialog_del.view.*
 import kotlinx.android.synthetic.main.fab_layout.*
 import kotlinx.android.synthetic.main.fab_layout.view.*
+import kotlinx.android.synthetic.main.fragment_diary.*
+import kotlinx.android.synthetic.main.list_item.*
+import kotlinx.android.synthetic.main.list_item.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,6 +47,24 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mandalart)
+
+        com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(LoginActivity.appData!!.getString("ID", ""))
+        var call5: Call<GetDiary> = APIRequestManager.getInstance().requestServer().getDiary(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
+
+        call5.enqueue(object: Callback<GetDiary> {
+            override fun onResponse(call: Call<GetDiary>, response: Response<GetDiary>) {
+                when(response.code()) {
+                    200 -> {
+                        com.emirim.hyejin.mokgongso.Diary.getDiary = response.body() as GetDiary
+                    }
+                }
+            }
+            override fun onFailure(call: Call<GetDiary>, t: Throwable) {
+                Log.e("ServerMandal", "에러: " + t.message)
+                t.printStackTrace()
+            }
+        })
+
 
         initBottomNavigation()
 
@@ -206,45 +232,15 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         rightButtonImageView.setOnClickListener {
             if(position == 2) {
                 // 작은 만다라트
-                com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(LoginActivity.appData!!.getString("ID", ""))
+                delDialog()
+            } else if(position == 5) {
+                // Toast.makeText(this, "${diaryRecyclerView.itemDecorationCount}, ${diaryRecyclerView.childCount}", Toast.LENGTH_SHORT).show()
 
-                var call: Call<Message> = APIRequestManager.getInstance().requestServer().delSub(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
-
-                call.enqueue(object: Callback<Message> {
-                    override fun onResponse(call: Call<Message>, response: Response<Message>) {
-                        when(response.code()) {
-                            200 -> {
-                                Log.d("DelSub", "Success")
-
-                                smallBoolean = false
-                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.title = null
-                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.achievement = 0
-                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdContent = Array(3, { Array<String>(3, {""}) })
-                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.subMandalartTitle = Array<String>(3, {""})
-
-                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdCout = IntArray(3)
-                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.count = 1
-                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.position = 1
-                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.secondSelect = -1
-                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdSelect = -1
-                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.viewer = 0
-
-                                supportFragmentManager
-                                        .beginTransaction()
-                                        .replace(R.id.frameLayout, SmallMandalartBeforeFragment.newInstance())
-                                        .commit()
-                            }
-                            500 -> {
-                                Log.d("DelSub", "Failed")
-                            }
-                        }
-                    }
-                    override fun onFailure(call: Call<Message>, t: Throwable) {
-                        Log.e("ThirdMandalart", "에러: " + t.message)
-                        t.printStackTrace()
-                    }
-                })
-            } else {
+                for(i in 0..(itemRecyclerView.childCount - 1)) {
+                    diaryRecyclerView.itemRecyclerView.getChildAt(i).findViewById<CheckBox>(R.id.delCheckBox).visibility = View.VISIBLE
+                }
+            }
+            else {
                 if(Mandalart.viewer == 2){
                     com.emirim.hyejin.mokgongso.Mandalart.setLow = SetLow(LoginActivity.appData!!.getString("ID", ""), Mandalart.secondSelect, Mandalart.thirdSelect, Mandalart.tmpAchievement)
 
@@ -315,7 +311,6 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
             fabBtn.backgroundTintList = resources.getColorStateList(R.color.colorPrimary)
 
             titlebartxt.text = "일기"
-            rightButtonImageView.setImageResource(0)
             supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.frameLayout, DiaryFragment.newInstance())
@@ -512,5 +507,59 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.viewer = 0
         com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.secondSelect = -1
         com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdSelect = -1
+    }
+
+    fun delDialog() {
+        var cancelDialog = LayoutInflater.from(this).inflate(R.layout.dialog_del, null)
+        val mBuilder = AlertDialog.Builder(this)
+                .setView(cancelDialog)
+
+        val  mAlertDialog = mBuilder.show()
+
+        cancelDialog.cancel.setOnClickListener {
+            mAlertDialog.dismiss()
+        }
+        cancelDialog.delBtn.setOnClickListener {
+            com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(LoginActivity.appData!!.getString("ID", ""))
+
+            var call: Call<Message> = APIRequestManager.getInstance().requestServer().delSub(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
+
+            call.enqueue(object: Callback<Message> {
+                override fun onResponse(call: Call<Message>, response: Response<Message>) {
+                    when(response.code()) {
+                        200 -> {
+                            Log.d("DelSub", "Success")
+
+                            smallBoolean = false
+                            com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.title = null
+                            com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.achievement = 0
+                            com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdContent = Array(3, { Array<String>(3, {""}) })
+                            com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.subMandalartTitle = Array<String>(3, {""})
+
+                            com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdCout = IntArray(3)
+                            com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.count = 1
+                            com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.position = 1
+                            com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.secondSelect = -1
+                            com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdSelect = -1
+                            com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.viewer = 0
+
+                            supportFragmentManager
+                                    .beginTransaction()
+                                    .replace(R.id.frameLayout, SmallMandalartBeforeFragment.newInstance())
+                                    .commit()
+
+                            mAlertDialog.dismiss()
+                        }
+                        500 -> {
+                            Log.d("DelSub", "Failed")
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<Message>, t: Throwable) {
+                    Log.e("ThirdMandalart", "에러: " + t.message)
+                    t.printStackTrace()
+                }
+            })
+        }
     }
  }

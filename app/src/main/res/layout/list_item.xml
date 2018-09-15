@@ -3,31 +3,36 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/listcardView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
     android:background="@color/white"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
     android:orientation="vertical">
-    <ListView
-        android:id="@+id/childListview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"></ListView>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/itemRecyclerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.NestedScrollView>
+
     <EditText
-        android:id="@+id/diaryEdt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/inputDiary"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="270dp"
+        android:layout_height="50dp"
         android:visibility="gone"/>
+
     <Button
         android:id="@+id/diaryWriteBtn"
         android:layout_gravity="center_horizontal"
-        android:layout_width="430dp"
+        android:layout_width="270dp"
         android:layout_height="50dp"
+        android:textColor="@color/white"
         android:background="@color/colorPrimaryDark"
-        android:text="일기 작성"/>
+        android:layout_marginTop="15dp"
+        android:text="일기쓰기"/>
 </LinearLayout>

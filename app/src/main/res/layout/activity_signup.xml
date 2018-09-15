@@ -33,7 +33,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
 
         android:padding="0dp"
-        android:background="@mipmap/left" />
+        android:background="@drawable/leftarrow" />
 
     <ImageView
         android:layout_width="110dp"

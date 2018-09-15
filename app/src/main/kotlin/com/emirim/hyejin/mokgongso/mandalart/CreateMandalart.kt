@@ -154,7 +154,7 @@ class CreateMandalart : AppCompatActivity() {
 
                             if(first) {
                                 val date = Date()
-                                val sdf = SimpleDateFormat("yyyy-mm-dd")
+                                val sdf = SimpleDateFormat("yyyy-MM-dd")
 
                                 com.emirim.hyejin.mokgongso.Mandalart.addDay = AddDay(LoginActivity.appData!!.getString("ID", ""), sdf.format(date).toString())
 
@@ -165,6 +165,7 @@ class CreateMandalart : AppCompatActivity() {
                                         when(response.code()) {
                                             200 -> {
                                                 Log.d("Add Day", sdf.format(date).toString())
+                                                LoginActivity.appData!!.edit().putString("startday", sdf.format(date))
                                             }
                                             500 -> {
                                                 Log.d("Add Day", "500")

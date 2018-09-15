@@ -36,6 +36,12 @@ interface API {
     @POST("/getTMandalChk/app/")
     fun getTMandalChk(@Body mandalChk: MandalChk): Call<TRe>
 
-    @POST("/delSub/app")
+    @POST("/delSub/app/")
     fun delSub(@Body mandalChk: MandalChk): Call<Message>
+
+    @POST("/addDiary/app/")
+    fun addDiary(@Body addDiary: AddDiary): Call<Message>
+
+    @POST("/getDiary/app/")
+    fun getDiary(@Body mandalChk: MandalChk): Call<GetDiary>
 }

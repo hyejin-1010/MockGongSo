@@ -3,6 +3,7 @@ package com.emirim.hyejin.mokgongso.fragment
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,14 +65,20 @@ class SettingFragment : Fragment() {
         }*/
 
         val sdf = SimpleDateFormat("yyyy-mm-dd")
-        //val startDay = sdf.parse(LoginActivity.appData!!.getString("startDay", ""))
         val today = Date()
 
-        val startCal = GregorianCalendar()
-        val toCal = GregorianCalendar()
+        Log.d("startDay", "${LoginActivity.appData!!.getString("startday", "")} startday")
 
-        //startCal.time = startDay
-        //startCal.time = today
+        if(LoginActivity.appData!!.getString("startday", "").isNotEmpty()) {
+            layout.day.text = "0"
+        } else {
+           /* val startDay = sdf.parse(LoginActivity.appData!!.getString("startDay", ""))
+            val startCal = GregorianCalendar()
+            val toCal = GregorianCalendar()
+
+            startCal.time = startDay
+            startCal.time = today*/
+        }
 
         layout.username.text = LoginActivity.appData!!.getString("name", "")
         //layout.day
