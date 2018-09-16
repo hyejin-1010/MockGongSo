@@ -36,35 +36,17 @@ import retrofit2.Response
 class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     var currentFragment: Fragment? = null
     var ft: FragmentTransaction? = null
-    var mandalBoolean: Boolean = false
-    var position = 0
 
     companion object {
         lateinit var rightButtonImageView: ImageView
         var smallBoolean = false
+        var mandalBoolean: Boolean = false
+        var position = -1
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mandalart)
-
-        com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(LoginActivity.appData!!.getString("ID", ""))
-        var call5: Call<GetDiary> = APIRequestManager.getInstance().requestServer().getDiary(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
-
-        call5.enqueue(object: Callback<GetDiary> {
-            override fun onResponse(call: Call<GetDiary>, response: Response<GetDiary>) {
-                when(response.code()) {
-                    200 -> {
-                        com.emirim.hyejin.mokgongso.Diary.getDiary = response.body() as GetDiary
-                    }
-                }
-            }
-            override fun onFailure(call: Call<GetDiary>, t: Throwable) {
-                Log.e("ServerMandal", "에러: " + t.message)
-                t.printStackTrace()
-            }
-        })
-
 
         initBottomNavigation()
 
@@ -176,20 +158,13 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                         }
 
                         smallBoolean = true
-                        position = 2
-
-                        rightButtonImageView.setImageResource(R.drawable.pencil)
 
                         Log.d("TMandal", response.body().toString())
                     }
                     401 -> {
-                        rightButtonImageView.setImageResource(0)
-                        position = -2
                     }
                     404 -> {
                         Log.d("TMandal", "실패")
-                        rightButtonImageView.setImageResource(0)
-                        position = -2
                     }
                 }
             }
@@ -212,7 +187,9 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                 .beginTransaction()
                 .replace(R.id.frameLayout, MainFragment.newInstance())
                 .commit()
-        position = -3
+        position = -1
+        titlebartxt.text = "메인"
+        rightButtonImageView.setImageResource(0)
 
         rightButtonImageView.setOnClickListener {
             if(position == 2) {
@@ -300,11 +277,22 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                     .beginTransaction()
                     .replace(R.id.frameLayout, DiaryFragment.newInstance())
                     .commit()
+
+            rightButtonImageView.setImageResource(R.drawable.trash)
             position = 5
         }
         fab2.setOnClickListener {
             subFloating.visibility = View.GONE
             fabBtn.backgroundTintList = resources.getColorStateList(R.color.colorPrimary)
+
+            titlebartxt.text = "보고서"
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.frameLayout, ReportFragment.newInstance())
+                    .commit()
+
+            rightButtonImageView.setImageResource(0)
+            position = 6
         }
     }
 
@@ -354,7 +342,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                             .beginTransaction()
                             .replace(R.id.frameLayout, SmallMandalartFragment.newInstance())
                             .commit()
-                    rightButtonImageView.setImageResource(R.drawable.pencil)
+                    rightButtonImageView.setImageResource(R.drawable.trash)
 
                     position = 2
                 }
@@ -420,7 +408,24 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         super.onWindowFocusChanged(hasFocus)
 
         if(hasFocus) {
-            if(position == 1) {
+            com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(LoginActivity.appData!!.getString("ID", ""))
+            var call5: Call<GetDiary> = APIRequestManager.getInstance().requestServer().getDiary(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
+
+            call5.enqueue(object: Callback<GetDiary> {
+                override fun onResponse(call: Call<GetDiary>, response: Response<GetDiary>) {
+                    when(response.code()) {
+                        200 -> {
+                            com.emirim.hyejin.mokgongso.Diary.getDiary = response.body() as GetDiary
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<GetDiary>, t: Throwable) {
+                    Log.e("ServerMandal", "에러: " + t.message)
+                    t.printStackTrace()
+                }
+            })
+
+            if((position == 1 || position == 0) && Mandalart.title != null) {
                 if (Mandalart.title != null) {
                     supportFragmentManager
                             .beginTransaction()
@@ -429,11 +434,11 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                     position = 1
                     rightButtonImageView.setImageResource(R.drawable.pencil)
                 }
-            } else if(position == 2) {
+            } else if(position == 2 || position == -2) {
                 if (com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.title != null) {
                     position = 2
                     smallBoolean = true
-                    rightButtonImageView.setImageResource(R.drawable.pencil)
+                    rightButtonImageView.setImageResource(R.drawable.trash)
                     supportFragmentManager
                             .beginTransaction()
                             .replace(R.id.frameLayout, SmallMandalartFragment.newInstance())

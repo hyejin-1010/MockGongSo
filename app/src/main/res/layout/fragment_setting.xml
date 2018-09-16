@@ -21,8 +21,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginLeft="30dp"
-            android:src="@drawable/logo_icon"/>
+            android:layout_marginLeft="30dp"/>
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="wrap_content"

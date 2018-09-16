@@ -99,13 +99,20 @@ class TriangleView : View {
             canvas!!.drawPath(mPath, strokePaint)
         } else if(boolean == 2) {
             mPath = calculate(direction)
-            mPaint.color = resources.getColor(R.color.colorPrimary)
+            mPaint.color = resources.getColor(R.color.colorPrimaryDark)
             canvas!!.drawPath(mPath, mPaint)
 
             boolean = 0
             canvas!!.drawPath(mPath, strokePaint)
-        } else if(mColor!!.defaultColor == resources.getColor(R.color.colorPrimaryDark) || boolean == 3) {
+        } else if(mColor!!.defaultColor == resources.getColor(R.color.colorPrimaryDark)) {
             mPath = calculate(direction)
+            mPaint.color = resources.getColor(R.color.colorPrimaryDark)
+            canvas!!.drawPath(mPath, strokePaint)
+            //canvas!!.drawPath(mPath, mPaint)
+        } else if(boolean == 3) {
+            mPath = calculate(direction)
+            mPaint.color = resources.getColor(R.color.colorPrimaryDark)
+            // canvas!!.drawPath(mPath, mPaint)
             canvas!!.drawPath(mPath, strokePaint)
         } else {
             mPath = calculate(direction)

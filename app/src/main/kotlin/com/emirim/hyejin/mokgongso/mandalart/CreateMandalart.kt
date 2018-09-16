@@ -14,6 +14,7 @@ import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import android.widget.Toast
 import com.emirim.hyejin.mokgongso.LoginActivity
+import com.emirim.hyejin.mokgongso.MandalartActivity
 
 import com.emirim.hyejin.mokgongso.R
 import com.emirim.hyejin.mokgongso.api.APIRequestManager
@@ -155,6 +156,8 @@ class CreateMandalart : AppCompatActivity() {
                             if(first) {
                                 val date = Date()
                                 val sdf = SimpleDateFormat("yyyy-MM-dd")
+
+                                MandalartActivity.mandalBoolean = true
 
                                 com.emirim.hyejin.mokgongso.Mandalart.addDay = AddDay(LoginActivity.appData!!.getString("ID", ""), sdf.format(date).toString())
 

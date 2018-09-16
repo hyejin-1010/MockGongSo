@@ -35,7 +35,7 @@ class TitleChildViewHolder: ChildViewHolder {
         diaryWriteBtn = view.findViewById(R.id.diaryWriteBtn) as Button
         inputDiary = view.findViewById(R.id.inputDiary) as EditText
 
-        diaryWriteBtn.setOnClickListener {
+       /* diaryWriteBtn.setOnClickListener {
             if(inputDiary.visibility == View.VISIBLE) {
                 inputDiary.visibility = View.GONE
                 diaryWriteBtn.text = "일기쓰기"
@@ -81,7 +81,7 @@ class TitleChildViewHolder: ChildViewHolder {
                 inputDiary.visibility = View.VISIBLE
                 diaryWriteBtn.text = "확인"
             }
-        }
+        }*/
 
 
         /*childListview = view.findViewById(R.id.childListview) as TextView

@@ -38,16 +38,21 @@ class MainFragment : Fragment() {
 
         Log.d("start main", "${LoginActivity.appData!!.getString("startday", "")}")
 
-        if(LoginActivity.appData!!.getString("startday", "").isNotEmpty() || LoginActivity.appData!!.getString("startday", "").equals("")) {
+        if(LoginActivity.appData!!.getString("startday", "").isNotEmpty() || !(LoginActivity.appData!!.getString("startday", "").equals(""))) {
             val startDay = LoginActivity.appData!!.getString("startday", "")
-            val startDate = SimpleDateFormat("yyyy-MM-dd").parse(startDay)
 
-            val today = Date()
+            if(startDay.equals("")) {
+                containtLayout.date.text = "0"
+            } else {
+                val startDate = SimpleDateFormat("yyyy-MM-dd").parse(startDay)
 
-            var diff = today.time - startDate.time
-            var diffDays = diff / (24 * 60 * 60 * 1000)
+                val today = Date()
 
-            containtLayout.date.text = diffDays.toString()
+                var diff = today.time - startDate.time
+                var diffDays = (diff / (24 * 60 * 60 * 1000)) + 1
+
+                containtLayout.date.text = diffDays.toString()
+            }
         } else {
             containtLayout.date.text = "0"
         }

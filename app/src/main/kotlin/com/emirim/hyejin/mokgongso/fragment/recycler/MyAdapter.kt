@@ -20,6 +20,8 @@ import com.emirim.hyejin.mokgongso.fragment.DiaryFragment
 import com.emirim.hyejin.mokgongso.fragment.recyclerview.InnerAdapter
 import com.emirim.hyejin.mokgongso.fragment.recyclerview.InnterItem
 import com.emirim.hyejin.mokgongso.model.AddDiary
+import com.emirim.hyejin.mokgongso.model.GetDiary
+import com.emirim.hyejin.mokgongso.model.MandalChk
 import com.emirim.hyejin.mokgongso.model.Message
 import com.facebook.internal.Validate
 import kotlinx.android.synthetic.main.fragment_diary.view.*
@@ -84,7 +86,7 @@ class MyAdapter: ExpandableRecyclerAdapter<TitleParentViewHolder, TitleChildView
         // 클릭할 때마다 호출
         p0?.diaryWriteBtn?.setOnClickListener {
             if(p0?.inputDiary?.visibility == View.VISIBLE) {
-                Toast.makeText(context, "${p1}", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, "${p1}", Toast.LENGTH_SHORT).show()
 
                 // DB에 저장
                 var calendar = Calendar.getInstance()
@@ -125,8 +127,25 @@ class MyAdapter: ExpandableRecyclerAdapter<TitleParentViewHolder, TitleChildView
                                 p0?.inputDiary?.setText("")
 
 
-                                p0?.inputDiary?.visibility = View.VISIBLE
+                                p0?.inputDiary?.visibility = View.GONE
                                 p0?.diaryWriteBtn?.text = "일기쓰기"
+
+                                com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(LoginActivity.appData!!.getString("ID", ""))
+                                var call5: Call<GetDiary> = APIRequestManager.getInstance().requestServer().getDiary(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
+
+                                call5.enqueue(object: Callback<GetDiary> {
+                                    override fun onResponse(call: Call<GetDiary>, response: Response<GetDiary>) {
+                                        when(response.code()) {
+                                            200 -> {
+                                                com.emirim.hyejin.mokgongso.Diary.getDiary = response.body() as GetDiary
+                                            }
+                                        }
+                                    }
+                                    override fun onFailure(call: Call<GetDiary>, t: Throwable) {
+                                        Log.e("ServerMandal", "에러: " + t.message)
+                                        t.printStackTrace()
+                                    }
+                                })
                             }
                             500 -> {
                                 Log.d("addDiary", "Success")
