@@ -95,7 +95,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="30dp"
-            android:text="잠금화면 만다라트 설정"/>
+            android:text="잠금화면 만다라트 설정"
+
+            android:id="@+id/locklock"/>
         <Switch
             android:id="@+id/lockSwitch"
             android:layout_width="wrap_content"

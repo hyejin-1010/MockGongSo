@@ -1,0 +1,77 @@
+package com.emirim.hyejin.mokgongso.lockScreen.util;
+
+import android.app.ActivityManager;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.provider.Settings;
+
+public class LockScreen  {
+
+    private static LockScreen singleton;
+    Context context;
+    boolean disableHomeButton=false;
+
+
+    SharedPreferences prefs = null;
+
+
+    public static LockScreen getInstance() {
+        if(singleton==null){
+            singleton = new LockScreen();
+
+        }
+        return singleton;
+    }
+    public void init(Context context){
+        this.context = context;
+    }
+
+    public void init(Context context, boolean disableHomeButton){
+        this.context = context;
+        this.disableHomeButton = disableHomeButton;
+    }
+
+    private void showSettingAccesability(){
+        if(!isMyServiceRunning(LockWinAccessService.class)) {
+            Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+            context.startActivity(intent);
+        }
+    }
+
+
+    public void active(){
+        if(disableHomeButton){
+            showSettingAccesability();
+        }
+
+        if(context!=null) {
+            context.startService(new Intent(context, LockScreenService.class));
+        }
+    }
+
+    public void deactivate(){
+        if(context!=null) {
+            context.stopService(new Intent(context, LockScreenService.class));
+        }
+    }
+    public boolean isActive(){
+        if(context!=null) {
+            return isMyServiceRunning(LockScreenService.class);
+        }else{
+            return false;
+        }
+    }
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+}
