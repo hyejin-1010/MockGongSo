@@ -11,8 +11,11 @@
         android:id="@+id/fab1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimaryDark"
+        app:backgroundTint="@color/colorPrimaryDark"
         android:layout_gravity="center"
         android:layout_marginBottom="8dp"
+        android:src="@drawable/edit_white"
         android:layout_marginRight="30dp"
         app:fabSize="mini"
         android:elevation="6dp"/>
@@ -21,9 +24,12 @@
         android:id="@+id/fab2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:src="@drawable/result"
         android:layout_gravity="center"
         android:layout_marginLeft="30dp"
         android:layout_marginBottom="8dp"
+        app:backgroundTint="@color/colorPrimaryDark"
         app:fabSize="mini"
         android:elevation="6dp"/>
 

@@ -124,33 +124,12 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                         }
 
                         mandalBoolean = true
-                        position = 1
-
-                        supportFragmentManager
-                                .beginTransaction()
-                                .add(R.id.frameLayout, MandalartViewFragment.newInstance())
-                                .commit()
-
-                        rightButtonImageView.setImageResource(R.mipmap.pencil)
-
                         Log.d("ServerMandal", response.body().toString())
                     }
                     401 -> {
-                        supportFragmentManager
-                                .beginTransaction()
-                                .add(R.id.frameLayout, MandalartFragment.newInstance())
-                                .commit()
-
-                        position = 0
                     }
                     404 -> {
                         Log.d("ServerMandal", "실패")
-                        supportFragmentManager
-                                .beginTransaction()
-                                .add(R.id.frameLayout, MandalartFragment.newInstance())
-                                .commit()
-
-                        position = 0
                     }
                 }
             }
@@ -199,7 +178,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                         smallBoolean = true
                         position = 2
 
-                        rightButtonImageView.setImageResource(R.mipmap.pencil)
+                        rightButtonImageView.setImageResource(R.drawable.pencil)
 
                         Log.d("TMandal", response.body().toString())
                     }
@@ -228,6 +207,12 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                     .commit()
         }
         */
+
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.frameLayout, MainFragment.newInstance())
+                .commit()
+        position = -3
 
         rightButtonImageView.setOnClickListener {
             if(position == 2) {
@@ -263,7 +248,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                                             .commit()
 
 
-                                    MandalartActivity.rightButtonImageView.setImageResource(R.mipmap.pencil)
+                                    MandalartActivity.rightButtonImageView.setImageResource(R.drawable.pencil)
                                 }
                                 404 -> {
                                 }
@@ -293,7 +278,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                         .beginTransaction()
                         .replace(R.id.frameLayout, MainFragment.newInstance())
                         .commit()
-                position = -1
+                position = -3
             } else {
                 subFloating.visibility = View.GONE
                 fabBtn.backgroundTintList = resources.getColorStateList(R.color.colorPrimary)
@@ -344,7 +329,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                             .beginTransaction()
                             .replace(R.id.frameLayout, MandalartViewFragment.newInstance())
                             .commit()
-                    rightButtonImageView.setImageResource(R.mipmap.pencil)
+                    rightButtonImageView.setImageResource(R.drawable.pencil)
 
                     position = 1
                 }
@@ -369,7 +354,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                             .beginTransaction()
                             .replace(R.id.frameLayout, SmallMandalartFragment.newInstance())
                             .commit()
-                    rightButtonImageView.setImageResource(R.mipmap.pencil)
+                    rightButtonImageView.setImageResource(R.drawable.pencil)
 
                     position = 2
                 }
@@ -388,6 +373,13 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
             }
             R.id.action_store -> {
                 titlebartxt.text = "상점"
+                supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frameLayout, StoreFragment.newInstance())
+                        .commit()
+
+                rightButtonImageView.setImageResource(0)
+
                 position = 3
                 return true
             }
@@ -397,6 +389,9 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                         .beginTransaction()
                         .replace(R.id.frameLayout, SettingFragment.newInstance())
                         .commit()
+
+                rightButtonImageView.setImageResource(0)
+
                 position = 4
                 return true
             }
@@ -432,13 +427,13 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                             .replace(R.id.frameLayout, MandalartViewFragment.newInstance())
                             .commit()
                     position = 1
-                    rightButtonImageView.setImageResource(R.mipmap.pencil)
+                    rightButtonImageView.setImageResource(R.drawable.pencil)
                 }
             } else if(position == 2) {
                 if (com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.title != null) {
                     position = 2
                     smallBoolean = true
-                    rightButtonImageView.setImageResource(R.mipmap.pencil)
+                    rightButtonImageView.setImageResource(R.drawable.pencil)
                     supportFragmentManager
                             .beginTransaction()
                             .replace(R.id.frameLayout, SmallMandalartFragment.newInstance())
@@ -458,7 +453,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                         .beginTransaction()
                         .replace(R.id.frameLayout, MandalartViewFragment.newInstance())
                         .commit()
-                rightButtonImageView.setImageResource(R.mipmap.pencil)
+                rightButtonImageView.setImageResource(R.drawable.pencil)
             } else if (Mandalart.viewer == 2) {
                 Mandalart.viewer = 1
                 Mandalart.thirdSelect = -1
@@ -466,7 +461,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                         .beginTransaction()
                         .replace(R.id.frameLayout, MandalartViewFragment.newInstance())
                         .commit()
-                rightButtonImageView.setImageResource(R.mipmap.pencil)
+                rightButtonImageView.setImageResource(R.drawable.pencil)
             } else {
                 super.onBackPressed()
             }
@@ -479,7 +474,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                         .replace(R.id.frameLayout, SmallMandalartFragment.newInstance())
                         .commit()
 
-                rightButtonImageView.setImageResource(R.mipmap.pencil)
+                rightButtonImageView.setImageResource(R.drawable.pencil)
             }else if(com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.viewer == 2) {
                 com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.viewer = 1
                 com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdSelect = -1
@@ -489,7 +484,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                         .replace(R.id.frameLayout, SmallMandalartFragment.newInstance())
                         .commit()
 
-                rightButtonImageView.setImageResource(R.mipmap.pencil)
+                rightButtonImageView.setImageResource(R.drawable.pencil)
             }
         }
         else {

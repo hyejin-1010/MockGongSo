@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_mandalart"
-        android:icon="@drawable/icon1hdpi"
+        android:icon="@drawable/mandalart"
         android:title=""
         android:enabled="true"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_smaill_mandalart"
-        android:icon="@drawable/icon2hdpi"
+        android:icon="@drawable/mandalart_sub"
         android:title=""
         android:enabled="true"
         app:showAsAction="ifRoom" />
@@ -18,13 +18,13 @@
         android:title="" />
     <item
         android:id="@+id/action_store"
-        android:icon="@drawable/icon3hdpi"
+        android:icon="@drawable/store"
         android:title=""
         android:enabled="true"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_setting"
-        android:icon="@drawable/ion4hdpi"
+        android:icon="@drawable/setting"
         android:title=""
         android:enabled="true"
         app:showAsAction="ifRoom" />

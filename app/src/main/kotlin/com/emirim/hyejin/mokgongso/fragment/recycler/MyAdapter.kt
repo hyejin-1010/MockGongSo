@@ -44,6 +44,7 @@ class MyAdapter: ExpandableRecyclerAdapter<TitleParentViewHolder, TitleChildView
         p0?.textView1?.text = title.title
 
         p0?.isExpanded = false
+
         // notifyDataSetChanged()
     }
 

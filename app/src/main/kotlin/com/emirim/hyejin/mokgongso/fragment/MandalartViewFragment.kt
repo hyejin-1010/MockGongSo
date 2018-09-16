@@ -81,7 +81,7 @@ class MandalartViewFragment : Fragment() {
 
     fun secondClick(i: Int) {
         //
-        if(i > Mandalart.count - 1) {
+        if(i > Mandalart.count - 2) {
             return
         }
 

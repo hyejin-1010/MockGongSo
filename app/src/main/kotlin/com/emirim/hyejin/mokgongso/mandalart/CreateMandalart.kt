@@ -165,7 +165,8 @@ class CreateMandalart : AppCompatActivity() {
                                         when(response.code()) {
                                             200 -> {
                                                 Log.d("Add Day", sdf.format(date).toString())
-                                                LoginActivity.appData!!.edit().putString("startday", sdf.format(date))
+                                                val editor = LoginActivity.appData!!.edit()
+                                                editor.putString("startday", sdf.format(date).trim())
                                             }
                                             500 -> {
                                                 Log.d("Add Day", "500")

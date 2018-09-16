@@ -13,6 +13,7 @@ import com.emirim.hyejin.mokgongso.LoginActivity
 import com.emirim.hyejin.mokgongso.MainActivity
 import com.emirim.hyejin.mokgongso.MandalartActivity
 import com.emirim.hyejin.mokgongso.R
+import com.emirim.hyejin.mokgongso.mandalart.Mandalart
 import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -36,6 +37,16 @@ class SettingFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val layout: View = inflater?.inflate(R.layout.fragment_setting, container, false)
         val signOutBtn = layout.findViewById<TextView>(R.id.signOutBtn)
+
+        if(Mandalart.achievement < 25) {
+            layout.profileIcon.setBackgroundResource(R.drawable.mypage_1)
+        } else if(Mandalart.achievement < 50) {
+            layout.profileIcon.setBackgroundResource(R.drawable.mypage_2)
+        } else if(Mandalart.achievement < 75) {
+            layout.profileIcon.setBackgroundResource(R.drawable.mypage_3)
+        } else {
+            layout.profileIcon.setBackgroundResource(R.drawable.mypage_4)
+        }
 
         var gso= GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -69,8 +80,16 @@ class SettingFragment : Fragment() {
 
         Log.d("startDay", "${LoginActivity.appData!!.getString("startday", "")} startday")
 
-        if(LoginActivity.appData!!.getString("startday", "").isNotEmpty()) {
-            layout.day.text = "0"
+        if(LoginActivity.appData!!.getString("startday", "").isNotEmpty() || LoginActivity.appData!!.getString("startday", "").equals("")) {
+            val startDay = LoginActivity.appData!!.getString("startday", "")
+            val startDate = SimpleDateFormat("yyyy-MM-dd").parse(startDay)
+
+            val today = Date()
+
+            var diff = today.time - startDate.time
+            var diffDays = (diff / (24 * 60 * 60 * 1000)) + 1
+
+            layout.day.text = diffDays.toString()
         } else {
            /* val startDay = sdf.parse(LoginActivity.appData!!.getString("startDay", ""))
             val startCal = GregorianCalendar()
@@ -78,6 +97,7 @@ class SettingFragment : Fragment() {
 
             startCal.time = startDay
             startCal.time = today*/
+            layout.day.text = "0"
         }
 
         layout.username.text = LoginActivity.appData!!.getString("name", "")

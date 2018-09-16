@@ -76,7 +76,7 @@ class SmallMandalartFragment : Fragment() {
     }
 
     fun secondClick(i: Int) { // 4
-        if(i > Mandalart.count - 1) {
+        if(i > Mandalart.count - 2) {
             return
         }
 
