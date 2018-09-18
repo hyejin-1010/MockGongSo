@@ -41,7 +41,7 @@
 
         android:layout_marginTop="70dp"
 
-        android:src="@mipmap/icon2"
+        android:src="@drawable/icon2"
 
         app:layout_constraintTop_toTopOf="@id/txt_signin"
         app:layout_constraintRight_toRightOf="parent"

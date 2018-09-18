@@ -7,5 +7,7 @@ class Diary {
     companion object {
         lateinit var addDiary: AddDiary
         lateinit var getDiary: GetDiary
+        lateinit var delDiary: DelDiary
+        var del = -1
     }
 }

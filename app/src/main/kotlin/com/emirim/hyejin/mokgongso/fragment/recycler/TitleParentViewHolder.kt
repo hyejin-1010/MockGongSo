@@ -4,11 +4,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.bignerdranch.expandablerecyclerview.ViewHolder.ParentViewHolder
 import com.emirim.hyejin.mokgongso.R
-import kotlinx.android.synthetic.main.list_header.view.*
+import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup
+import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder
 
-class TitleParentViewHolder: ParentViewHolder {
+class TitleParentViewHolder: RecyclerView.ViewHolder {
     var textView1: TextView
     // var itemRecyclerView: RecyclerView
     var cardView: LinearLayout

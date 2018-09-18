@@ -1,42 +1,47 @@
+/*
 package com.emirim.hyejin.mokgongso.fragment.recycler
 
-import android.content.Context
-import android.graphics.Color
-import android.support.annotation.UiThread
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.bignerdranch.expandablerecyclerview.Adapter.ExpandableRecyclerAdapter
-import com.bignerdranch.expandablerecyclerview.Model.ParentObject
-import com.emirim.hyejin.mokgongso.Diary
-import com.emirim.hyejin.mokgongso.LoginActivity
 import com.emirim.hyejin.mokgongso.R
-import com.emirim.hyejin.mokgongso.api.APIRequestManager
-import com.emirim.hyejin.mokgongso.fragment.DiaryFragment
-import com.emirim.hyejin.mokgongso.fragment.recyclerview.InnerAdapter
-import com.emirim.hyejin.mokgongso.fragment.recyclerview.InnterItem
-import com.emirim.hyejin.mokgongso.model.AddDiary
-import com.emirim.hyejin.mokgongso.model.GetDiary
-import com.emirim.hyejin.mokgongso.model.MandalChk
-import com.emirim.hyejin.mokgongso.model.Message
-import com.facebook.internal.Validate
-import kotlinx.android.synthetic.main.fragment_diary.view.*
-import kotlinx.android.synthetic.main.list_header.view.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.text.SimpleDateFormat
-import java.util.*
+import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter
+import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup
 
-class MyAdapter: ExpandableRecyclerAdapter<TitleParentViewHolder, TitleChildViewHolder> {
-    lateinit var inflater: LayoutInflater
-    var context: Context
+class MyAdapter: ExpandableRecyclerViewAdapter<TitleParentViewHolder, TitleChildViewHolder> {
 
-    constructor(context: Context, parentItemList: List<ParentObject>) : super(context, parentItemList) {
+    constructor(groups: List<ExpandableGroup<*>>): super(groups)
+
+    override fun onCreateGroupViewHolder(parent: ViewGroup?, viewType: Int): TitleParentViewHolder {
+        var view: View = LayoutInflater.from(parent?.context).inflate(R.layout.list_header, parent, false)
+
+        return TitleParentViewHolder(view)
+    }
+
+    override fun onCreateChildViewHolder(parent: ViewGroup?, viewType: Int): TitleChildViewHolder {
+        var view: View = LayoutInflater.from(parent?.context)
+                .inflate(R.layout.list_item, parent, false)
+
+        return TitleChildViewHolder(view)
+    }
+
+    override fun onBindChildViewHolder(holder: TitleChildViewHolder?, flatPosition: Int, group: ExpandableGroup<*>?, childIndex: Int) {
+        val child: TitleChild = (group as Genre).items.get(childIndex)
+
+    }
+
+    override fun onBindGroupViewHolder(holder: TitleParentViewHolder?, flatPosition: Int, group: ExpandableGroup<*>?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+
+    */
+/*   lateinit var inflater: LayoutInflater
+       var context: Context*//*
+
+
+   */
+/* constructor(context: Context, parentItemList: List<ParentObject>) : super(context, parentItemList) {
         inflater = LayoutInflater.from(context)
         this.context = context
     }
@@ -70,9 +75,13 @@ class MyAdapter: ExpandableRecyclerAdapter<TitleParentViewHolder, TitleChildView
     }
 
     override fun onBindChildViewHolder(p0: TitleChildViewHolder?, p1: Int, p2: Any?) {
-        /*this@MyAdapter.run {
+        *//*
+*/
+/*this@MyAdapter.run {
             notifyDataSetChanged()
-        }*/
+        }*//*
+*/
+/*
 
         // DiaryFragment.containtLayout.cardView.setBackgroundColor(Color.WHITE)
 
@@ -170,55 +179,7 @@ class MyAdapter: ExpandableRecyclerAdapter<TitleParentViewHolder, TitleChildView
 
     override fun onParentItemClickListener(position: Int) {
         super.onParentItemClickListener(position)
-    }
-
-    /*lateinit var inflater: LayoutInflater
-    var context: Context
-    var titleChildViewHolder: TitleChildViewHolder? = null
-
-    constructor(context: Context, parentItemList: List<ParentObject>): super(context, parentItemList) {
-        inflater = LayoutInflater.from(context)
-        this.context = context
-    }
-
-    override fun onBindParentViewHolder(p0: TitleParentViewHolder?, p1: Int, p2: Any?) {
-        var title: TitleParent = p2 as TitleParent
-        p0?.textView1?.text = title.title
-    }
-
-    override fun onCreateChildViewHolder(p0: ViewGroup?): TitleChildViewHolder {
-        var view: View = inflater.inflate(R.layout.list_item, p0, false)
-
-        return TitleChildViewHolder(view)
-    }*/
-    /*
-    override fun onCreateParentViewHolder(p0: ViewGroup?): TitleParentViewHolder {
-        var view: View = inflater.inflate(R.layout.list_header, p0, false)
-
-        return TitleParentViewHolder(view)
-    }
-
-    override fun onBindChildViewHolder(p0: TitleChildViewHolder?, p1: Int, p2: Any?) {
-        var title: TitleChild = p2 as TitleChild
-
-        titleChildViewHolder = p0
-        p0?.childListview?.text = title.data
-    }
- */
-    /*
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        super.onBindViewHolder(holder, position)
-    }
-
-    override fun onParentItemClickListener(position: Int) {
-        super.onParentItemClickListener(position)
-
-        if(titleChildViewHolder != null) {
-            if(titleChildViewHolder?.diaryEdt?.visibility == View.VISIBLE) {
-                titleChildViewHolder?.diaryEdt?.visibility = View.GONE
-                titleChildViewHolder?.diaryWriteBtn?.text = "일기쓰기"
-            }
-        }
-    }*/
+    }*//*
 
 }
+*/

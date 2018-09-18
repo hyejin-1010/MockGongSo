@@ -15,12 +15,18 @@ import kotlinx.android.synthetic.main.activity_signup.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 class SignUpActivity : AppCompatActivity() {
     companion object {
         var joinBoolean = false
         var emailBoolean = false
+
+        lateinit var matcher: Matcher
     }
+
+    val EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,33 +41,42 @@ class SignUpActivity : AppCompatActivity() {
         nameEdt.addTextChangedListener(addListenerOnTextChange(this, nameEdt))
         emailEdt.setOnFocusChangeListener { v, hasFocus ->
             if(!hasFocus && emailEdt.text.toString().trim().isNotEmpty()) {
-                User.duplicatechk = Duplicatechk(emailEdt.text.toString())
+                // 유효성 검사
+                matcher = EMAIL_ADDRESS_REGEX.matcher(emailEdt.text.toString())
 
-                // 아이디 중복 확인
-                var call: Call<Message> = APIRequestManager.getInstance().requestServer().duplicatechk(User.duplicatechk)
-                call.enqueue(object: Callback<Message> {
-                    override fun onResponse(call: Call<Message>, response: Response<Message>) {
-                        when(response.code()) {
-                            200 -> {
-                                Log.d("duplicatechk", "200")
-                                emailCheck.setImageResource(R.mipmap.shape_3)
-                                emailEdt.setBackgroundResource(R.drawable.solid)
-                                emailBoolean = true
-                            }
-                            409 -> {
-                                Log.d("duplicatechk", "409")
-                                emailEdt.setBackgroundResource(R.drawable.dotted)
-                                emailCheck.setImageResource(R.mipmap.shape_4)
-                                emailBoolean = false
+                if(matcher.find()) {
+                    User.duplicatechk = Duplicatechk(emailEdt.text.toString())
+
+                    // 아이디 중복 확인
+                    var call: Call<Message> = APIRequestManager.getInstance().requestServer().duplicatechk(User.duplicatechk)
+                    call.enqueue(object : Callback<Message> {
+                        override fun onResponse(call: Call<Message>, response: Response<Message>) {
+                            when (response.code()) {
+                                200 -> {
+                                    Log.d("duplicatechk", "200")
+                                    emailCheck.setImageResource(R.mipmap.shape_3)
+                                    emailEdt.setBackgroundResource(R.drawable.solid)
+                                    emailBoolean = true
+                                }
+                                409 -> {
+                                    Log.d("duplicatechk", "409")
+                                    emailEdt.setBackgroundResource(R.drawable.dotted)
+                                    emailCheck.setImageResource(R.mipmap.shape_4)
+                                    emailBoolean = false
+                                }
                             }
                         }
-                    }
 
-                    override fun onFailure(call: Call<Message>, t: Throwable) {
-                        Log.e("SignUpActivity", "에러: " + t.message)
-                        t.printStackTrace()
-                    }
-                })
+                        override fun onFailure(call: Call<Message>, t: Throwable) {
+                            Log.e("SignUpActivity", "에러: " + t.message)
+                            t.printStackTrace()
+                        }
+                    })
+                } else {
+                    emailEdt.setBackgroundResource(R.drawable.dotted)
+                    emailCheck.setImageResource(R.mipmap.shape_4)
+                    emailBoolean = false
+                }
             }
         }
 

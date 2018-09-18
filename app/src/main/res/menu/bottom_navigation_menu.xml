@@ -4,13 +4,13 @@
     <item
         android:id="@+id/action_mandalart"
         android:icon="@drawable/mandalart"
-        android:title=""
+        android:title="만다라트"
         android:enabled="true"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_smaill_mandalart"
         android:icon="@drawable/mandalart_sub"
-        android:title=""
+        android:title="작은목표"
         android:enabled="true"
         app:showAsAction="ifRoom" />
     <item
@@ -19,13 +19,13 @@
     <item
         android:id="@+id/action_store"
         android:icon="@drawable/store"
-        android:title=""
+        android:title="상점"
         android:enabled="true"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_setting"
         android:icon="@drawable/setting"
-        android:title=""
+        android:title="설정"
         android:enabled="true"
         app:showAsAction="ifRoom" />
 </menu>

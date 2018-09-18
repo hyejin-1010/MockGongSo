@@ -4,12 +4,19 @@
     android:id="@+id/listcardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:paddingTop="5dp"
-    android:paddingBottom="5dp"
+    android:background="@color/colorPrimary"
+    android:paddingTop="18dp"
+    android:paddingBottom="23dp"
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
+    android:layout_marginTop="15dp"
     android:orientation="vertical">
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        style="@style/TextStyle3"/>
     <android.support.v4.widget.NestedScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -30,7 +37,7 @@
         android:id="@+id/diaryWriteBtn"
         android:layout_gravity="center_horizontal"
         android:layout_width="270dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:textColor="@color/white"
         android:background="@color/colorPrimaryDark"
         android:layout_marginTop="15dp"

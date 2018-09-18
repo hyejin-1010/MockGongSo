@@ -1,22 +1,20 @@
 package com.emirim.hyejin.mokgongso.fragment.recycler
 
-import com.bignerdranch.expandablerecyclerview.Model.ParentObject
+import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup
 import java.util.*
 
-class TitleParent: ParentObject {
+class TitleParent: ExpandableGroup<TitleChild> {
 
-    lateinit var mChildrenList: ArrayList<TitleChild>
-    var _id: UUID
-    var title: String
+    // lateinit var mChildrenList: ArrayList<TitleChild>
+    /*var _id: UUID
+    var title: String*/
     // var subTitle: String
 
-    constructor(title: String) {
-        this.title = title
+    constructor(title: String, items: List<TitleChild>): super(title, items)
+       /* this.title = title
         // this.subTitle = subTitle
-        _id = UUID.randomUUID()
-    }
-
-    override fun setChildObjectList(p0: MutableList<Any>?) {
+        _id = UUID.randomUUID()*/
+   /* override fun setChildObjectList(p0: MutableList<Any>?) {
         if(p0 != null) {
             mChildrenList = p0 as ArrayList<TitleChild>
         }
@@ -24,6 +22,6 @@ class TitleParent: ParentObject {
 
     override fun getChildObjectList(): ArrayList<TitleChild> {
         return mChildrenList
-    }
+    }*/
 
 }

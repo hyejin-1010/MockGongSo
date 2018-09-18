@@ -1,35 +1,16 @@
 package com.emirim.hyejin.mokgongso.fragment.recycler
 
-import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
 import android.widget.*
-import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder
-import com.bignerdranch.expandablerecyclerview.ViewHolder.ParentViewHolder
-import com.emirim.hyejin.mokgongso.Diary
-import com.emirim.hyejin.mokgongso.LoginActivity
 import com.emirim.hyejin.mokgongso.R
-import com.emirim.hyejin.mokgongso.api.APIRequestManager
-import com.emirim.hyejin.mokgongso.model.AddDay
-import com.emirim.hyejin.mokgongso.model.AddDiary
-import com.emirim.hyejin.mokgongso.model.MandalChk
-import com.emirim.hyejin.mokgongso.model.Message
-import kotlinx.android.synthetic.main.list_header.view.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.text.SimpleDateFormat
-import java.util.*
+import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder
 
 class TitleChildViewHolder: ChildViewHolder {
     var itemRecyclerView: RecyclerView
     var diaryWriteBtn: Button
     var inputDiary: EditText
-    /*var cardLayout: LinearLayout
-    var childListview: TextView
-    var diaryWriteBtn: Button
-    var diaryEdt: EditText*/
+
     constructor(view: View): super(view) {
         itemRecyclerView = view.findViewById(R.id.itemRecyclerView) as RecyclerView
         diaryWriteBtn = view.findViewById(R.id.diaryWriteBtn) as Button
@@ -139,5 +120,9 @@ class TitleChildViewHolder: ChildViewHolder {
                 })
             }
         }*/
+    }
+
+    fun onBind(titleChild: TitleChild) {
+
     }
 }

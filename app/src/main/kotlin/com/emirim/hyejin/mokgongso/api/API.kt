@@ -44,4 +44,7 @@ interface API {
 
     @POST("/getDiary/app/")
     fun getDiary(@Body mandalChk: MandalChk): Call<GetDiary>
+
+    @POST("/delDiary/app/")
+    fun delDiary(@Body delDiary: DelDiary): Call<Message>
 }
