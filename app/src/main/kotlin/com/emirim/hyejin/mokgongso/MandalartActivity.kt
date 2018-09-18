@@ -195,15 +195,31 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                 delDialog()
             } else if(position == 5) {
                 if(rightButtonImageView.tag.equals(R.drawable.trash)) {
-                    (DiaryFragment.containtLayout.diaryRecyclerView.adapter as BasicAdapter).viewCheckBox()
+                    if(BasicAdapter.mExpandedPosition >= 0) {
+                        (DiaryFragment.containtLayout.diaryRecyclerView.adapter as BasicAdapter).viewCheckBox()
 
-                    rightButtonImageView.setImageResource(R.drawable.confirm)
-                    rightButtonImageView.tag = R.drawable.confirm
+                        rightButtonImageView.setImageResource(R.drawable.confirm)
+                        rightButtonImageView.tag = R.drawable.confirm
+                    }
                 } else {
-                    (DiaryFragment.containtLayout.diaryRecyclerView.adapter as BasicAdapter).goneCheckBox()
+                    var cancelDialog = LayoutInflater.from(this).inflate(R.layout.dialog_deldiary, null)
+                    val mBuilder = AlertDialog.Builder(this)
+                            .setView(cancelDialog)
 
-                    rightButtonImageView.setImageResource(R.drawable.trash)
-                    rightButtonImageView.tag = R.drawable.trash
+                    val  mAlertDialog = mBuilder.show()
+
+                    cancelDialog.cancel.setOnClickListener {
+                        (DiaryFragment.containtLayout.diaryRecyclerView.adapter as BasicAdapter).goneCheckBoxNotDel()
+                        mAlertDialog.dismiss()
+                    }
+                    cancelDialog.delBtn.setOnClickListener {
+                        (DiaryFragment.containtLayout.diaryRecyclerView.adapter as BasicAdapter).goneCheckBox()
+
+                        rightButtonImageView.setImageResource(R.drawable.trash)
+                        rightButtonImageView.tag = R.drawable.trash
+
+                        mAlertDialog.dismiss()
+                    }
                 }
             }
             else {
@@ -389,7 +405,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                 position = 4
                 return true
             }
-            else -> {
+            R.id.action -> {
                 supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.frameLayout, MainFragment.newInstance())
@@ -398,7 +414,19 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                 rightButtonImageView.setImageResource(0)
 
                 position = -1
+
                 titlebartxt.text = "메인"
+            }
+            else -> {
+                /*supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frameLayout, MainFragment.newInstance())
+                        .commit()
+
+                rightButtonImageView.setImageResource(0)
+
+                position = -1
+                titlebartxt.text = "메인"*/
             }
         }
 

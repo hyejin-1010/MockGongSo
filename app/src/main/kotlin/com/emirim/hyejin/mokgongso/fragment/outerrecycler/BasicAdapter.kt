@@ -48,6 +48,15 @@ class BasicAdapter: RecyclerView.Adapter<ViewHolder> {
         holder.itemRecyclerView.adapter = innerAdapter
         holder.date.text = mDataset[position].diaryText
 
+        if(mDataset[position].innerItem.size > 0) {
+            holder.priviewText.text = mDataset[position].innerItem[0].diaryText
+            holder.priviewText.visibility = View.VISIBLE
+            holder.preview.visibility = View.VISIBLE
+        } else {
+            holder.priviewText.visibility = View.GONE
+            holder.preview.visibility = View.GONE
+        }
+
         // Animation
         val isExpanded = position == mExpandedPosition
 
@@ -67,9 +76,11 @@ class BasicAdapter: RecyclerView.Adapter<ViewHolder> {
         }
 
         if(isExpanded) {
+            holder.preview.visibility = View.GONE
+            holder.priviewText.visibility = View.GONE
             holder.itemRecyclerView.visibility = View.VISIBLE
             holder.diaryWriteBtn.visibility = View.VISIBLE
-            holder.listcardView.setBackgroundResource(R.color.white)
+            holder.listcardView.setBackgroundResource(R.drawable.mandalart_box_1)
 
             var innerAdapter = InnerAdapter(mDataset[position].innerItem, context)
             holder.itemRecyclerView.adapter = innerAdapter
@@ -263,5 +274,27 @@ class BasicAdapter: RecyclerView.Adapter<ViewHolder> {
                 t.printStackTrace()
             }
         })
+    }
+
+    fun goneCheckBoxNotDel() {
+        for(i in 0..(mHolder.itemRecyclerView.childCount - 1)) {
+            mHolder.itemRecyclerView.getChildAt(i).delCheckBox.visibility = View.GONE
+        }
+
+        var checkedList:List<InnterItem> = ArrayList()
+        checkedList = (mHolder.itemRecyclerView.adapter as InnerAdapter).getInnerList()
+
+        var innerItems: ArrayList<InnterItem> = ArrayList()
+
+        // 삭제 List
+        for(i in 0..(checkedList.size - 1)) {
+            innerItems.add(InnterItem(checkedList[i].diaryText, false, checkedList[i].token))
+        }
+
+        mDataset[mExpandedPosition].innerItem = innerItems
+
+        var innerAdapter = InnerAdapter(mDataset[mExpandedPosition].innerItem, context)
+        mHolder.itemRecyclerView.adapter = innerAdapter
+        mHolder.date.text = mDataset[mExpandedPosition].diaryText
     }
 }

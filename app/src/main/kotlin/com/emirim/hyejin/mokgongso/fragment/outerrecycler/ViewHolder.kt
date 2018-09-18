@@ -15,6 +15,8 @@ class ViewHolder: RecyclerView.ViewHolder {
     var inputDiary: EditText
     var diaryWriteBtn: Button
     var listcardView: LinearLayout
+    var priviewText: TextView
+    var preview: TextView
 
     constructor(itemView: View): super(itemView) {
         date = itemView.findViewById(R.id.date) as TextView
@@ -22,5 +24,7 @@ class ViewHolder: RecyclerView.ViewHolder {
         inputDiary = itemView.findViewById(R.id.inputDiary) as EditText
         diaryWriteBtn = itemView.findViewById(R.id.diaryWriteBtn) as Button
         listcardView = itemView.findViewById(R.id.listcardView) as LinearLayout
+        priviewText = itemView.findViewById(R.id.priviewText) as TextView
+        preview = itemView.findViewById(R.id.preview) as TextView
     }
 }

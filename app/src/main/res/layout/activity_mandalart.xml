@@ -51,6 +51,7 @@
             android:background="@color/white"
             app:fabAlignmentMode="center"
             app:fabAttached="true"
+            app:labelVisibilityMode="unlabeled"
             app:menu="@menu/bottom_navigation_menu" >
         </android.support.design.widget.BottomNavigationView>
     </android.support.constraint.ConstraintLayout>
@@ -67,7 +68,8 @@
         android:src="@drawable/mock"
         app:backgroundTint="@color/colorPrimary"
         app:layout_anchorGravity="top|center"
-        app:borderWidth="2dp"
+        app:borderWidth="3dp"
+        app:rippleColor="@color/black"
         android:scaleType="center"/>
 
     <include layout="@layout/fab_layout" android:id="@+id/subFloating"

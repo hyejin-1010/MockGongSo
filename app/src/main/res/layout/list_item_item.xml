@@ -7,6 +7,7 @@
     android:background="@color/white"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
+    android:layout_marginLeft="3dp"
     android:orientation="horizontal">
 
     <CheckBox
@@ -16,9 +17,19 @@
         android:visibility="gone"/>
 
     <TextView
-        android:id="@+id/diaryText"
+        android:id="@+id/preview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"/>
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:text="-"/>
+    <TextView
+        android:id="@+id/diaryText"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="3dp"/>
 
 </LinearLayout>
