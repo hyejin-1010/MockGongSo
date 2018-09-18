@@ -181,15 +181,6 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
             }
         })
 
-        /*
-        if(savedInstanceState == null) {
-            supportFragmentManager
-                    .beginTransaction()
-                    .add(R.id.frameLayout, MandalartFragment.newInstance())
-                    .commit()
-        }
-        */
-
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.frameLayout, MainFragment.newInstance())
@@ -203,126 +194,17 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                 // 작은 만다라트
                 delDialog()
             } else if(position == 5) {
-                // Toast.makeText(this, "${diaryRecyclerView.itemDecorationCount}, ${diaryRecyclerView.childCount}", Toast.LENGTH_SHORT).show()
-
-                /*for(i in 0..(itemRecyclerView.childCount - 1)) {
-                    diaryRecyclerView.itemRecyclerView.getChildAt(i).findViewById<CheckBox>(R.id.delCheckBox).visibility = View.VISIBLE
-                }*/
-
                 if(rightButtonImageView.tag.equals(R.drawable.trash)) {
-                    /*Log.d("checkedList", "띠용")
-
-                    if(diaryRecyclerView.getChildAt(BasicAdapter.mExpandedPosition) != null && BasicAdapter.mExpandedPosition != -1) {
-                        for (i in 0..(diaryRecyclerView.getChildAt(BasicAdapter.mExpandedPosition).itemRecyclerView.childCount - 1)) {
-                            diaryRecyclerView.getChildAt(BasicAdapter.mExpandedPosition).itemRecyclerView.getChildAt(i).findViewById<CheckBox>(R.id.delCheckBox).visibility = View.VISIBLE
-                        }
-
-                        rightButtonImageView.setImageResource(R.drawable.confirm)
-                        rightButtonImageView.tag = R.drawable.confirm
-                    }*/
                     (DiaryFragment.containtLayout.diaryRecyclerView.adapter as BasicAdapter).viewCheckBox()
 
                     rightButtonImageView.setImageResource(R.drawable.confirm)
                     rightButtonImageView.tag = R.drawable.confirm
                 } else {
-                    /*var checkedList:List<InnterItem> = ArrayList()
-                    if(BasicAdapter.mExpandedPosition != -1)
-                        checkedList = (diaryRecyclerView.getChildAt(BasicAdapter.mExpandedPosition).itemRecyclerView.adapter as InnerAdapter).getInnerList()
-
-                    var delTokens: ArrayList<String> = ArrayList()
-
-                    // 지우는 과정
-                    for(i in 0..(checkedList.size - 1)) {
-                        if (checkedList[i].delCheck) {
-                            delTokens.add(checkedList[i].token)
-                        }
-                    }
-
-                    Diary.delDiary = DelDiary(LoginActivity.appData!!.getString("ID", ""), delTokens)
-
-                    Log.d("asdf", "${LoginActivity.appData!!.getString("ID", "")} ${delTokens}")
-
-                    var calld: Call<Message> = APIRequestManager.getInstance().requestServer().delDiary(Diary.delDiary)
-
-                    calld.enqueue(object: Callback<Message> {
-                        override fun onResponse(call: Call<Message>, response: Response<Message>) {
-                            when(response.code()) {
-                                200 -> {
-                                    Log.d("DelDiary", "200")
-
-                                    com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(LoginActivity.appData!!.getString("ID", ""))
-                                    var call6: Call<GetDiary> = APIRequestManager.getInstance().requestServer().getDiary(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
-
-                                    call6.enqueue(object: Callback<GetDiary> {
-                                        override fun onResponse(call: Call<GetDiary>, response: Response<GetDiary>) {
-                                            when(response.code()) {
-                                                200 -> {
-                                                    com.emirim.hyejin.mokgongso.Diary.getDiary = response.body() as GetDiary
-                                                }
-                                            }
-                                        }
-                                        override fun onFailure(call: Call<GetDiary>, t: Throwable) {
-                                            Log.e("ServerMandal", "에러: " + t.message)
-                                            t.printStackTrace()
-                                        }
-                                    })
-
-                                    for (i in 0..(diaryRecyclerView.getChildAt(BasicAdapter.mExpandedPosition).itemRecyclerView.childCount - 1)) {
-                                        diaryRecyclerView.getChildAt(BasicAdapter.mExpandedPosition).itemRecyclerView.getChildAt(i).findViewById<CheckBox>(R.id.delCheckBox).visibility = View.GONE
-                                    }
-
-                                    Log.d("checkedList", "${checkedList.toString()}")
-
-                                    titlebartxt.text = "일기"
-
-                                    position = 5
-
-                                    rightButtonImageView.setImageResource(R.drawable.trash)
-                                    rightButtonImageView.tag = R.drawable.trash
-
-                                    diaryRecyclerView.getChildAt(BasicAdapter.mExpandedPosition).callOnClick()
-                                }
-                                404 -> {
-                                    Log.d("DelDiary", "실패")
-                                }
-                            }
-                        }
-                        override fun onFailure(call: Call<Message>, t: Throwable) {
-                            Log.e("DelDiary", "에러: " + t.message)
-                            t.printStackTrace()
-                        }
-                    })*/
                     (DiaryFragment.containtLayout.diaryRecyclerView.adapter as BasicAdapter).goneCheckBox()
 
                     rightButtonImageView.setImageResource(R.drawable.trash)
                     rightButtonImageView.tag = R.drawable.trash
-                    // BasicAdapter.mExpandedPosition = -1
-                    // BasicAdapter.previousExpandedPosition = -1
-
-                    // DiaryFragment.containtLayout.diaryRecyclerView.adapter?.notifyItemChanged(BasicAdapter.mExpandedPosition)
-                    // DiaryFragment.containtLayout.diaryRecyclerView.adapter?.bindViewHolder(DiaryFragment.containtLayout.diaryRecyclerView.getChildViewHolder(diaryRecyclerView.getChildAt(BasicAdapter.mExpandedPosition)), BasicAdapter.mExpandedPosition)
-
-                    /*supportFragmentManager
-                            .beginTransaction()
-                            .replace(R.id.frameLayout, DiaryFragment.newInstance())
-                            .commit()*/
-
-                    // DiaryFragment.containtLayout.diaryRecyclerView.removeAllViews()
-
-                    /*position = 5*/
                 }
-
-                // diaryRecyclerView.itemRecyclerView.findViewById<CheckBox>(R.id.delCheckBox).visibility = View.VISIBLE
-
-
-//                if(diaryRecyclerView.adapter?.itemCount != null) {
-//                    for (i in 0..(diaryRecyclerView.adapter?.itemCount!! - 1)) {
-//                        //diaryRecyclerView.adapter?.bindViewHolder(ViewHolder(this.window.decorView), i)
-////                        diaryRecyclerView.adapter?.onBindViewHolder(ViewHolder(this.window.decorView), i)
-////                        Toast.makeText(this, "${diaryRecyclerView.adapter?.itemCount}", Toast.LENGTH_SHORT).show()
-//
-//                    }
-//                }
             }
             else {
                 if(Mandalart.viewer == 2){

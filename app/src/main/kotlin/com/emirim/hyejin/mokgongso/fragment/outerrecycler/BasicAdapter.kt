@@ -1,20 +1,17 @@
 package com.emirim.hyejin.mokgongso.fragment.outerrecycler
 
 import android.content.Context
-import android.support.annotation.UiThread
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import com.emirim.hyejin.mokgongso.Diary
 import com.emirim.hyejin.mokgongso.LoginActivity
 import com.emirim.hyejin.mokgongso.MandalartActivity
 import com.emirim.hyejin.mokgongso.R
 import com.emirim.hyejin.mokgongso.api.APIRequestManager
-import com.emirim.hyejin.mokgongso.fragment.DiaryFragment
 import com.emirim.hyejin.mokgongso.fragment.innerrecyclerview.InnerAdapter
 import com.emirim.hyejin.mokgongso.fragment.innerrecyclerview.InnterItem
 import com.emirim.hyejin.mokgongso.model.*
@@ -53,8 +50,6 @@ class BasicAdapter: RecyclerView.Adapter<ViewHolder> {
 
         // Animation
         val isExpanded = position == mExpandedPosition
-       /* holder.itemRecyclerView.visibility = if (isExpanded) View.VISIBLE else View.GONE
-        holder.diaryWriteBtn.visibility = if (isExpanded) View.VISIBLE else View.GONE*/
 
         var innerItem2: ArrayList<InnterItem> = ArrayList()
         for(i in 0..(Diary.getDiary.re.size - 1)) {
@@ -256,10 +251,6 @@ class BasicAdapter: RecyclerView.Adapter<ViewHolder> {
                         mHolder.itemRecyclerView.adapter = innerAdapter
                         mHolder.date.text = mDataset[mExpandedPosition].diaryText
 
-                        /*
-                        var innerAdapter = InnerAdapter(mDataset[position].innerItem, context)
-                        holder.itemRecyclerView.adapter = innerAdapter
-                        holder.date.text = mDataset[position].diaryText*/
                         Log.d("checkedList", "${checkedList.toString()}")
                     }
                     404 -> {
