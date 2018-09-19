@@ -3,8 +3,6 @@ package com.emirim.hyejin.mokgongso
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.emirim.hyejin.mokgongso.lockScreen.LockScreenService
 
 class MainActivity : AppCompatActivity() {
     val TAG: String = "MainActivity"

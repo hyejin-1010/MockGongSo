@@ -7,12 +7,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.CompoundButton
+import android.widget.Switch
 import android.widget.TextView
 import com.emirim.hyejin.mokgongso.LoginActivity
 import com.emirim.hyejin.mokgongso.MainActivity
 import com.emirim.hyejin.mokgongso.MandalartActivity
 import com.emirim.hyejin.mokgongso.R
+import com.emirim.hyejin.mokgongso.lockScreen.util.LockScreen
 import com.emirim.hyejin.mokgongso.mandalart.Mandalart
 import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -37,6 +39,7 @@ class SettingFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val layout: View = inflater?.inflate(R.layout.fragment_setting, container, false)
         val signOutBtn = layout.findViewById<TextView>(R.id.signOutBtn)
+        val lockSwitch = layout.findViewById<Switch>(R.id.lockSwitch)
 
         var gso= GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -56,6 +59,18 @@ class SettingFragment : Fragment() {
 
             signOut()
         }
+
+        /*Lock Screen switch*/
+        /* if Lock Screen already activate? */
+        LockScreen.getInstance().init(context,true)
+        lockSwitch.isChecked = LockScreen.getInstance().isActive()
+        lockSwitch.setOnCheckedChangeListener{buttonview: CompoundButton?, isChecked: Boolean ->
+            if(isChecked) LockScreen.getInstance().active()
+            else LockScreen.getInstance().deactivate()
+            //layout.findViewById<TextView>(R.id.locklock).text = "checked"
+            //layout.findViewById<TextView>(R.id.locklock).text = "unchecked"
+        }
+
         /*signOutBtn.setOnClickListener {
             var editor = LoginActivity.appData!!.edit()
 

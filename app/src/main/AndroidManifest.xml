@@ -4,6 +4,15 @@
     package="com.emirim.hyejin.mokgongso">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.PHONE_STATE_STATE" />
+    <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE"
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:allowBackup="true"
@@ -49,7 +58,20 @@
         <activity android:name=".mandalart.CreateMandalart" android:windowSoftInputMode="adjustResize|adjustPan" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".smallMandalart.CreateMandalart" />
-        
-        <activity android:name=".lockScreen.LockScreenActivity" android:excludeFromRecents="true" android:launchMode="singleTask" android:screenOrientation="portrait" />
+
+        <activity android:name=".lockScreen.LockScreenActivity"
+            android:showOnLockScreen="true"
+            android:launchMode="singleInstance"/>
+
+        <service android:name=".lockScreen.util.LockScreenService"/>
+        <service
+            android:name=".lockScreen.util.LockWinAccessService"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data android:name="android.accessibilityservice" android:resource="@xml/accessibilityservice"/>
+        </service>
     </application>
 </manifest>
