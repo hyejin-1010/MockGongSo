@@ -56,7 +56,35 @@ class LoginActivity : AppCompatActivity() {
         var token: String = appData!!.getString("ID", "")
 
         if(token.isNotEmpty()) {
-            intentMandalart()
+            // auto
+            com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(token)
+
+            var callAuto: Call<SignInMessage> = APIRequestManager.getInstance().requestServer().auto(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
+
+            callAuto.enqueue(object: Callback<SignInMessage> {
+                override fun onResponse(call: Call<SignInMessage>, response: Response<SignInMessage>) {
+                    when(response.code()) {
+                        200 -> {
+                            val message: SignInMessage = response.body() as SignInMessage
+                            val editor = appData!!.edit()
+
+                            editor.putString("ID", message.data.token.trim())
+                            editor.putString("name", message.data.name.trim())
+                            editor.putString("startday", message.data.startDay.trim())
+
+                            Log.d("Login" ,message.data.toString())
+
+                            editor.apply()
+
+                            intentMandalart()
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<SignInMessage>, t: Throwable) {
+                    Log.e("Page4", "실패: " + t.message)
+                    t.printStackTrace()
+                }
+            })
         }
 
         // google
@@ -217,7 +245,7 @@ class LoginActivity : AppCompatActivity() {
                         }
                         201 -> {
                             // 회원가입 성공
-                            val message: RFb = response.body() as RFb
+                            val message: SignInMessage = response.body() as SignInMessage
                             val editor = appData!!.edit()
 
                             editor.putString("ID", message.data.token.trim())

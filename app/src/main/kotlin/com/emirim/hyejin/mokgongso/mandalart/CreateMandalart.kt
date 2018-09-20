@@ -169,7 +169,7 @@ class CreateMandalart : AppCompatActivity() {
                                             200 -> {
                                                 Log.d("Add Day", sdf.format(date).toString())
                                                 val editor = LoginActivity.appData!!.edit()
-                                                editor.putString("startday", sdf.format(date).trim())
+                                                editor.putString("startday", sdf.format(date).toString())
                                             }
                                             500 -> {
                                                 Log.d("Add Day", "500")
@@ -178,6 +178,35 @@ class CreateMandalart : AppCompatActivity() {
                                     }
 
                                     override fun onFailure(call: Call<Message>, t: Throwable) {
+                                        Log.e("Page4", "실패: " + t.message)
+                                        t.printStackTrace()
+                                    }
+                                })
+
+                                // auto
+                                var token: String = LoginActivity.appData!!.getString("ID", "")
+                                com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(token)
+
+                                var callAuto: Call<SignInMessage> = APIRequestManager.getInstance().requestServer().auto(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
+
+                                callAuto.enqueue(object: Callback<SignInMessage> {
+                                    override fun onResponse(call: Call<SignInMessage>, response: Response<SignInMessage>) {
+                                        when(response.code()) {
+                                            200 -> {
+                                                val message: SignInMessage = response.body() as SignInMessage
+                                                val editor = appData!!.edit()
+
+                                                editor.putString("ID", message.data.token.trim())
+                                                editor.putString("name", message.data.name.trim())
+                                                editor.putString("startday", message.data.startDay.trim())
+
+                                                Log.d("Login" ,message.data.toString())
+
+                                                editor.apply()
+                                            }
+                                        }
+                                    }
+                                    override fun onFailure(call: Call<SignInMessage>, t: Throwable) {
                                         Log.e("Page4", "실패: " + t.message)
                                         t.printStackTrace()
                                     }

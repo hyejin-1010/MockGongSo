@@ -88,7 +88,9 @@ class SettingFragment : Fragment() {
                 mAlertDialog.dismiss()
             }
             cancelDialog.delBtn.setOnClickListener {
-                User.delUser = DelUser(LoginActivity.appData!!.getString("token", ""))
+                User.delUser = DelUser(LoginActivity.appData!!.getString("ID", ""))
+
+                Log.d("dleUser token", LoginActivity.appData!!.getString("ID", ""))
 
                 var callDel: Call<Message> = APIRequestManager.getInstance().requestServer().delUser(User.delUser)
 
@@ -97,7 +99,16 @@ class SettingFragment : Fragment() {
                         when (response.code()) {
                             200 -> {
                                 val message: Message = response.body() as Message
+                                var editor = LoginActivity.appData!!.edit()
+
+                                editor.clear()
+                                editor.commit()
+
                                 mAlertDialog.dismiss()
+                                initSmallMandalart()
+                                initMandalart()
+
+                                signOut()
                             }
                             500 -> {
                                 // 실패
@@ -169,13 +180,42 @@ class SettingFragment : Fragment() {
         LoginManager.getInstance().logOut()
 
         mGoogleSignInClient!!.signOut().addOnCompleteListener {
-            val intent = Intent(activity, MainActivity::class.java)
-            startActivity(intent)
+            initMandalart()
+            initSmallMandalart()
+            intentMain()
         }
     }
 
     private fun intentMain() {
         var intent = Intent(activity, MainActivity::class.java)
         startActivity(intent)
+    }
+
+    fun initMandalart() {
+        Mandalart.title = null
+        Mandalart.achievement = 0
+        Mandalart.subMandalartTitle = Array<String>(8, {""})
+        Mandalart.thirdContent = Array(8, { Array<String>(8, {""}) })
+        Mandalart.thirdAchievement = Array(8, { IntArray(8) })
+        Mandalart.thirdCout = IntArray(8)
+        Mandalart.count = 1
+        Mandalart.position = 1
+        Mandalart.secondSelect = -1
+        Mandalart.thirdSelect = -1
+        Mandalart.viewer = 0
+        Mandalart.tmpAchievement = 0
+    }
+
+    fun initSmallMandalart() {
+        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.title = null
+        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.achievement = 0
+        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.subMandalartTitle = Array<String>(3, {""})
+        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdContent = Array(3, {Array<String>(3, {""})})
+        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdCout = IntArray(3)
+        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.count = 1
+        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.position = 1
+        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.secondSelect = -1
+        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdSelect = -1
+        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.viewer = 0
     }
 }

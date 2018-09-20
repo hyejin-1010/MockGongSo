@@ -53,4 +53,7 @@ interface API {
 
     @POST("/delUser/")
     fun delUser(@Body delUser: DelUser): Call<Message>
+
+    @POST("/auto/")
+    fun auto(@Body mandalChk: MandalChk): Call<SignInMessage>
 }
