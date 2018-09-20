@@ -194,7 +194,50 @@ class LoginActivity : AppCompatActivity() {
 
     private fun updateUI(user: FirebaseUser?) {
         user?.let {
-            intentMandalart()
+            // Firebase Login 성공 - Server에 값 전송
+            User.fb = Fb(user.uid, user.displayName)
+
+            var callFb: Call<SignInMessage> = APIRequestManager.getInstance().requestServer().fb(User.fb)
+
+            callFb.enqueue(object: Callback<SignInMessage> {
+                override fun onResponse(call: Call<SignInMessage>, response: Response<SignInMessage>) {
+                    when (response.code()) {
+                        200 -> {
+                            // 로그인 성공
+                            val message: SignInMessage = response.body() as SignInMessage
+                            val editor = appData!!.edit()
+
+                            editor.putString("ID", message.data.token.trim())
+                            editor.putString("name", message.data.name.trim())
+                            editor.putString("startday", message.data.startDay.trim())
+
+                            editor.apply()
+
+                            intentMandalart()
+                        }
+                        201 -> {
+                            // 회원가입 성공
+                            val message: RFb = response.body() as RFb
+                            val editor = appData!!.edit()
+
+                            editor.putString("ID", message.data.token.trim())
+                            editor.putString("name", message.data.name.trim())
+
+                            editor.apply()
+
+                            intentMandalart()
+                        }
+                        500 -> {
+                            Log.d(TAG, "Login Fail")
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<SignInMessage>, t: Throwable) {
+                    Log.e("SignUpActivity", "에러: " + t.message)
+                    t.printStackTrace()
+                }
+            })
         }
     }
 

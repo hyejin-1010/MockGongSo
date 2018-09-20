@@ -47,4 +47,10 @@ interface API {
 
     @POST("/delDiary/app/")
     fun delDiary(@Body delDiary: DelDiary): Call<Message>
+
+    @POST("/fb/app/")
+    fun fb(@Body fb: Fb): Call<SignInMessage>
+
+    @POST("/delUser/")
+    fun delUser(@Body delUser: DelUser): Call<Message>
 }

@@ -1,5 +1,6 @@
 package com.emirim.hyejin.mokgongso.fragment
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,18 +11,22 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.Switch
 import android.widget.TextView
-import com.emirim.hyejin.mokgongso.LoginActivity
-import com.emirim.hyejin.mokgongso.MainActivity
-import com.emirim.hyejin.mokgongso.MandalartActivity
-import com.emirim.hyejin.mokgongso.R
+import com.emirim.hyejin.mokgongso.*
+import com.emirim.hyejin.mokgongso.api.APIRequestManager
 import com.emirim.hyejin.mokgongso.lockScreen.util.LockScreen
 import com.emirim.hyejin.mokgongso.mandalart.Mandalart
+import com.emirim.hyejin.mokgongso.model.DelUser
+import com.emirim.hyejin.mokgongso.model.Message
 import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.dialog_del.view.*
 import kotlinx.android.synthetic.main.fragment_setting.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -38,7 +43,6 @@ class SettingFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val layout: View = inflater?.inflate(R.layout.fragment_setting, container, false)
-        val signOutBtn = layout.findViewById<TextView>(R.id.signOutBtn)
         val lockSwitch = layout.findViewById<Switch>(R.id.lockSwitch)
 
         var gso= GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -50,14 +54,65 @@ class SettingFragment : Fragment() {
 
         mAuth = FirebaseAuth.getInstance()
 
-
+        // 로그아웃
         layout.logoutlayout.setOnClickListener {
             var editor = LoginActivity.appData!!.edit()
 
             editor.clear()
             editor.commit()
 
-            signOut()
+            var cancelDialog = LayoutInflater.from(activity).inflate(R.layout.dialog_logout, null)
+            val mBuilder = AlertDialog.Builder(activity)
+                    .setView(cancelDialog)
+
+            val  mAlertDialog = mBuilder.show()
+
+            cancelDialog.cancel.setOnClickListener {
+                mAlertDialog.dismiss()
+            }
+            cancelDialog.delBtn.setOnClickListener {
+                signOut()
+                mAlertDialog.dismiss()
+            }
+        }
+
+        // 회원탈퇴
+        layout.secessionlayout.setOnClickListener {
+            var cancelDialog = LayoutInflater.from(activity).inflate(R.layout.dialog_secession, null)
+            val mBuilder = AlertDialog.Builder(activity)
+                    .setView(cancelDialog)
+
+            val  mAlertDialog = mBuilder.show()
+
+            cancelDialog.cancel.setOnClickListener {
+                mAlertDialog.dismiss()
+            }
+            cancelDialog.delBtn.setOnClickListener {
+                User.delUser = DelUser(LoginActivity.appData!!.getString("token", ""))
+
+                var callDel: Call<Message> = APIRequestManager.getInstance().requestServer().delUser(User.delUser)
+
+                callDel.enqueue(object : Callback<Message> {
+                    override fun onResponse(call: Call<Message>, response: Response<Message>) {
+                        when (response.code()) {
+                            200 -> {
+                                val message: Message = response.body() as Message
+                                mAlertDialog.dismiss()
+                            }
+                            500 -> {
+                                // 실패
+                                mAlertDialog.dismiss()
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Message>, t: Throwable) {
+                        Log.e("SignUpActivity", "에러: " + t.message)
+                        t.printStackTrace()
+                        mAlertDialog.dismiss()
+                    }
+                })
+            }
         }
 
         /*Lock Screen switch*/
@@ -70,15 +125,6 @@ class SettingFragment : Fragment() {
             //layout.findViewById<TextView>(R.id.locklock).text = "checked"
             //layout.findViewById<TextView>(R.id.locklock).text = "unchecked"
         }
-
-        /*signOutBtn.setOnClickListener {
-            var editor = LoginActivity.appData!!.edit()
-
-            editor.clear()
-            editor.commit()
-
-            signOut()
-        }*/
 
         val sdf = SimpleDateFormat("yyyy-mm-dd")
         val today = Date()
