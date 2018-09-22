@@ -128,7 +128,9 @@ class LoginActivity : AppCompatActivity() {
 
         // 회원가입
         join.setOnClickListener {
-            startActivity(Intent(this, Terms::class.java))
+            var intent = Intent(this, Terms::class.java)
+            intent.putExtra("bool", false)
+            startActivity(intent)
         }
 
         // local 로그인

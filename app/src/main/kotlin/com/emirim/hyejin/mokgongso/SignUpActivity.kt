@@ -1,6 +1,7 @@
 package com.emirim.hyejin.mokgongso
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
@@ -33,6 +34,8 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_signup)
 
         leftArrow.setOnClickListener {
+            var intent = Intent(this, Terms::class.java)
+            intent.putExtra("bool", true)
             finish()
         }
 

@@ -92,6 +92,8 @@
             android:textColor="@color/black"
             android:text="목공소 모바일 서비스 이용약관(필수)"/>
         <TextView
+            android:id="@+id/content"
+            android:text="@string/terms"
             android:layout_width="280dp"
             android:layout_height="240dp"
             android:scrollbars="vertical"
