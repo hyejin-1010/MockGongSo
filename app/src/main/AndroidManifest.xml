@@ -62,6 +62,8 @@
         <activity android:name=".lockScreen.LockScreenActivity"
             android:showOnLockScreen="true"
             android:launchMode="singleInstance"/>
+        <activity android:name=".tutorial.MainAcitivity"/>
+        <activity android:name=".Terms" />
 
         <service android:name=".lockScreen.util.LockScreenService"/>
         <service

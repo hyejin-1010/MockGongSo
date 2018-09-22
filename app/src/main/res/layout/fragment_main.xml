@@ -4,6 +4,28 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <me.itangqi.waveloadingview.WaveLoadingView
+        android:id="@+id/wave"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        app:wlv_borderColor="@color/colorPrimaryDark"
+        app:wlv_borderWidth="0dp"
+        app:wlv_shapeType="square"
+        app:wlv_round_rectangle="true"
+        app:wlv_triangle_direction="north"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="50dp"
+
+        app:wlv_titleCenterStrokeColor="@color/black"
+        app:wlv_titleCenterStrokeWidth="3dp"
+        app:wlv_titleCenterColor="@color/black"
+        app:wlv_titleCenterSize="24sp"
+
+        app:wlv_progressValue="0"
+
+        app:wlv_waveAmplitude="70"
+        app:wlv_waveColor="@color/colorPrimaryDark" />
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
@@ -42,12 +64,12 @@
     <ImageView
         android:id="@+id/mandalartImg"
         android:layout_width="130dp"
-        android:layout_height="130dp"
+        android:layout_height="150dp"
+        android:src="@drawable/step_1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textLayout"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/step_1"/>
+        android:layout_marginTop="40dp"/>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="wrap_content"

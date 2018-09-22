@@ -26,14 +26,16 @@ class MainFragment : Fragment() {
 
         containtLayout.mandalartPercent.text = com.emirim.hyejin.mokgongso.mandalart.Mandalart.achievement.toString()
 
+        containtLayout.wave.progressValue = com.emirim.hyejin.mokgongso.mandalart.Mandalart.achievement
+
         if(com.emirim.hyejin.mokgongso.mandalart.Mandalart.achievement < 24) {
-            containtLayout.mandalartImg.setBackgroundResource(R.drawable.step_1)
+            containtLayout.mandalartImg.setImageResource(R.drawable.step_1)
         } else if(com.emirim.hyejin.mokgongso.mandalart.Mandalart.achievement < 49) {
-            containtLayout.mandalartImg.setBackgroundResource(R.drawable.step_2)
+            containtLayout.mandalartImg.setImageResource(R.drawable.step_2)
         } else if(com.emirim.hyejin.mokgongso.mandalart.Mandalart.achievement < 49) {
-            containtLayout.mandalartImg.setBackgroundResource(R.drawable.step_3)
+            containtLayout.mandalartImg.setImageResource(R.drawable.step_3)
         } else {
-            containtLayout.mandalartImg.setBackgroundResource(R.drawable.step_4)
+            containtLayout.mandalartImg.setImageResource(R.drawable.step_4)
         }
 
         Log.d("start main", "${LoginActivity.appData!!.getString("startday", "")}")

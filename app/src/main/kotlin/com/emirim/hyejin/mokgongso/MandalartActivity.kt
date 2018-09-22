@@ -278,7 +278,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                 position = -3
             } else {
                 subFloating.visibility = View.GONE
-                fabBtn.backgroundTintList = resources.getColorStateList(R.color.colorPrimary)
+                fabBtn.setImageResource(R.drawable.floating_1)
             }
         }
 
@@ -290,7 +290,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
 
         fab1.setOnClickListener {
             subFloating.visibility = View.GONE
-            fabBtn.backgroundTintList = resources.getColorStateList(R.color.colorPrimary)
+            fabBtn.setImageResource(R.drawable.floating_1)
 
             titlebartxt.text = "일기"
             supportFragmentManager
@@ -304,7 +304,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         }
         fab2.setOnClickListener {
             subFloating.visibility = View.GONE
-            fabBtn.backgroundTintList = resources.getColorStateList(R.color.colorPrimary)
+            fabBtn.setImageResource(R.drawable.floating_1)
 
             titlebartxt.text = "보고서"
             supportFragmentManager
@@ -320,10 +320,10 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
     fun fabVisible() {
         if(subFloating.visibility == View.GONE) {
             subFloating.visibility = View.VISIBLE
-            fabBtn.backgroundTintList = resources.getColorStateList(R.color.colorPrimaryDark)
+            fabBtn.setImageResource(R.drawable.floating_2)
         } else {
             subFloating.visibility = View.GONE
-            fabBtn.backgroundTintList = resources.getColorStateList(R.color.colorPrimary)
+            fabBtn.setImageResource(R.drawable.floating_1)
         }
     }
 

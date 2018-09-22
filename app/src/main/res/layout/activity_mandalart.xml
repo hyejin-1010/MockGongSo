@@ -56,21 +56,17 @@
         </android.support.design.widget.BottomNavigationView>
     </android.support.constraint.ConstraintLayout>
 
-    <android.support.design.widget.FloatingActionButton
+    <ImageView
         android:id="@+id/fabBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:fabSize="normal"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="27dp"
         android:elevation="6dp"
         app:layout_anchor="@id/bottomNavigation"
-        android:src="@drawable/mock"
-        app:backgroundTint="@color/colorPrimary"
-        app:layout_anchorGravity="top|center"
-        app:borderWidth="3dp"
-        app:rippleColor="@color/black"
-        android:scaleType="center"/>
+        android:src="@drawable/floating_1"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_anchorGravity="top|center" />
 
     <include layout="@layout/fab_layout" android:id="@+id/subFloating"
         android:visibility="gone"/>

@@ -11,6 +11,7 @@ import android.util.Log
 import android.widget.Toast
 import com.emirim.hyejin.mokgongso.api.APIRequestManager
 import com.emirim.hyejin.mokgongso.model.*
+import com.emirim.hyejin.mokgongso.tutorial.MainAcitivity
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -55,6 +56,8 @@ class LoginActivity : AppCompatActivity() {
         // 설정값 불러옴
         var token: String = appData!!.getString("ID", "")
 
+        Log.d("Login token" ,token)
+
         if(token.isNotEmpty()) {
             // auto
             com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(token)
@@ -75,8 +78,6 @@ class LoginActivity : AppCompatActivity() {
                             Log.d("Login" ,message.data.toString())
 
                             editor.apply()
-
-                            intentMandalart()
                         }
                     }
                 }
@@ -85,6 +86,8 @@ class LoginActivity : AppCompatActivity() {
                     t.printStackTrace()
                 }
             })
+
+            intentMandalart()
         }
 
         // google
@@ -125,7 +128,7 @@ class LoginActivity : AppCompatActivity() {
 
         // 회원가입
         join.setOnClickListener {
-            startActivity(Intent(this, SignUpActivity::class.java))
+            startActivity(Intent(this, Terms::class.java))
         }
 
         // local 로그인
@@ -151,7 +154,8 @@ class LoginActivity : AppCompatActivity() {
                             
                             editor.apply()
 
-                            intentMandalart()
+                            // 튜토리얼을 봐야하는 지 확인
+                            intentChk()
                         }
                         404 -> {
                             Log.d(TAG, "Login Fail")
@@ -253,7 +257,7 @@ class LoginActivity : AppCompatActivity() {
 
                             editor.apply()
 
-                            intentMandalart()
+                            intentTutorial()
                         }
                         500 -> {
                             Log.d(TAG, "Login Fail")
@@ -294,6 +298,42 @@ class LoginActivity : AppCompatActivity() {
 
         startActivity(intent)
         finish()
+    }
+
+    fun intentTutorial() {
+        var intent = Intent(this, MainAcitivity::class.java)
+
+        startActivity(intent)
+        finish()
+    }
+
+    fun intentChk() {
+        Mandalart.mandalChk = MandalChk(appData!!.getString("ID", ""))
+
+        var callMandal: Call<Re> = APIRequestManager.getInstance().requestServer().getMandal(Mandalart.mandalChk)
+
+        callMandal.enqueue(object: Callback<Re> {
+            override fun onResponse(call: Call<Re>, response: Response<Re>) {
+                when(response.code()) {
+                    200 -> {
+                        // 만다라트 존재
+                        intentMandalart()
+                    }
+                    401 -> {
+                        // 존재 X
+                        intentTutorial()
+                    }
+                    404 -> {
+                        // 존재 X
+                        intentTutorial()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<Re>, t: Throwable) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+        })
     }
 }
 
