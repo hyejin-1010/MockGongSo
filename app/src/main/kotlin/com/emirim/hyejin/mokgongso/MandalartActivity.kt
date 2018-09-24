@@ -57,6 +57,41 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
 
         initBottomNavigation()
 
+        var token: String = LoginActivity.appData!!.getString("ID", "")
+
+        Log.d("Login token" ,token)
+
+        if(token.isNotEmpty()) {
+            // auto
+            com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(token)
+
+            var callAuto: Call<SignInMessage> = APIRequestManager.getInstance().requestServer().auto(token)
+
+            callAuto.enqueue(object : Callback<SignInMessage> {
+                override fun onResponse(call: Call<SignInMessage>, response: Response<SignInMessage>) {
+                    when (response.code()) {
+                        200 -> {
+                            val message: SignInMessage = response.body() as SignInMessage
+                            val editor = LoginActivity.appData!!.edit()
+
+                            editor.putString("ID", message.data.token.trim())
+                            editor.putString("name", message.data.name.trim())
+                            editor.putString("startday", message.data.startDay.trim())
+
+                            Log.d("Login", message.data.toString())
+
+                            editor.apply()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<SignInMessage>, t: Throwable) {
+                    Log.e("Page4", "실패: " + t.message)
+                    t.printStackTrace()
+                }
+            })
+        }
+
         rightButtonImageView = findViewById(R.id.rightButton)
 
         com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(LoginActivity.appData!!.getString("ID", ""))

@@ -187,7 +187,7 @@ class CreateMandalart : AppCompatActivity() {
                                 var token: String = LoginActivity.appData!!.getString("ID", "")
                                 com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(token)
 
-                                var callAuto: Call<SignInMessage> = APIRequestManager.getInstance().requestServer().auto(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
+                                var callAuto: Call<SignInMessage> = APIRequestManager.getInstance().requestServer().auto(token)
 
                                 callAuto.enqueue(object: Callback<SignInMessage> {
                                     override fun onResponse(call: Call<SignInMessage>, response: Response<SignInMessage>) {

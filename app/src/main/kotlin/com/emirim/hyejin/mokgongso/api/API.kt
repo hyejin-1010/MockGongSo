@@ -3,7 +3,9 @@ package com.emirim.hyejin.mokgongso.api
 import com.emirim.hyejin.mokgongso.model.*
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface API {
     @POST("/duplicatechk/")
@@ -54,6 +56,6 @@ interface API {
     @POST("/delUser/")
     fun delUser(@Body delUser: DelUser): Call<Message>
 
-    @POST("/auto/")
-    fun auto(@Body mandalChk: MandalChk): Call<SignInMessage>
+    @GET("/auto/{token}")
+    fun auto(@Path("token") token: String): Call<SignInMessage>
 }

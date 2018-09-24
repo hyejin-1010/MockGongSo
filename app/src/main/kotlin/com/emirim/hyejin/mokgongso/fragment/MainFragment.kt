@@ -9,8 +9,14 @@ import android.view.ViewGroup
 import com.emirim.hyejin.mokgongso.LoginActivity
 import com.emirim.hyejin.mokgongso.Mandalart
 import com.emirim.hyejin.mokgongso.R
+import com.emirim.hyejin.mokgongso.api.APIRequestManager
+import com.emirim.hyejin.mokgongso.model.MandalChk
+import com.emirim.hyejin.mokgongso.model.SignInMessage
 import kotlinx.android.synthetic.main.fragment_main.view.*
 import kotlinx.android.synthetic.main.fragment_setting.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -22,6 +28,10 @@ class MainFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        var token: String = LoginActivity.appData!!.getString("ID", "")
+
+        Log.d("Login token" ,token)
+
         val containtLayout: View = inflater?.inflate(R.layout.fragment_main, container, false)
 
         containtLayout.mandalartPercent.text = com.emirim.hyejin.mokgongso.mandalart.Mandalart.achievement.toString()

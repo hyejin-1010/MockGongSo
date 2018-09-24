@@ -9,6 +9,7 @@ import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
+import com.emirim.hyejin.mokgongso.api.API
 import com.emirim.hyejin.mokgongso.api.APIRequestManager
 import com.emirim.hyejin.mokgongso.model.*
 import com.emirim.hyejin.mokgongso.tutorial.MainAcitivity
@@ -60,9 +61,8 @@ class LoginActivity : AppCompatActivity() {
 
         if(token.isNotEmpty()) {
             // auto
-            com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(token)
 
-            var callAuto: Call<SignInMessage> = APIRequestManager.getInstance().requestServer().auto(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
+            var callAuto: Call<SignInMessage> = APIRequestManager.getInstance().requestServer().auto(token)
 
             callAuto.enqueue(object: Callback<SignInMessage> {
                 override fun onResponse(call: Call<SignInMessage>, response: Response<SignInMessage>) {
@@ -70,6 +70,8 @@ class LoginActivity : AppCompatActivity() {
                         200 -> {
                             val message: SignInMessage = response.body() as SignInMessage
                             val editor = appData!!.edit()
+
+                            Log.d("asdfasdf", message.toString())
 
                             editor.putString("ID", message.data.token.trim())
                             editor.putString("name", message.data.name.trim())
