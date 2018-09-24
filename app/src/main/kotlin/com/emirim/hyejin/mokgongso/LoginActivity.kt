@@ -162,6 +162,7 @@ class LoginActivity : AppCompatActivity() {
                         404 -> {
                             Log.d(TAG, "Login Fail")
                             password.requestFocus()
+                            password.setText("")
                         }
                     }
                 }

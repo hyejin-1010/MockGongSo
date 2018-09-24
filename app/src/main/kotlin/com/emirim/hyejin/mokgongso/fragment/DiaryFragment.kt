@@ -59,56 +59,60 @@ class DiaryFragment : Fragment() {
             })
 
             val startDay = LoginActivity.appData!!.getString("startday", "")
-            val startDate = SimpleDateFormat("yyyy-MM-dd").parse(startDay)
+            if (startDay.equals("") || startDay.isNotEmpty()) {
+                return outterItems
+            } else {
+                val startDate = SimpleDateFormat("yyyy-MM-dd").parse(startDay)
 
-            val today = Date()
+                val today = Date()
 
-            val startCalendar = Calendar.getInstance()
-            val todayCalendar = Calendar.getInstance()
+                val startCalendar = Calendar.getInstance()
+                val todayCalendar = Calendar.getInstance()
 
-            startCalendar.time = startDate
-            todayCalendar.time = today
+                startCalendar.time = startDate
+                todayCalendar.time = today
 
-            while (startCalendar.compareTo(todayCalendar) != 1) {
-                Log.d("starttoday dada", "${startCalendar.time} ${todayCalendar.time}")
+                while (startCalendar.compareTo(todayCalendar) != 1) {
+                    Log.d("starttoday dada", "${startCalendar.time} ${todayCalendar.time}")
 
-                val sdf = SimpleDateFormat("yyyy-MM-dd")
-                var day: String
-                var date = todayCalendar.time
+                    val sdf = SimpleDateFormat("yyyy-MM-dd")
+                    var day: String
+                    var date = todayCalendar.time
 
-                when (todayCalendar.get(Calendar.DAY_OF_WEEK)) {
-                    1 -> day = "일요일"
-                    2 -> day = "월요일"
-                    3 -> day = "화요일"
-                    4 -> day = "수요일"
-                    5 -> day = "목요일"
-                    6 -> day = "금요일"
-                    7 -> day = "토요일"
-                    else -> day = "else"
-                }
-
-                titles.add(sdf.format(date) + " " + day)
-
-                //startCalendar.add(Calendar.DATE, 1)
-                todayCalendar.add(Calendar.DATE, -1)
-            }
-
-            for (title in titles) {
-                var innerItems: ArrayList<InnterItem> = ArrayList()
-
-                for (i in 0..(getDiary.re.size - 1)) {
-                    if (title.equals(getDiary.re[i].date)) {
-                        for (j in 0..(getDiary.re[i].diary.size - 1)) {
-                            innerItems.add(InnterItem(getDiary.re[i].diary[j].index, false, getDiary.re[i].diary[j].token))
-                        }
-                        break
+                    when (todayCalendar.get(Calendar.DAY_OF_WEEK)) {
+                        1 -> day = "일요일"
+                        2 -> day = "월요일"
+                        3 -> day = "화요일"
+                        4 -> day = "수요일"
+                        5 -> day = "목요일"
+                        6 -> day = "금요일"
+                        7 -> day = "토요일"
+                        else -> day = "else"
                     }
+
+                    titles.add(sdf.format(date) + " " + day)
+
+                    //startCalendar.add(Calendar.DATE, 1)
+                    todayCalendar.add(Calendar.DATE, -1)
                 }
 
-                outterItems.add(OutterItem(title, false, innerItems))
-            }
+                for (title in titles) {
+                    var innerItems: ArrayList<InnterItem> = ArrayList()
 
-            return outterItems
+                    for (i in 0..(getDiary.re.size - 1)) {
+                        if (title.equals(getDiary.re[i].date)) {
+                            for (j in 0..(getDiary.re[i].diary.size - 1)) {
+                                innerItems.add(InnterItem(getDiary.re[i].diary[j].index, false, getDiary.re[i].diary[j].token))
+                            }
+                            break
+                        }
+                    }
+
+                    outterItems.add(OutterItem(title, false, innerItems))
+                }
+
+                return outterItems
+            }
         }
     }
 

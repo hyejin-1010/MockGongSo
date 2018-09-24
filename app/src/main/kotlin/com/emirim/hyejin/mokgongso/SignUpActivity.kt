@@ -57,14 +57,14 @@ class SignUpActivity : AppCompatActivity() {
                             when (response.code()) {
                                 200 -> {
                                     Log.d("duplicatechk", "200")
-                                    emailCheck.setImageResource(R.mipmap.shape_3)
+                                    emailCheck.setImageResource(R.drawable.shape_4)
                                     emailEdt.setBackgroundResource(R.drawable.solid)
                                     emailBoolean = true
                                 }
                                 409 -> {
                                     Log.d("duplicatechk", "409")
                                     emailEdt.setBackgroundResource(R.drawable.dotted)
-                                    emailCheck.setImageResource(R.mipmap.shape_4)
+                                    emailCheck.setImageResource(R.drawable.shape_3)
                                     emailBoolean = false
                                 }
                             }
@@ -77,7 +77,7 @@ class SignUpActivity : AppCompatActivity() {
                     })
                 } else {
                     emailEdt.setBackgroundResource(R.drawable.dotted)
-                    emailCheck.setImageResource(R.mipmap.shape_4)
+                    emailCheck.setImageResource(R.drawable.shape_3)
                     emailBoolean = false
                 }
             }
@@ -92,7 +92,7 @@ class SignUpActivity : AppCompatActivity() {
                 if(s != null && s.trim().isNotEmpty() && pwConfirmEdt != null && pwConfirmEdt.text.toString().equals(pwEdt.text.toString())) {
                     pwConfirmEdt.setBackgroundResource(R.drawable.solid)
                     joinBoolean = true
-                    pwConfirmCheck.setImageResource(R.mipmap.shape_3)
+                    pwConfirmCheck.setImageResource(R.drawable.shape_4)
 
                     // 회원가입 버튼 활성화
                     signUpBtn.setBackgroundResource(R.drawable.loginbutton)
@@ -100,7 +100,7 @@ class SignUpActivity : AppCompatActivity() {
                 } else {
                     pwConfirmEdt.setBackgroundResource(R.drawable.dotted)
                     joinBoolean = false
-                    pwConfirmCheck.setImageResource(R.mipmap.shape_4)
+                    pwConfirmCheck.setImageResource(R.drawable.shape_3)
                 }
             }
             override fun afterTextChanged(s: Editable?) {

@@ -75,7 +75,7 @@ class Terms: AppCompatActivity() {
         }
 
         agree.setOnClickListener {
-            if(radio1.isChecked && radio2.isChecked) {
+            if(radio1.isChecked) {
                 startActivity(Intent(this, SignUpActivity::class.java))
                 finish()
             }

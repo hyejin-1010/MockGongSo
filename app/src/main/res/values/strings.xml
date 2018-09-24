@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Mokgongso</string>
+    <string name="app_name">목공소</string>
     <string name="login">로그인</string>
     <string name="facebook_app_id">199352967351501</string>
     <string name="fb_login_protocol_scheme">fb199352967351501</string>
