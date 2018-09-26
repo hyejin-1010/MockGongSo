@@ -57,11 +57,11 @@ class SmallMandalartFragment : Fragment() {
 
     fun secondInit() {
         for (i in 0..2) {
-            secondSelector[i].setColor(R.color.colorPrimaryDark)
-        }
-
-        for (i in 0..(Mandalart.count - 2)) {
-            secondSelector[i].setColor(R.color.white)
+            if(Mandalart.subMandalartTitle[i] != null && !(Mandalart.subMandalartTitle[i].equals(""))) {
+                secondSelector[i].setColor(R.color.white)
+            } else {
+                secondSelector[i].setColor(R.color.colorPrimary)
+            }
         }
     }
 
@@ -70,16 +70,14 @@ class SmallMandalartFragment : Fragment() {
             secondSelector[j].setColor(R.color.colorPrimaryDark)
         }
 
-        for(j in 0..(Mandalart.thirdCout[Mandalart.secondSelect] - 1)) {
-            secondSelector[j].setColor(R.color.white)
+        for(j in 0..2) {
+            if(Mandalart.thirdContent[Mandalart.secondSelect][j] != null && !(Mandalart.thirdContent[Mandalart.secondSelect][j].equals(""))) {
+                secondSelector[j].setColor(R.color.white)
+            }
         }
     }
 
     fun secondClick(i: Int) { // 4
-        if(i > Mandalart.count - 2) {
-            return
-        }
-
         if(Mandalart.secondSelect == i) {
             Mandalart.viewer = 1
 
@@ -93,29 +91,31 @@ class SmallMandalartFragment : Fragment() {
 
             thirdInit()
         } else {
-            if(Mandalart.secondSelect != -1) {
-                secondSelector[Mandalart.secondSelect].setColor(R.color.white)
-            }
+            if(Mandalart.subMandalartTitle[i] != null && !(Mandalart.subMandalartTitle[i].equals(""))) {
+                if(Mandalart.secondSelect != -1) {
+                    secondSelector[Mandalart.secondSelect].setColor(R.color.white)
+                }
 
-            secondSelector[i].setColor(R.color.colorAccent)
-            Mandalart.secondSelect = i
-            constraintLayout.title.text = Mandalart.subMandalartTitle[i]
+                secondSelector[i].setColor(R.color.colorAccent)
+                Mandalart.secondSelect = i
+                constraintLayout.title.text = Mandalart.subMandalartTitle[i]
+            }
         }
     }
 
     fun thirdClick(i: Int) {
-        if(i > Mandalart.thirdCout[Mandalart.secondSelect] - 1) {
-            return
-        }
-
         if(Mandalart.thirdSelect == i) {
             // 이동
         } else if(Mandalart.thirdSelect != -1) {
-            secondSelector[Mandalart.thirdSelect].setColor(R.color.white)
+            if(Mandalart.thirdContent[Mandalart.secondSelect][i] != null && !(Mandalart.thirdContent[Mandalart.secondSelect][i].equals(""))) {
+                secondSelector[Mandalart.thirdSelect].setColor(R.color.white)
+            }
         }
 
-        secondSelector[i].setColor(R.color.colorAccent)
-        Mandalart.thirdSelect = i
-        constraintLayout.title.text = Mandalart.thirdContent[Mandalart.secondSelect][i]
+        if(Mandalart.thirdContent[Mandalart.secondSelect][i] != null && !(Mandalart.thirdContent[Mandalart.secondSelect][i].equals(""))) {
+            secondSelector[i].setColor(R.color.colorAccent)
+            Mandalart.thirdSelect = i
+            constraintLayout.title.text = Mandalart.thirdContent[Mandalart.secondSelect][i]
+        }
     }
 }

@@ -164,8 +164,6 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                         com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.title = tRe.re.title
                         com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.achievement = tRe.re.achievement
 
-                        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.count = 1
-
                         for(i in 0..2) {
                             com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.subMandalartTitle[tRe.re.mandal[i].order] = tRe.re.mandal[i].middleTitle
 
@@ -174,18 +172,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                             strArray[1] = tRe.re.mandal[i].smallMandalArt2.title
                             strArray[2] = tRe.re.mandal[i].smallMandalArt3.title
 
-                            com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdCout[i] = 0
-
-                            for(j in 0..2) {
-                                if(strArray[j].isNotEmpty()) com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdCout[i]++
-                                else break
-                            }
-
                             com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdContent[i] = strArray
-
-                            if(tRe.re.mandal[i].middleTitle.isNotEmpty()) {
-                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.count ++
-                            }
                         }
 
                         smallBoolean = true
@@ -537,8 +524,6 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                         com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.title = tRe.re.title
                         com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.achievement = tRe.re.achievement
 
-                        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.count = 1
-
                         for(i in 0..2) {
                             com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.subMandalartTitle[tRe.re.mandal[i].order] = tRe.re.mandal[i].middleTitle
 
@@ -547,18 +532,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                             strArray[1] = tRe.re.mandal[i].smallMandalArt2.title
                             strArray[2] = tRe.re.mandal[i].smallMandalArt3.title
 
-                            com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdCout[i] = 0
-
-                            for(j in 0..2) {
-                                if(strArray[j].isNotEmpty()) com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdCout[i]++
-                                else break
-                            }
-
                             com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdContent[i] = strArray
-
-                            if(tRe.re.mandal[i].middleTitle.isNotEmpty()) {
-                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.count ++
-                            }
                         }
 
                         smallBoolean = true
@@ -710,8 +684,6 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                             com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdContent = Array(3, { Array<String>(3, {""}) })
                             com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.subMandalartTitle = Array<String>(3, {""})
 
-                            com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdCout = IntArray(3)
-                            com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.count = 1
                             com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.position = 1
                             com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.secondSelect = -1
                             com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdSelect = -1

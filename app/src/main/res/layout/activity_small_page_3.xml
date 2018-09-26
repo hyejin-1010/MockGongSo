@@ -111,4 +111,16 @@
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginLeft="160dp"/>
     </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/createButton"
+        android:layout_width="259dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="30dp"
+        android:text="만다라트 만들기"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@drawable/createbutton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/canvasLayout2"/>
 </android.support.constraint.ConstraintLayout>

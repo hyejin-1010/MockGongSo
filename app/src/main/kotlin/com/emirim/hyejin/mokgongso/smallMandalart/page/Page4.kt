@@ -1,5 +1,6 @@
 package com.emirim.hyejin.mokgongso.smallMandalart.page
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -10,13 +11,15 @@ import android.view.WindowManager
 import android.widget.EditText
 import android.widget.TextView
 import com.emirim.hyejin.mokgongso.R
+import com.emirim.hyejin.mokgongso.View.TriangleView
 import com.emirim.hyejin.mokgongso.smallMandalart.CreateMandalart
 import kotlinx.android.synthetic.main.activity_small_page_4.view.*
+import kotlinx.android.synthetic.main.dialog_input2.view.*
 
 class Page4 : Fragment() {
     companion object {
         lateinit var constraintLayout: View
-        lateinit var mandalartSub: Array<EditText>
+        lateinit var mandalartSub: Array<TriangleView>
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,29 +32,45 @@ class Page4 : Fragment() {
 
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
-        mandalartSub = arrayOf<EditText>(constraintLayout.mandalartSub1,constraintLayout.mandalartSub2,constraintLayout.mandalartSub3)
+        mandalartSub = arrayOf<TriangleView>(constraintLayout.topTriangle,constraintLayout.leftTriangle,constraintLayout.rightTriangle)
 
         constraintLayout.leftArrow.setOnClickListener {
             CreateMandalart.mViewPager.currentItem = 2
-
-            for(i in 0..2) {
-                if(i < Mandalart.thirdCout[Mandalart.position - 1]) {
-                    Mandalart.thirdContent[Mandalart.position - 1][i] = mandalartSub[i].text.toString()
-                    Log.d("test tmake", "content[${Mandalart.position - 1}][${i}] : ${mandalartSub[i].text.toString()}")
-                }
-            }
         }
 
-        constraintLayout.mandalartAddBtn.setOnClickListener {
-            mandalartSub[Mandalart.thirdCout[Mandalart.position - 1]].visibility = View.VISIBLE
-            mandalartSub[Mandalart.thirdCout[Mandalart.position - 1]].setText("")
-            if(Mandalart.thirdCout[Mandalart.position - 1] == 2)
-                constraintLayout.mandalartAddBtn.visibility = View.GONE
+        for(i in 0..2) {
+            mandalartSub[i].setOnClickListener {
+                mandalartSub[i].setColor(R.color.white)
 
-            else {
-                constraintLayout.rightArrow.visibility = View.GONE
+                var inputDialog = LayoutInflater.from(context).inflate(R.layout.dialog_input2, null)
+                val mBuilder = AlertDialog.Builder(context)
+                        .setView(inputDialog)
+
+                val  mAlertDialog = mBuilder.show()
+
+                inputDialog.cancel.setOnClickListener {
+                    mAlertDialog.dismiss()
+                }
+                inputDialog.delBtn.setOnClickListener {
+                    Mandalart.thirdContent[Mandalart.position - 1][i] = inputDialog.smallEdit.text.toString()
+                    mandalartSub[i].setColor(R.color.white)
+
+                    mAlertDialog.dismiss()
+
+                    Mandalart.thirdContent[Mandalart.position - 1][i] = inputDialog.smallEdit.text.toString()
+                    mandalartSub[i].setColor(R.color.white)
+                }
+
+                mAlertDialog.setOnDismissListener {
+                    for(i in 0..2) {
+                        if(Mandalart.thirdContent[Mandalart.position - 1][i] != null && !(Mandalart.thirdContent[Mandalart.position - 1][i].equals(""))) {
+                            mandalartSub[i].setColor(R.color.white)
+                        } else {
+                            mandalartSub[i].setColor(R.color.colorPrimary)
+                        }
+                    }
+                }
             }
-            Mandalart.thirdCout[Mandalart.position - 1]++
         }
 
         /*constraintLayout.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
@@ -72,23 +91,9 @@ class Page4 : Fragment() {
         super.setUserVisibleHint(isVisibleToUser)
 
         if(isVisibleToUser) {
-            val subTitle: TextView = constraintLayout.findViewById(R.id.mandalartTitle)
-
-            subTitle.text = Mandalart.subMandalartTitle[Mandalart.position - 1]
-
             for(i in 0..2) {
-                mandalartSub[i].visibility = View.GONE
-
-                if(i < Mandalart.thirdCout[Mandalart.position - 1]) {
-                    mandalartSub[i].visibility = View.VISIBLE
-                    mandalartSub[i].setText(Mandalart.thirdContent[Mandalart.position - 1][i])
-                    //mandalartSub[i].setText("s")
-                }
-
-                if(Mandalart.thirdCout[Mandalart.position - 1] == 2) {
-                    constraintLayout.mandalartAddBtn.visibility = View.GONE
-                } else {
-                    constraintLayout.mandalartAddBtn.visibility = View.VISIBLE
+                if(Mandalart.thirdContent[Mandalart.position - 1][i] != null && !(Mandalart.thirdContent[Mandalart.position - 1][i].equals(""))) {
+                    mandalartSub[i].setColor(R.color.white)
                 }
             }
         }

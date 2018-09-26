@@ -8,8 +8,8 @@ class Mandalart {
         var subMandalartTitle = Array<String>(3, {""})
         var thirdContent = Array(3, { Array<String>(3, {""}) })
 
-        var thirdCout = IntArray(3)
-        var count: Int = 1
+        // var thirdCout = IntArray(3)
+        // var count: Int = 1
         var position: Int = 1
 
         var secondSelect = -1

@@ -209,8 +209,6 @@ class SettingFragment : Fragment() {
         com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.achievement = 0
         com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.subMandalartTitle = Array<String>(3, {""})
         com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdContent = Array(3, {Array<String>(3, {""})})
-        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdCout = IntArray(3)
-        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.count = 1
         com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.position = 1
         com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.secondSelect = -1
         com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdSelect = -1
