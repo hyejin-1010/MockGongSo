@@ -24,8 +24,6 @@ class MandalartFragment : Fragment() {
         val containtLayout: View = inflater?.inflate(R.layout.fragment_mandalart, container, false)
 
         containtLayout.createBtn.setOnClickListener {
-            Mandalart.count = 1
-
             var intent = Intent(activity, CreateMandalart::class.java)
             startActivity(intent)
         }

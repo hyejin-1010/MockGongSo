@@ -9,8 +9,8 @@ class Mandalart {
         var thirdContent = Array(8, { Array<String>(8, {""}) })
         var thirdAchievement = Array(8, { IntArray(8) })
 
-        var thirdCout = IntArray(8)
-        var count: Int = 1
+        //var thirdCout = IntArray(8)
+        //var count: Int = 1
         var position: Int = 1
 
         var secondSelect = -1

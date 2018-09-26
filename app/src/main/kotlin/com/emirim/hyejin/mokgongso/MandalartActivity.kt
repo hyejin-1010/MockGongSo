@@ -107,8 +107,6 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                         com.emirim.hyejin.mokgongso.mandalart.Mandalart.title = re.re.title
                         com.emirim.hyejin.mokgongso.mandalart.Mandalart.achievement = re.re.achievement
 
-                        com.emirim.hyejin.mokgongso.mandalart.Mandalart.count = 1
-
                         for(i in 0..7){
                             com.emirim.hyejin.mokgongso.mandalart.Mandalart.subMandalartTitle[re.re.mandal[i].order] = re.re.mandal[i].middleTitle
 
@@ -132,19 +130,8 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                             intArray[6] = re.re.mandal[i].smallMandalArt7.achievement
                             intArray[7] = re.re.mandal[i].smallMandalArt8.achievement
 
-                            com.emirim.hyejin.mokgongso.mandalart.Mandalart.thirdCout[i] = 0
-
-                            for(j in 0..7){
-                                if(strArray[j].isNotEmpty()) com.emirim.hyejin.mokgongso.mandalart.Mandalart.thirdCout[i] ++
-                                else break
-                            }
-
                             com.emirim.hyejin.mokgongso.mandalart.Mandalart.thirdContent[i] = strArray
                             com.emirim.hyejin.mokgongso.mandalart.Mandalart.thirdAchievement[i] = intArray
-
-                            if(re.re.mandal[i].middleTitle.isNotEmpty()) {
-                                com.emirim.hyejin.mokgongso.mandalart.Mandalart.count ++
-                            }
                         }
 
                         mandalBoolean = true

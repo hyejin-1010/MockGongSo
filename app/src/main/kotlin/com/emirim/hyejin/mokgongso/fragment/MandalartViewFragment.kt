@@ -65,8 +65,10 @@ class MandalartViewFragment : Fragment() {
             secondSelector[i].setBackgroundResource(R.drawable.mandalart_box_2)
         }
 
-        for (i in 0..(Mandalart.count - 2)) {
-            secondSelector[i].setBackgroundResource(R.drawable.mandalart_box_1)
+        for(i in 0..7) {
+            if(Mandalart.subMandalartTitle[i] != null && !(Mandalart.subMandalartTitle[i].equals(""))) {
+                secondSelector[i].setBackgroundResource(R.drawable.mandalart_box_1)
+            }
         }
     }
 
@@ -75,45 +77,33 @@ class MandalartViewFragment : Fragment() {
             secondSelector[j].setBackgroundResource(R.drawable.mandalart_box_2)
         }
 
-        for(j in 0..(Mandalart.thirdCout[Mandalart.secondSelect] - 1)) {
-            secondSelector[j].setBackgroundResource(R.drawable.mandalart_box_1)
-        }
+        for(j in 0..7) {
+            if(Mandalart.thirdContent[Mandalart.secondSelect][j] != null && !(Mandalart.thirdContent[Mandalart.secondSelect][j].equals(""))) {
+                secondSelector[j].setBackgroundResource(R.drawable.mandalart_box_1)
+            }
+         }
     }
 
     fun secondClick(i: Int) {
-        //
-        if(i > Mandalart.count - 2) {
-            return
-        }
-
         if(Mandalart.secondSelect == i) {
             Mandalart.viewer = 1
 
-            for (j in 0..(Mandalart.count - 2)) {
-                secondSelector[j].setBackgroundResource(R.drawable.mandalart_box_2)
-            }
-
-            for(j in 0..(Mandalart.thirdCout[Mandalart.secondSelect] - 1)) {
-                secondSelector[j].setBackgroundResource(R.drawable.mandalart_box_1)
-            }
-
+            thirdInit()
         } else {
-            if(Mandalart.secondSelect != -1) {
-                secondSelector[Mandalart.secondSelect].setBackgroundResource(R.drawable.mandalart_box_1)
-            }
+            if (Mandalart.subMandalartTitle[i] != null && !(Mandalart.subMandalartTitle[i].equals(""))) {
+                if (Mandalart.secondSelect != -1) {
+                    secondSelector[Mandalart.secondSelect].setBackgroundResource(R.drawable.mandalart_box_1)
+                }
 
-            secondSelector[i].setBackgroundResource(R.drawable.mandalart_box_3)
-            Mandalart.secondSelect = i
-            constraintLayout.title.text = Mandalart.subMandalartTitle[i]
-            constraintLayout.subTitle.text = Mandalart.title
+                secondSelector[i].setBackgroundResource(R.drawable.mandalart_box_3)
+                Mandalart.secondSelect = i
+                constraintLayout.title.text = Mandalart.subMandalartTitle[i]
+                constraintLayout.subTitle.text = Mandalart.title
+            }
         }
     }
 
     fun thirdClick(i: Int) {
-        if(i > Mandalart.thirdCout[Mandalart.secondSelect] - 1) {
-            return
-        }
-
         if(Mandalart.thirdSelect == i) {
             // 이동
             Mandalart.viewer = 2
@@ -122,12 +112,16 @@ class MandalartViewFragment : Fragment() {
                     .replace(R.id.frameLayout, MandalartViewThirdFragment.newInstance())
                     .commit()
         } else if(Mandalart.thirdSelect != -1) {
-            secondSelector[Mandalart.thirdSelect].setBackgroundResource(R.drawable.mandalart_box_1)
+            if(Mandalart.thirdContent[Mandalart.secondSelect][i] != null && !(Mandalart.thirdContent[Mandalart.secondSelect][i].equals(""))) {
+                secondSelector[Mandalart.thirdSelect].setBackgroundResource(R.drawable.mandalart_box_1)
+            }
         }
 
-        secondSelector[i].setBackgroundResource(R.drawable.mandalart_box_3)
-        Mandalart.thirdSelect = i
-        constraintLayout.title.text = Mandalart.thirdContent[Mandalart.secondSelect][i]
-        constraintLayout.subTitle.text = Mandalart.subMandalartTitle[Mandalart.secondSelect]
+        if(Mandalart.thirdContent[Mandalart.secondSelect][i] != null && !(Mandalart.thirdContent[Mandalart.secondSelect][i].equals(""))) {
+            secondSelector[i].setBackgroundResource(R.drawable.mandalart_box_3)
+            Mandalart.thirdSelect = i
+            constraintLayout.title.text = Mandalart.thirdContent[Mandalart.secondSelect][i]
+            constraintLayout.subTitle.text = Mandalart.subMandalartTitle[Mandalart.secondSelect]
+        }
     }
 }

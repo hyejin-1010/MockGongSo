@@ -197,8 +197,6 @@ class SettingFragment : Fragment() {
         Mandalart.subMandalartTitle = Array<String>(8, {""})
         Mandalart.thirdContent = Array(8, { Array<String>(8, {""}) })
         Mandalart.thirdAchievement = Array(8, { IntArray(8) })
-        Mandalart.thirdCout = IntArray(8)
-        Mandalart.count = 1
         Mandalart.position = 1
         Mandalart.secondSelect = -1
         Mandalart.thirdSelect = -1

@@ -34,16 +34,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
     <Button
-        android:id="@+id/rightArrow"
-        android:layout_width="15dp"
-        android:layout_height="20dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="20dp"
-        app:layout_constraintTop_toTopOf="@id/title"
-        android:layout_marginTop="20dp"
-        android:padding="0dp"
-        android:background="@drawable/right" />
-    <Button
         android:id="@+id/leftArrow"
         android:layout_width="15dp"
         android:layout_height="20dp"
@@ -60,18 +50,18 @@
         app:layout_constraintTop_toBottomOf="@id/subTitle"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="43dp">
         <TextView
             android:id="@+id/secondTitle1"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             style="@style/TextStyle6"
             android:gravity="center"
             android:background="@drawable/mandalart_box_2"/>
         <TextView
             android:id="@+id/secondTitle2"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:background="@drawable/mandalart_box_2"
             android:gravity="center"
             style="@style/TextStyle6"
@@ -79,8 +69,8 @@
             android:layout_marginLeft="17dp"/>
         <TextView
             android:id="@+id/secondTitle3"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:background="@drawable/mandalart_box_2"
             android:gravity="center"
             style="@style/TextStyle6"
@@ -97,15 +87,15 @@
         android:layout_marginTop="17dp">
         <TextView
             android:id="@+id/secondTitle4"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             style="@style/TextStyle6"
             android:gravity="center"
             android:background="@drawable/mandalart_box_2"/>
         <TextView
             android:id="@+id/firstTitle"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:background="@drawable/mandalart_box_3"
             app:layout_constraintLeft_toRightOf="@id/secondTitle4"
             android:textColor="@color/white"
@@ -115,8 +105,8 @@
             android:layout_marginLeft="17dp"/>
         <TextView
             android:id="@+id/secondTitle5"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:background="@drawable/mandalart_box_2"
             android:gravity="center"
             style="@style/TextStyle6"
@@ -133,15 +123,15 @@
         android:layout_marginTop="17dp">
         <TextView
             android:id="@+id/secondTitle6"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:gravity="center"
             style="@style/TextStyle6"
             android:background="@drawable/mandalart_box_2"/>
         <TextView
             android:id="@+id/secondTitle7"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:background="@drawable/mandalart_box_2"
             android:gravity="center"
             style="@style/TextStyle6"
@@ -149,12 +139,24 @@
             android:layout_marginLeft="17dp"/>
         <TextView
             android:id="@+id/secondTitle8"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:background="@drawable/mandalart_box_2"
             android:gravity="center"
             style="@style/TextStyle6"
             app:layout_constraintLeft_toRightOf="@id/secondTitle7"
             android:layout_marginLeft="17dp"/>
     </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/createButton"
+        android:layout_width="259dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="30dp"
+        android:text="만다라트 만들기"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@drawable/createbutton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subConstraintLayout3"/>
 </android.support.constraint.ConstraintLayout>

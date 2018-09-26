@@ -1,5 +1,6 @@
 package com.emirim.hyejin.mokgongso.mandalart.page
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.v4.app.Fragment
@@ -16,11 +17,12 @@ import com.emirim.hyejin.mokgongso.mandalart.CreateMandalart
 import com.emirim.hyejin.mokgongso.mandalart.Mandalart
 import kotlinx.android.synthetic.main.activity_page_1.*
 import kotlinx.android.synthetic.main.activity_page_2.view.*
+import kotlinx.android.synthetic.main.dialog_input.view.*
 
 class Page2 : Fragment() {
     companion object {
         lateinit var constraintLayout: View
-        lateinit var mandalartSub: Array<EditText>
+        lateinit var secondTitle: Array<TextView>
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,51 +35,35 @@ class Page2 : Fragment() {
         //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
+        // Right And Left Button
         constraintLayout.leftArrow.setOnClickListener {
             CreateMandalart.mViewPager.currentItem = 0
         }
-
-        mandalartSub = arrayOf<EditText>(constraintLayout.mandalartSub1,constraintLayout.mandalartSub2,constraintLayout.mandalartSub3, constraintLayout.mandalartSub4, constraintLayout.mandalartSub5, constraintLayout.mandalartSub6, constraintLayout.mandalartSub7, constraintLayout.mandalartSub8)
-
         constraintLayout.rightArrow.setOnClickListener {
-            for(i in 1..(Mandalart.count - 1)) {
-                Mandalart.subMandalartTitle[i - 1] = mandalartSub[i-1].text.toString()
-            }
-
             CreateMandalart.mViewPager.currentItem = 2
         }
 
-        // EditText 추가
-        constraintLayout.mandalartAddBtn.setOnClickListener {
-            mandalartSub[Mandalart.count - 1].visibility = View.VISIBLE
-            if(Mandalart.count == 8)
-                constraintLayout.mandalartAddBtn.visibility = View.GONE
+        secondTitle = arrayOf<TextView>(constraintLayout.secondTitle1,constraintLayout.secondTitle2,constraintLayout.secondTitle3, constraintLayout.secondTitle4, constraintLayout.secondTitle5, constraintLayout.secondTitle6, constraintLayout.secondTitle7, constraintLayout.secondTitle8)
 
-            constraintLayout.rightArrow.visibility = View.GONE
+        for(i in 0..(secondTitle.size - 1)) {
+            secondTitle[i].setOnClickListener {
+                var inputDialog = LayoutInflater.from(context).inflate(R.layout.dialog_input, null)
+                val mBuilder = AlertDialog.Builder(context)
+                        .setView(inputDialog)
 
-            Mandalart.count++
-        }
+                val  mAlertDialog = mBuilder.show()
 
-        for(x in 1..8) {
-            mandalartSub[x-1].addTextChangedListener(object: TextWatcher {
-                override fun afterTextChanged(s: Editable?) { }
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    var boolean = false
-
-                    for(i in 1..(Mandalart.count - 1)) {
-                            if(!(mandalartSub[i-1].text.trim().isNotEmpty())) {
-                                boolean = true
-                                break
-                            }
-                        }
-
-                    if(boolean)
-                        constraintLayout.rightArrow.visibility = View.GONE
-                    else
-                        constraintLayout.rightArrow.visibility = View.VISIBLE
+                inputDialog.cancel.setOnClickListener {
+                    mAlertDialog.dismiss()
                 }
-            })
+                inputDialog.delBtn.setOnClickListener {
+                    Mandalart.subMandalartTitle[i] = inputDialog.smallEdit.text.toString()
+                    secondTitle[i].text = "2"
+                    secondTitle[i].setBackgroundResource(R.drawable.mandalart_box_1)
+
+                    mAlertDialog.dismiss()
+                }
+            }
         }
 
         return constraintLayout
@@ -88,20 +74,11 @@ class Page2 : Fragment() {
 
         if(isVisibleToUser) {
             // 화면에 실제로 보일 때
-            val mandalartTitle: TextView = constraintLayout.findViewById(R.id.mandalartTitle)
-
-            mandalartTitle.text = Mandalart.title
-
-            for(i in 1..(Mandalart.count - 1)) {
-                mandalartSub[i-1].visibility = View.VISIBLE
-                mandalartSub[i-1].setText(Mandalart.subMandalartTitle[i - 1])
-            }
-
-
-            if((Mandalart.count - 1) == 8) {
-                constraintLayout.mandalartAddBtn.visibility = View.GONE
-            } else {
-                constraintLayout.mandalartAddBtn.visibility = View.VISIBLE
+            for(i in 0..(secondTitle.size - 1)) {
+                if(Mandalart.subMandalartTitle[i] != null && !(Mandalart.subMandalartTitle[i].equals(("")))) {
+                    secondTitle[i].text = "2"
+                    secondTitle[i].setBackgroundResource(R.drawable.mandalart_box_1)
+                }
             }
         } else {
             // preload 될 때 (전 페이지에 있을 때)
