@@ -81,14 +81,6 @@ class SmallMandalartFragment : Fragment() {
         if(Mandalart.secondSelect == i) {
             Mandalart.viewer = 1
 
-            /*for (j in 0..(Mandalart.count - 2)) {
-                secondSelector[j].setColor(R.color.colorPrimaryDark)
-            }
-
-            for(j in 0..(Mandalart.thirdCout[Mandalart.secondSelect] - 1)) {
-                secondSelector[i].setColor(R.color.white)
-            }*/
-
             thirdInit()
         } else {
             if(Mandalart.subMandalartTitle[i] != null && !(Mandalart.subMandalartTitle[i].equals(""))) {
