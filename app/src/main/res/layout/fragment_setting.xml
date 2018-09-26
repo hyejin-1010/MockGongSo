@@ -12,7 +12,7 @@
         <android.support.constraint.ConstraintLayout
             android:id="@+id/profile"
             android:layout_width="match_parent"
-            android:layout_height="165dp"
+            android:layout_height="150dp"
             android:background="@color/white"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="43dp">
@@ -85,7 +85,7 @@
         <android.support.constraint.ConstraintLayout
             android:id="@+id/locklayout"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             app:layout_constraintTop_toBottomOf="@id/profile"
             android:layout_marginTop="13dp"
             android:background="@color/white">
@@ -113,7 +113,7 @@
         <android.support.constraint.ConstraintLayout
             android:id="@+id/pushlayout"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             app:layout_constraintTop_toBottomOf="@id/locklayout"
             android:layout_marginTop="5dp"
             android:background="@color/white">
@@ -141,7 +141,7 @@
         <android.support.constraint.ConstraintLayout
             android:id="@+id/agrementlayout"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             app:layout_constraintTop_toBottomOf="@id/pushlayout"
             android:layout_marginTop="13dp"
             android:background="@color/white">
@@ -166,7 +166,7 @@
         <android.support.constraint.ConstraintLayout
             android:id="@+id/logoutlayout"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:background="@color/white"
             android:layout_marginTop="5dp"
             app:layout_constraintTop_toBottomOf="@id/agrementlayout">
@@ -184,7 +184,7 @@
         <android.support.constraint.ConstraintLayout
             android:id="@+id/secessionlayout"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             app:layout_constraintTop_toBottomOf="@id/logoutlayout"
             android:layout_marginTop="5dp"
             android:background="@color/white">
