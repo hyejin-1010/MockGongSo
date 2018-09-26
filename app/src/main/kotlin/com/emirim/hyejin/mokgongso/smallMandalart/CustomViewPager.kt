@@ -5,7 +5,7 @@ import android.support.v4.view.ViewPager
 import android.util.AttributeSet
 import android.view.MotionEvent
 
-class C: ViewPager {
+class CustomViewPager: ViewPager {
     companion object {
         var enabled: Boolean = true
     }

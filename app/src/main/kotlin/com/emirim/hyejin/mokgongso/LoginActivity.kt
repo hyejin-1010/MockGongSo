@@ -320,6 +320,43 @@ class LoginActivity : AppCompatActivity() {
                 when(response.code()) {
                     200 -> {
                         // 만다라트 존재
+                        val re: Re = response.body() as Re
+                        com.emirim.hyejin.mokgongso.Mandalart.re = re
+                        com.emirim.hyejin.mokgongso.mandalart.Mandalart.title = re.re.title
+                        com.emirim.hyejin.mokgongso.mandalart.Mandalart.achievement = re.re.achievement.toInt()
+
+                        Log.d("getMandal", re.toString())
+
+                        for(i in 0..7){
+                            com.emirim.hyejin.mokgongso.mandalart.Mandalart.subMandalartTitle[re.re.mandal[i].order] = re.re.mandal[i].middleTitle
+
+                            var strArray = Array<String>(8, {""})
+                            strArray[0] = re.re.mandal[i].smallMandalArt1.title
+                            strArray[1] = re.re.mandal[i].smallMandalArt2.title
+                            strArray[2] = re.re.mandal[i].smallMandalArt3.title
+                            strArray[3] = re.re.mandal[i].smallMandalArt4.title
+                            strArray[4] = re.re.mandal[i].smallMandalArt5.title
+                            strArray[5] = re.re.mandal[i].smallMandalArt6.title
+                            strArray[6] = re.re.mandal[i].smallMandalArt7.title
+                            strArray[7] = re.re.mandal[i].smallMandalArt8.title
+
+                            var intArray = IntArray(8, {0})
+                            intArray[0] = re.re.mandal[i].smallMandalArt1.achievement
+                            intArray[1] = re.re.mandal[i].smallMandalArt2.achievement
+                            intArray[2] = re.re.mandal[i].smallMandalArt3.achievement
+                            intArray[3] = re.re.mandal[i].smallMandalArt4.achievement
+                            intArray[4] = re.re.mandal[i].smallMandalArt5.achievement
+                            intArray[5] = re.re.mandal[i].smallMandalArt6.achievement
+                            intArray[6] = re.re.mandal[i].smallMandalArt7.achievement
+                            intArray[7] = re.re.mandal[i].smallMandalArt8.achievement
+
+                            com.emirim.hyejin.mokgongso.mandalart.Mandalart.thirdContent[i] = strArray
+                            com.emirim.hyejin.mokgongso.mandalart.Mandalart.thirdAchievement[i] = intArray
+                        }
+
+                        MandalartActivity.mandalBoolean = true
+                        Log.d("ServerMandal", response.body().toString())
+
                         intentMandalart()
                     }
                     401 -> {

@@ -27,7 +27,7 @@ interface API {
     fun getMandal(@Body mandalChk: MandalChk): Call<Re>
 
     @POST("/setLow/app/")
-    fun setLow(@Body setLow: SetLow): Call<Message>
+    fun setLow(@Body setLow: SetLow): Call<Achievement>
 
     @POST("/addDay/app")
     fun addDay(@Body addDay: AddDay): Call<Message>

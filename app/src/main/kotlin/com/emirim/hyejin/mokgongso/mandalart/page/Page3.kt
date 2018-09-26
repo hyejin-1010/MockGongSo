@@ -155,6 +155,8 @@ class Page3 : Fragment() {
                                         200 -> {
                                             val re: Re = response.body() as Re
                                             com.emirim.hyejin.mokgongso.Mandalart.re = re
+
+                                            Log.d("getMandal", re.toString())
                                         }
                                         401 -> {
 

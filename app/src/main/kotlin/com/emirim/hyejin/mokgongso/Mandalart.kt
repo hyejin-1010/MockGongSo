@@ -12,5 +12,6 @@ class Mandalart {
         lateinit var addDay: AddDay
         lateinit var tMake: TMake
         lateinit var tRe: TRe
+        lateinit var achievement: Achievement
     }
 }

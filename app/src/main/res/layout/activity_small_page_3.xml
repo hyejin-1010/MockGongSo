@@ -64,8 +64,8 @@
 
         <com.emirim.hyejin.mokgongso.View.TriangleView
             android:id="@+id/topTriangle"
-            android:layout_width="120dp"
-            android:layout_height="100dp"
+            android:layout_width="110dp"
+            android:layout_height="90dp"
             android:layout_margin="10dp"
             app:color="@color/colorPrimaryDark"
             app:direction="up"
@@ -74,8 +74,8 @@
 
         <com.emirim.hyejin.mokgongso.View.TriangleView
             android:id="@+id/centerTriangle"
-            android:layout_width="120dp"
-            android:layout_height="100dp"
+            android:layout_width="110dp"
+            android:layout_height="90dp"
             android:layout_marginTop="20dp"
             app:color="@color/colorPrimary"
             app:direction="down"
@@ -91,8 +91,8 @@
         app:layout_constraintBottom_toBottomOf="@id/canvasLayout1">
         <com.emirim.hyejin.mokgongso.View.TriangleView
             android:id="@+id/leftTriangle"
-            android:layout_width="120dp"
-            android:layout_height="100dp"
+            android:layout_width="110dp"
+            android:layout_height="90dp"
             app:color="@color/colorPrimaryDark"
             app:direction="up"
             app:layout_constraintHorizontal_bias="0.498"
@@ -102,8 +102,8 @@
 
         <com.emirim.hyejin.mokgongso.View.TriangleView
             android:id="@+id/rightTriangle"
-            android:layout_width="120dp"
-            android:layout_height="100dp"
+            android:layout_width="110dp"
+            android:layout_height="90dp"
             app:color="@color/colorPrimaryDark"
             app:direction="up"
             app:layout_constraintHorizontal_bias="0.498"

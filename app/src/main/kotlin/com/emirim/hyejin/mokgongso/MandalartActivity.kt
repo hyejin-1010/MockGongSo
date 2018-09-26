@@ -105,7 +105,9 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                         val re: Re = response.body() as Re
                         com.emirim.hyejin.mokgongso.Mandalart.re = re
                         com.emirim.hyejin.mokgongso.mandalart.Mandalart.title = re.re.title
-                        com.emirim.hyejin.mokgongso.mandalart.Mandalart.achievement = re.re.achievement
+                        com.emirim.hyejin.mokgongso.mandalart.Mandalart.achievement = re.re.achievement.toInt()
+
+                        Log.d("getMandal", re.toString())
 
                         for(i in 0..7){
                             com.emirim.hyejin.mokgongso.mandalart.Mandalart.subMandalartTitle[re.re.mandal[i].order] = re.re.mandal[i].middleTitle
@@ -248,13 +250,17 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                 if(Mandalart.viewer == 2){
                     com.emirim.hyejin.mokgongso.Mandalart.setLow = SetLow(LoginActivity.appData!!.getString("ID", ""), Mandalart.secondSelect, Mandalart.thirdSelect, Mandalart.tmpAchievement)
 
-                    var call: Call<Message> = APIRequestManager.getInstance().requestServer().setLow(com.emirim.hyejin.mokgongso.Mandalart.setLow)
+                    var call: Call<Achievement> = APIRequestManager.getInstance().requestServer().setLow(com.emirim.hyejin.mokgongso.Mandalart.setLow)
 
-                    call.enqueue(object: Callback<Message> {
-                        override fun onResponse(call: Call<Message>, response: Response<Message>) {
+                    call.enqueue(object: Callback<Achievement> {
+                        override fun onResponse(call: Call<Achievement>, response: Response<Achievement>) {
                             when(response.code()) {
                                 200 -> {
                                     Log.d("ThirdMandalart", response.body().toString())
+                                    Log.d("ThirdMandalart", "${Mandalart.secondSelect}, ${Mandalart.thirdSelect}, ${Mandalart.tmpAchievement}")
+
+                                    var achievement = response.body() as Achievement
+                                    Mandalart.achievement = achievement.achievement.toDouble().toInt()
 
                                     Mandalart.thirdAchievement[Mandalart.secondSelect][Mandalart.thirdSelect] = Mandalart.tmpAchievement
 
@@ -276,7 +282,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                                 }
                             }
                         }
-                        override fun onFailure(call: Call<Message>, t: Throwable) {
+                        override fun onFailure(call: Call<Achievement>, t: Throwable) {
                             Log.e("ThirdMandalart", "에러: " + t.message)
                             t.printStackTrace()
                         }
@@ -461,6 +467,117 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
+        com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(LoginActivity.appData!!.getString("ID", ""))
+
+        var call: Call<Re> = APIRequestManager.getInstance().requestServer().getMandal(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
+
+        call.enqueue(object: Callback<Re> {
+            override fun onResponse(call: Call<Re>, response: Response<Re>) {
+                when(response.code()) {
+                    200 -> {
+                        val re: Re = response.body() as Re
+                        com.emirim.hyejin.mokgongso.Mandalart.re = re
+                        com.emirim.hyejin.mokgongso.mandalart.Mandalart.title = re.re.title
+                        com.emirim.hyejin.mokgongso.mandalart.Mandalart.achievement = re.re.achievement.toInt()
+
+                        Log.d("getMandal", re.toString())
+
+                        for(i in 0..7){
+                            com.emirim.hyejin.mokgongso.mandalart.Mandalart.subMandalartTitle[re.re.mandal[i].order] = re.re.mandal[i].middleTitle
+
+                            var strArray = Array<String>(8, {""})
+                            strArray[0] = re.re.mandal[i].smallMandalArt1.title
+                            strArray[1] = re.re.mandal[i].smallMandalArt2.title
+                            strArray[2] = re.re.mandal[i].smallMandalArt3.title
+                            strArray[3] = re.re.mandal[i].smallMandalArt4.title
+                            strArray[4] = re.re.mandal[i].smallMandalArt5.title
+                            strArray[5] = re.re.mandal[i].smallMandalArt6.title
+                            strArray[6] = re.re.mandal[i].smallMandalArt7.title
+                            strArray[7] = re.re.mandal[i].smallMandalArt8.title
+
+                            var intArray = IntArray(8, {0})
+                            intArray[0] = re.re.mandal[i].smallMandalArt1.achievement
+                            intArray[1] = re.re.mandal[i].smallMandalArt2.achievement
+                            intArray[2] = re.re.mandal[i].smallMandalArt3.achievement
+                            intArray[3] = re.re.mandal[i].smallMandalArt4.achievement
+                            intArray[4] = re.re.mandal[i].smallMandalArt5.achievement
+                            intArray[5] = re.re.mandal[i].smallMandalArt6.achievement
+                            intArray[6] = re.re.mandal[i].smallMandalArt7.achievement
+                            intArray[7] = re.re.mandal[i].smallMandalArt8.achievement
+
+                            com.emirim.hyejin.mokgongso.mandalart.Mandalart.thirdContent[i] = strArray
+                            com.emirim.hyejin.mokgongso.mandalart.Mandalart.thirdAchievement[i] = intArray
+                        }
+
+                        mandalBoolean = true
+                        Log.d("ServerMandal", response.body().toString())
+                    }
+                    401 -> {
+                    }
+                    404 -> {
+                        Log.d("ServerMandal", "실패")
+                    }
+                }
+            }
+            override fun onFailure(call: Call<Re>, t: Throwable) {
+                Log.e("ServerMandal", "에러: " + t.message)
+                t.printStackTrace()
+            }
+        })
+
+        // 작은 만다라트
+        var call2: Call<TRe> = APIRequestManager.getInstance().requestServer().getTMandalChk(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
+
+        call2.enqueue(object: Callback<TRe> {
+            override fun onResponse(call: Call<TRe>, response: Response<TRe>) {
+                when(response.code()) {
+                    200 -> {
+                        val tRe: TRe = response.body() as TRe
+                        com.emirim.hyejin.mokgongso.Mandalart.tRe = tRe
+                        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.title = tRe.re.title
+                        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.achievement = tRe.re.achievement
+
+                        com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.count = 1
+
+                        for(i in 0..2) {
+                            com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.subMandalartTitle[tRe.re.mandal[i].order] = tRe.re.mandal[i].middleTitle
+
+                            var strArray = Array<String>(3, {""})
+                            strArray[0] = tRe.re.mandal[i].smallMandalArt1.title
+                            strArray[1] = tRe.re.mandal[i].smallMandalArt2.title
+                            strArray[2] = tRe.re.mandal[i].smallMandalArt3.title
+
+                            com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdCout[i] = 0
+
+                            for(j in 0..2) {
+                                if(strArray[j].isNotEmpty()) com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdCout[i]++
+                                else break
+                            }
+
+                            com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.thirdContent[i] = strArray
+
+                            if(tRe.re.mandal[i].middleTitle.isNotEmpty()) {
+                                com.emirim.hyejin.mokgongso.smallMandalart.page.Mandalart.count ++
+                            }
+                        }
+
+                        smallBoolean = true
+
+                        Log.d("TMandal", response.body().toString())
+                    }
+                    401 -> {
+                    }
+                    404 -> {
+                        Log.d("TMandal", "실패")
+                    }
+                }
+            }
+            override fun onFailure(call: Call<TRe>, t: Throwable) {
+                Log.e("TMandal", "에러: " + t.message)
+                t.printStackTrace()
+            }
+        })
+
         super.onWindowFocusChanged(hasFocus)
 
         if(hasFocus) {
