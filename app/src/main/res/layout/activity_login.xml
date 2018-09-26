@@ -36,7 +36,9 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideline2"
         android:paddingBottom="20dp"
-        android:paddingLeft="10sp"/>
+        android:paddingLeft="10sp"
+        android:maxLines="1"
+        android:inputType="text"/>
     <EditText
         android:id="@+id/password"
         style="@style/TextStyle2"
@@ -48,7 +50,8 @@
         app:layout_constraintTop_toBottomOf="@id/email"
         android:paddingBottom="17dp"
         android:paddingLeft="10sp"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        android:maxLines="1"/>
 
     <Button
         android:id="@+id/loginBtn"
