@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.tutorial_main.*
 
 class MainAcitivity: AppCompatActivity() {
     companion object {
-        val MAX_PAGE = 5
+        val MAX_PAGE = 6
         var cur_Fragment = Fragment()
         lateinit var context: Context
     }
@@ -50,6 +50,9 @@ class MainAcitivity: AppCompatActivity() {
                     cur_Fragment = Page4()
                 }
                 4 ->  {
+                    cur_Fragment = Page45()
+                }
+                5 -> {
                     cur_Fragment = Page5()
                 }
             }

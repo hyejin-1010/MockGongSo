@@ -11,16 +11,13 @@ import com.emirim.hyejin.mokgongso.MandalartActivity
 import com.emirim.hyejin.mokgongso.R
 import kotlinx.android.synthetic.main.tutorial_main.*
 
-class Page5: Fragment() {
+class Page45: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val constraintLayout = inflater.inflate(R.layout.tutorial_page1, container, false) as ConstraintLayout
-
-        startActivity(Intent(context, MandalartActivity::class.java))
-        activity?.finish()
+        val constraintLayout = inflater.inflate(R.layout.tutorial_page4, container, false) as ConstraintLayout
 
         return constraintLayout
     }
