@@ -189,6 +189,7 @@ class SettingFragment : Fragment() {
     private fun intentMain() {
         var intent = Intent(activity, MainActivity::class.java)
         startActivity(intent)
+        activity?.finish()
     }
 
     fun initMandalart() {
