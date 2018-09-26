@@ -71,8 +71,6 @@ class LoginActivity : AppCompatActivity() {
                             val message: SignInMessage = response.body() as SignInMessage
                             val editor = appData!!.edit()
 
-                            Log.d("asdfasdf", message.toString())
-
                             editor.putString("ID", message.data.token.trim())
                             editor.putString("name", message.data.name.trim())
                             editor.putString("startday", message.data.startDay.trim())
