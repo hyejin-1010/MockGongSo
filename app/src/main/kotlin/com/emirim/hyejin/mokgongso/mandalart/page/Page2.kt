@@ -64,18 +64,6 @@ class Page2 : Fragment() {
 
                         mAlertDialog.dismiss()
                     }
-
-                    mAlertDialog.setOnDismissListener {
-                        for(i in 0..2) {
-                            if(Mandalart.subMandalartTitle[i] != null && !(Mandalart.subMandalartTitle[i].equals(""))) {
-                                secondTitle[i].setBackgroundResource(R.drawable.mandalart_box_1)
-                                secondTitle[i].text = "2"
-                            } else {
-                                secondTitle[i].setBackgroundResource(R.drawable.mandalart_box_2)
-                                secondTitle[i].text = ""
-                            }
-                        }
-                    }
                 } else {
                     Mandalart.subMandalartTitle[i] = ""
                     secondTitle[i].setBackgroundResource(R.drawable.mandalart_box_2)

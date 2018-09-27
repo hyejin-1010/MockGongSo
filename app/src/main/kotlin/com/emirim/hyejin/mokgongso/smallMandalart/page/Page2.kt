@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.emirim.hyejin.mokgongso.R
 import com.emirim.hyejin.mokgongso.View.TriangleView
 import com.emirim.hyejin.mokgongso.smallMandalart.CreateMandalart
@@ -74,11 +75,11 @@ class Page2 : Fragment() {
                     }
 
                     mAlertDialog.setOnDismissListener {
-                        for(i in 0..2) {
-                            if(Mandalart.subMandalartTitle[i] != null && !(Mandalart.subMandalartTitle[i].equals(""))) {
-                                mandalartSub[i].setColor(R.color.white)
+                        for(j in 0..2) {
+                            if(Mandalart.subMandalartTitle[j] != null && !(Mandalart.subMandalartTitle[j].equals(""))) {
+                                mandalartSub[j].setColor(R.color.white)
                             } else {
-                                mandalartSub[i].setColor(R.color.colorPrimary)
+                                mandalartSub[j].setColor(R.color.colorPrimary)
                             }
                         }
                     }

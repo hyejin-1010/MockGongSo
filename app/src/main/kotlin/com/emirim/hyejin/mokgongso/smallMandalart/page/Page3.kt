@@ -102,6 +102,8 @@ class Page3 : Fragment() {
                 }
             })
 
+            MandalartActivity.rightButtonImageView.setImageResource(R.drawable.trash)
+
             activity?.finish()
         }
 
@@ -115,6 +117,8 @@ class Page3 : Fragment() {
             for(i in 0..2) {
                 if(Mandalart.subMandalartTitle[i] != null && !(Mandalart.subMandalartTitle[i].equals(""))) {
                     mandalartSub[i].setColor(R.color.white)
+                } else {
+                    mandalartSub[i].setColor(R.color.colorPrimary)
                 }
             }
 

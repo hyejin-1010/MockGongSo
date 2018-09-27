@@ -48,6 +48,10 @@
     <style name="EditText1">
         <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
+    <style name="EditText2">
+        <item name="android:colorControlNormal">@color/colorPrimaryDark</item>
+        <item name="android:colorControlActivated">@color/colorPrimaryDark</item>
+    </style>
     
     <style name="bottomBarTextView" parent="@android:style/TextAppearance.Widget.TextView">
         <item name="android:textSize">8dp</item>

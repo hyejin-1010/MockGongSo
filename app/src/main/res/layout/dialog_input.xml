@@ -6,55 +6,54 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="300dp"
-        android:layout_height="200dp"
+        android:layout_height="160dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
         <TextView
             android:id="@+id/topText"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="17dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2단계 목표를 입력해주세요!"
-            style="@style/TextStyle3"
-            app:layout_constraintLeft_toLeftOf="parent"/>
-        <TextView
-            android:id="@+id/bottomText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="17dp"
+            android:text="2단계 목표를 적어주세요!"
+            android:textColor="@color/colorPrimaryDark"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:text="2단계 목표를 입력해주세요 :)"
-            app:layout_constraintTop_toBottomOf="@id/topText"
-            android:layout_marginTop="6dp"/>
+            android:textSize="12sp"
+            app:layout_constraintRight_toRightOf="parent"/>
+
         <EditText
             android:id="@+id/smallEdit"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="17dp"
-            app:layout_constraintTop_toBottomOf="@id/bottomText"/>
+            android:gravity="center"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:theme="@style/EditText2"
+            app:layout_constraintTop_toBottomOf="@id/topText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="23dp"/>
         <Button
             android:id="@+id/cancel"
-            android:layout_width="73dp"
-            android:layout_height="50dp"
-            android:background="@drawable/delcancelbutton"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:text="아니요"/>
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="3dp"
+            android:background="@drawable/not"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
         <Button
             android:id="@+id/delBtn"
-            android:layout_width="73dp"
-            android:layout_height="50dp"
-            android:background="@drawable/delokbutton"
-            app:layout_constraintRight_toLeftOf="@id/cancel"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:background="@drawable/mandalart_box_3"
+            android:textColor="@color/white"
+            android:text="확인"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="네"/>
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="20dp"/>
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

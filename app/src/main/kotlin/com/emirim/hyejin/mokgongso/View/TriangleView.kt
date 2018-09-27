@@ -52,11 +52,11 @@ class TriangleView : View {
     fun setColor(color: Int) {
         mPaint.color = color
 
-        if(color == 2131034285) {
+        if(color == 2131034285 || color == 2131034286) {
             boolean = 1
         } else if(color == 2131034160) {
             boolean = 2
-        } else if(color == 2131034162) {
+        } else if(color == 2131034162 || color == 2131034161) {
             boolean = 3
         }
         Log.d("TriangleView change2 ", color.toString())
@@ -91,6 +91,7 @@ class TriangleView : View {
 
     override fun onDraw(canvas: Canvas?) {
         if(boolean == 1) {
+            // white
             mPath = calculate(direction)
             mPaint.color = resources.getColor(R.color.white)
             canvas!!.drawPath(mPath, mPaint)
@@ -98,6 +99,7 @@ class TriangleView : View {
             boolean = 0
             canvas!!.drawPath(mPath, strokePaint)
         } else if(boolean == 2) {
+            // Primary
             mPath = calculate(direction)
             mPaint.color = resources.getColor(R.color.colorPrimaryDark)
             canvas!!.drawPath(mPath, mPaint)
@@ -110,6 +112,7 @@ class TriangleView : View {
             canvas!!.drawPath(mPath, strokePaint)
             //canvas!!.drawPath(mPath, mPaint)
         } else if(boolean == 3) {
+            // Primary Dark
             mPath = calculate(direction)
             mPaint.color = resources.getColor(R.color.colorPrimaryDark)
             // canvas!!.drawPath(mPath, mPaint)

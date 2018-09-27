@@ -69,11 +69,11 @@ class Page4 : Fragment() {
                     }
 
                     mAlertDialog.setOnDismissListener {
-                        for (i in 0..2) {
-                            if (Mandalart.thirdContent[Mandalart.position - 1][i] != null && !(Mandalart.thirdContent[Mandalart.position - 1][i].equals(""))) {
-                                mandalartSub[i].setColor(R.color.white)
+                        for (j in 0..2) {
+                            if (Mandalart.thirdContent[Mandalart.position - 1][j] != null && !(Mandalart.thirdContent[Mandalart.position - 1][j].equals(""))) {
+                                mandalartSub[j].setColor(R.color.white)
                             } else {
-                                mandalartSub[i].setColor(R.color.colorPrimary)
+                                mandalartSub[j].setColor(R.color.colorPrimary)
                             }
                         }
                     }
@@ -81,11 +81,11 @@ class Page4 : Fragment() {
                     Mandalart.thirdContent[Mandalart.position - 1][i] = ""
                     mandalartSub[i].setColor(R.color.colorPrimary)
 
-                    for (i in 0..2) {
-                        if (Mandalart.thirdContent[Mandalart.position - 1][i] != null && !(Mandalart.thirdContent[Mandalart.position - 1][i].equals(""))) {
-                            mandalartSub[i].setColor(R.color.white)
+                    for (j in 0..2) {
+                        if (Mandalart.thirdContent[Mandalart.position - 1][j] != null && !(Mandalart.thirdContent[Mandalart.position - 1][j].equals(""))) {
+                            mandalartSub[j].setColor(R.color.white)
                         } else {
-                            mandalartSub[i].setColor(R.color.colorPrimary)
+                            mandalartSub[j].setColor(R.color.colorPrimary)
                         }
                     }
                 }
@@ -96,7 +96,6 @@ class Page4 : Fragment() {
             if(keyCode == KeyEvent.KEYCODE_BACK) {
                 CreateMandalart.mViewPager.currentItem = 2
                 Toast.makeText(activity, "있잖아", Toast.LENGTH_LONG).show()
-
                 false
             } else {
                 return@OnKeyListener true
