@@ -73,7 +73,7 @@ class LoginActivity : AppCompatActivity() {
 
                             editor.putString("ID", message.data.token.trim())
                             editor.putString("name", message.data.name.trim())
-                            editor.putString("startday", message.data.startDay.trim())
+                            User.startDay = message.data.startDay.trim()
 
                             Log.d("Login" ,message.data.toString())
 
@@ -150,7 +150,7 @@ class LoginActivity : AppCompatActivity() {
 
                             editor.putString("ID", message.data.token.trim())
                             editor.putString("name", message.data.name.trim())
-                            editor.putString("startday", message.data.startDay.trim())
+                            User.startDay = message.data.startDay.trim()
 
                             Log.d("Login" ,message.data.toString())
                             
@@ -244,7 +244,7 @@ class LoginActivity : AppCompatActivity() {
 
                             editor.putString("ID", message.data.token.trim())
                             editor.putString("name", message.data.name.trim())
-                            editor.putString("startday", message.data.startDay.trim())
+                            User.startDay = message.data.startDay.trim()
 
                             editor.apply()
 
@@ -257,6 +257,7 @@ class LoginActivity : AppCompatActivity() {
 
                             editor.putString("ID", message.data.token.trim())
                             editor.putString("name", message.data.name.trim())
+                            User.startDay = message.data.startDay.trim()
 
                             editor.apply()
 

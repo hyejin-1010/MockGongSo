@@ -140,10 +140,8 @@ class SettingFragment : Fragment() {
         val sdf = SimpleDateFormat("yyyy-mm-dd")
         val today = Date()
 
-        Log.d("startDay", "${LoginActivity.appData!!.getString("startday", "")} startday")
-
-        if(LoginActivity.appData!!.getString("startday", "").isNotEmpty() || LoginActivity.appData!!.getString("startday", "").equals("")) {
-            val startDay = LoginActivity.appData!!.getString("startday", "")
+        if(User.startDay.isNotEmpty() || User.startDay.equals("")) {
+            val startDay = User.startDay
             if(startDay.equals("")) {
                 layout.day.text = "0"
             } else {
@@ -188,6 +186,7 @@ class SettingFragment : Fragment() {
 
     private fun intentMain() {
         var intent = Intent(activity, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
         activity?.finish()
     }

@@ -51,7 +51,8 @@
             android:background="@color/white"
             app:fabAlignmentMode="center"
             app:fabAttached="true"
-            app:labelVisibilityMode="unlabeled"
+            app:labelVisibilityMode="labeled"
+            app:itemTextColor="@color/black"
             app:menu="@menu/bottom_navigation_menu" >
         </android.support.design.widget.BottomNavigationView>
     </android.support.constraint.ConstraintLayout>

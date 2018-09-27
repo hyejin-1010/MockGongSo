@@ -11,6 +11,7 @@ import android.widget.TextView
 import com.emirim.hyejin.mokgongso.LoginActivity
 import com.emirim.hyejin.mokgongso.MandalartActivity
 import com.emirim.hyejin.mokgongso.R
+import com.emirim.hyejin.mokgongso.User
 import com.emirim.hyejin.mokgongso.api.APIRequestManager
 import com.emirim.hyejin.mokgongso.mandalart.CreateMandalart
 import com.emirim.hyejin.mokgongso.mandalart.Mandalart
@@ -100,8 +101,7 @@ class Page3 : Fragment() {
                                         when(response.code()) {
                                             200 -> {
                                                 Log.d("Add Day", sdf.format(date).toString())
-                                                val editor = LoginActivity.appData!!.edit()
-                                                editor.putString("startday", sdf.format(date).toString())
+                                                User.startDay = sdf.format(date).toString()
                                             }
                                             500 -> {
                                                 Log.d("Add Day", "500")
@@ -130,7 +130,7 @@ class Page3 : Fragment() {
 
                                                 editor.putString("ID", message.data.token.trim())
                                                 editor.putString("name", message.data.name.trim())
-                                                editor.putString("startday", message.data.startDay.trim())
+                                                User.startDay = message.data.startDay.trim()
 
                                                 Log.d("Login" ,message.data.toString())
 
@@ -155,7 +155,6 @@ class Page3 : Fragment() {
                                         200 -> {
                                             val re: Re = response.body() as Re
                                             com.emirim.hyejin.mokgongso.Mandalart.re = re
-
                                             Log.d("getMandal", re.toString())
                                         }
                                         401 -> {

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.emirim.hyejin.mokgongso.LoginActivity
 import com.emirim.hyejin.mokgongso.Mandalart
 import com.emirim.hyejin.mokgongso.R
+import com.emirim.hyejin.mokgongso.User
 import com.emirim.hyejin.mokgongso.api.APIRequestManager
 import com.emirim.hyejin.mokgongso.model.MandalChk
 import com.emirim.hyejin.mokgongso.model.SignInMessage
@@ -48,10 +49,8 @@ class MainFragment : Fragment() {
             containtLayout.mandalartImg.setImageResource(R.drawable.step_4)
         }
 
-        Log.d("start main", "${LoginActivity.appData!!.getString("startday", "")}")
-
-        if(LoginActivity.appData!!.getString("startday", "").isNotEmpty() || !(LoginActivity.appData!!.getString("startday", "").equals(""))) {
-            val startDay = LoginActivity.appData!!.getString("startday", "")
+        if(User.startDay.isNotEmpty() || !(User.startDay.equals(""))) {
+            val startDay = User.startDay
 
             if(startDay.equals("")) {
                 containtLayout.date.text = "0"

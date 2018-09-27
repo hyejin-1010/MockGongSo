@@ -76,7 +76,7 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
 
                             editor.putString("ID", message.data.token.trim())
                             editor.putString("name", message.data.name.trim())
-                            editor.putString("startday", message.data.startDay.trim())
+                            User.startDay = message.data.startDay.trim()
 
                             Log.d("Login", message.data.toString())
 
@@ -138,8 +138,23 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
 
                         mandalBoolean = true
                         Log.d("ServerMandal", response.body().toString())
+
+                        supportFragmentManager
+                                .beginTransaction()
+                                .replace(R.id.frameLayout, MainFragment.newInstance())
+                                .commit()
+                        position = -1
+                        titlebartxt.text = "메인"
+                        rightButtonImageView.setImageResource(0)
                     }
                     401 -> {
+                        supportFragmentManager
+                                .beginTransaction()
+                                .replace(R.id.frameLayout, MainFragment.newInstance())
+                                .commit()
+                        position = -1
+                        titlebartxt.text = "메인"
+                        rightButtonImageView.setImageResource(0)
                     }
                     404 -> {
                         Log.d("ServerMandal", "실패")
@@ -191,14 +206,6 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                 t.printStackTrace()
             }
         })
-
-        supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.frameLayout, MainFragment.newInstance())
-                .commit()
-        position = -1
-        titlebartxt.text = "메인"
-        rightButtonImageView.setImageResource(0)
 
         rightButtonImageView.setOnClickListener {
             if(position == 2) {
@@ -451,6 +458,8 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
     private fun initBottomNavigation() {
         BottomNavigationViewHelper.disableShiftMode(bottomNavigation)
         bottomNavigation.setOnNavigationItemSelectedListener(this)
+        bottomNavigation.itemTextAppearanceActive = R.style.bottomBarTextView
+        bottomNavigation.itemTextAppearanceInactive = R.style.bottomBarTextView
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

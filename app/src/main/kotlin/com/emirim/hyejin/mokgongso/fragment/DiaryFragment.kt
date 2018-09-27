@@ -58,7 +58,7 @@ class DiaryFragment : Fragment() {
                 }
             })
 
-            val startDay = LoginActivity.appData!!.getString("startday", "")
+            val startDay = User.startDay
             if (startDay.equals("") || startDay.isNotEmpty()) {
                 return outterItems
             } else {

@@ -9,5 +9,7 @@ class User {
         lateinit var signIn: Signin
         lateinit var fb: Fb
         lateinit var delUser: DelUser
+
+        var startDay = ""
     }
 }
