@@ -68,6 +68,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_width="300dp"
-        android:layout_height="390dp"
+        android:layout_height="350dp"
         android:src="@drawable/t4"/>
 </android.support.constraint.ConstraintLayout>
