@@ -47,21 +47,27 @@ class Page2 : Fragment() {
 
         for(i in 0..(secondTitle.size - 1)) {
             secondTitle[i].setOnClickListener {
-                var inputDialog = LayoutInflater.from(context).inflate(R.layout.dialog_input, null)
-                val mBuilder = AlertDialog.Builder(context)
-                        .setView(inputDialog)
+                if (Mandalart.subMandalartTitle[i] == null || Mandalart.subMandalartTitle[i].equals("")) {
+                    var inputDialog = LayoutInflater.from(context).inflate(R.layout.dialog_input, null)
+                    val mBuilder = AlertDialog.Builder(context)
+                            .setView(inputDialog)
 
-                val  mAlertDialog = mBuilder.show()
+                    val mAlertDialog = mBuilder.show()
 
-                inputDialog.cancel.setOnClickListener {
-                    mAlertDialog.dismiss()
-                }
-                inputDialog.delBtn.setOnClickListener {
-                    Mandalart.subMandalartTitle[i] = inputDialog.smallEdit.text.toString()
-                    secondTitle[i].text = "2"
-                    secondTitle[i].setBackgroundResource(R.drawable.mandalart_box_1)
+                    inputDialog.cancel.setOnClickListener {
+                        mAlertDialog.dismiss()
+                    }
+                    inputDialog.delBtn.setOnClickListener {
+                        Mandalart.subMandalartTitle[i] = inputDialog.smallEdit.text.toString()
+                        secondTitle[i].text = "2"
+                        secondTitle[i].setBackgroundResource(R.drawable.mandalart_box_1)
 
-                    mAlertDialog.dismiss()
+                        mAlertDialog.dismiss()
+                    }
+                } else {
+                    Mandalart.subMandalartTitle[i] = ""
+                    secondTitle[i].setBackgroundResource(R.drawable.mandalart_box_2)
+                    secondTitle[i].text = ""
                 }
             }
         }

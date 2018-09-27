@@ -44,21 +44,27 @@ class Page4 : Fragment() {
 
         for(i in 0..(mandalartSub.size - 1)) {
             mandalartSub[i].setOnClickListener {
-                var inputDialog = LayoutInflater.from(context).inflate(R.layout.dialog_input2, null)
-                val mBuilder = AlertDialog.Builder(context)
-                        .setView(inputDialog)
+                if(Mandalart.thirdContent[Mandalart.position - 1][i] == null || Mandalart.thirdContent[Mandalart.position - 1][i].equals("")) {
+                    var inputDialog = LayoutInflater.from(context).inflate(R.layout.dialog_input2, null)
+                    val mBuilder = AlertDialog.Builder(context)
+                            .setView(inputDialog)
 
-                val  mAlertDialog = mBuilder.show()
+                    val mAlertDialog = mBuilder.show()
 
-                inputDialog.cancel.setOnClickListener {
-                    mAlertDialog.dismiss()
-                }
-                inputDialog.delBtn.setOnClickListener {
-                    Mandalart.thirdContent[Mandalart.position - 1][i] = inputDialog.smallEdit.text.toString()
-                    mandalartSub[i].text = "3"
-                    mandalartSub[i].setBackgroundResource(R.drawable.mandalart_box_1)
+                    inputDialog.cancel.setOnClickListener {
+                        mAlertDialog.dismiss()
+                    }
+                    inputDialog.delBtn.setOnClickListener {
+                        Mandalart.thirdContent[Mandalart.position - 1][i] = inputDialog.smallEdit.text.toString()
+                        mandalartSub[i].text = "3"
+                        mandalartSub[i].setBackgroundResource(R.drawable.mandalart_box_1)
 
-                    mAlertDialog.dismiss()
+                        mAlertDialog.dismiss()
+                    }
+                } else {
+                    Mandalart.thirdContent[Mandalart.position - 1][i] = ""
+                    mandalartSub[i].setBackgroundResource(R.drawable.mandalart_box_2)
+                    mandalartSub[i].text = ""
                 }
             }
         }
