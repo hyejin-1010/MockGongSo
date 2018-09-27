@@ -40,30 +40,49 @@ class Page4 : Fragment() {
 
         for(i in 0..2) {
             mandalartSub[i].setOnClickListener {
-                mandalartSub[i].setColor(R.color.white)
-
-                var inputDialog = LayoutInflater.from(context).inflate(R.layout.dialog_input2, null)
-                val mBuilder = AlertDialog.Builder(context)
-                        .setView(inputDialog)
-
-                val  mAlertDialog = mBuilder.show()
-
-                inputDialog.cancel.setOnClickListener {
-                    mAlertDialog.dismiss()
-                }
-                inputDialog.delBtn.setOnClickListener {
-                    Mandalart.thirdContent[Mandalart.position - 1][i] = inputDialog.smallEdit.text.toString()
+                if(Mandalart.thirdContent[Mandalart.position - 1][i] == null || Mandalart.thirdContent[Mandalart.position - 1][i].equals("")) {
                     mandalartSub[i].setColor(R.color.white)
 
-                    mAlertDialog.dismiss()
+                    var inputDialog = LayoutInflater.from(context).inflate(R.layout.dialog_input2, null)
+                    val mBuilder = AlertDialog.Builder(context)
+                            .setView(inputDialog)
 
-                    Mandalart.thirdContent[Mandalart.position - 1][i] = inputDialog.smallEdit.text.toString()
-                    mandalartSub[i].setColor(R.color.white)
-                }
+                    val mAlertDialog = mBuilder.show()
 
-                mAlertDialog.setOnDismissListener {
-                    for(i in 0..2) {
-                        if(Mandalart.thirdContent[Mandalart.position - 1][i] != null && !(Mandalart.thirdContent[Mandalart.position - 1][i].equals(""))) {
+                    inputDialog.cancel.setOnClickListener {
+                        Mandalart.thirdContent[Mandalart.position - 1][i] = ""
+                        mandalartSub[i].setColor(R.color.colorPrimary)
+
+                        mAlertDialog.dismiss()
+
+                        Mandalart.thirdContent[Mandalart.position - 1][i] = ""
+                        mandalartSub[i].setColor(R.color.colorPrimary)
+                    }
+                    inputDialog.delBtn.setOnClickListener {
+                        Mandalart.thirdContent[Mandalart.position - 1][i] = inputDialog.smallEdit.text.toString()
+                        mandalartSub[i].setColor(R.color.white)
+
+                        mAlertDialog.dismiss()
+
+                        Mandalart.thirdContent[Mandalart.position - 1][i] = inputDialog.smallEdit.text.toString()
+                        mandalartSub[i].setColor(R.color.white)
+                    }
+
+                    mAlertDialog.setOnDismissListener {
+                        for (i in 0..2) {
+                            if (Mandalart.thirdContent[Mandalart.position - 1][i] != null && !(Mandalart.thirdContent[Mandalart.position - 1][i].equals(""))) {
+                                mandalartSub[i].setColor(R.color.white)
+                            } else {
+                                mandalartSub[i].setColor(R.color.colorPrimary)
+                            }
+                        }
+                    }
+                } else {
+                    Mandalart.thirdContent[Mandalart.position - 1][i] = ""
+                    mandalartSub[i].setColor(R.color.colorPrimary)
+
+                    for (i in 0..2) {
+                        if (Mandalart.thirdContent[Mandalart.position - 1][i] != null && !(Mandalart.thirdContent[Mandalart.position - 1][i].equals(""))) {
                             mandalartSub[i].setColor(R.color.white)
                         } else {
                             mandalartSub[i].setColor(R.color.colorPrimary)

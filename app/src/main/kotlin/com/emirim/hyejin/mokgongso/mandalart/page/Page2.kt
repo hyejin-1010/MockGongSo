@@ -64,10 +64,36 @@ class Page2 : Fragment() {
 
                         mAlertDialog.dismiss()
                     }
+
+                    mAlertDialog.setOnDismissListener {
+                        for(i in 0..2) {
+                            if(Mandalart.subMandalartTitle[i] != null && !(Mandalart.subMandalartTitle[i].equals(""))) {
+                                secondTitle[i].setBackgroundResource(R.drawable.mandalart_box_1)
+                                secondTitle[i].text = "2"
+                            } else {
+                                secondTitle[i].setBackgroundResource(R.drawable.mandalart_box_2)
+                                secondTitle[i].text = ""
+                            }
+                        }
+                    }
                 } else {
                     Mandalart.subMandalartTitle[i] = ""
                     secondTitle[i].setBackgroundResource(R.drawable.mandalart_box_2)
                     secondTitle[i].text = ""
+
+                    for(j in 0..2) {
+                        if(Mandalart.subMandalartTitle[j] != null && !(Mandalart.subMandalartTitle[j].equals(""))) {
+                            secondTitle[j].setBackgroundResource(R.drawable.mandalart_box_1)
+                            secondTitle[j].text = "2"
+                        } else {
+                            secondTitle[j].setBackgroundResource(R.drawable.mandalart_box_2)
+                            secondTitle[j].text = ""
+                        }
+                    }
+
+                    for(j in 0..2) {
+                        Mandalart.thirdContent[i][j] = ""
+                    }
                 }
             }
         }
