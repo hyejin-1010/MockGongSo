@@ -58,10 +58,14 @@ class DiaryFragment : Fragment() {
                 }
             })
 
-            val startDay = User.startDay
-            if (startDay.equals("") || startDay.isNotEmpty()) {
+            var startDay = User.startDay
+            if (User.startDay.equals("") || !(User.startDay.isNotEmpty())) {
+                Log.d("Diary ", "startDay 존재 X ${User.startDay}")
+
                 return outterItems
             } else {
+                Log.d("Diary ", "startDay 존재함")
+
                 val startDate = SimpleDateFormat("yyyy-MM-dd").parse(startDay)
 
                 val today = Date()
@@ -72,7 +76,7 @@ class DiaryFragment : Fragment() {
                 startCalendar.time = startDate
                 todayCalendar.time = today
 
-                while (startCalendar.compareTo(todayCalendar) != 1) {
+                do {
                     Log.d("starttoday dada", "${startCalendar.time} ${todayCalendar.time}")
 
                     val sdf = SimpleDateFormat("yyyy-MM-dd")
@@ -94,7 +98,7 @@ class DiaryFragment : Fragment() {
 
                     //startCalendar.add(Calendar.DATE, 1)
                     todayCalendar.add(Calendar.DATE, -1)
-                }
+                } while (startCalendar.compareTo(todayCalendar) != 1)
 
                 for (title in titles) {
                     var innerItems: ArrayList<InnterItem> = ArrayList()
