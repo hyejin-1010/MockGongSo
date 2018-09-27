@@ -158,12 +158,27 @@ class MandalartActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                     }
                     404 -> {
                         Log.d("ServerMandal", "실패")
+                        supportFragmentManager
+                                .beginTransaction()
+                                .replace(R.id.frameLayout, MainFragment.newInstance())
+                                .commit()
+                        position = -1
+                        titlebartxt.text = "메인"
+                        rightButtonImageView.setImageResource(0)
                     }
                 }
             }
             override fun onFailure(call: Call<Re>, t: Throwable) {
                 Log.e("ServerMandal", "에러: " + t.message)
                 t.printStackTrace()
+
+                supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frameLayout, MainFragment.newInstance())
+                        .commit()
+                position = -1
+                titlebartxt.text = "메인"
+                rightButtonImageView.setImageResource(0)
             }
         })
 

@@ -65,6 +65,7 @@
             android:launchMode="singleInstance"/>
         <activity android:name=".tutorial.MainAcitivity"/>
         <activity android:name=".Terms" />
+        <activity android:name=".mandalart.ModificationActivity" />
 
         <service android:name=".lockScreen.util.LockScreenService"/>
         <service

@@ -11,5 +11,6 @@ class User {
         lateinit var delUser: DelUser
 
         var startDay = ""
+        var first = false
     }
 }

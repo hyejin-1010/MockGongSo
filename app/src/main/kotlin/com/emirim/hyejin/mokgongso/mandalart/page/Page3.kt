@@ -1,5 +1,6 @@
 package com.emirim.hyejin.mokgongso.mandalart.page
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -15,6 +16,7 @@ import com.emirim.hyejin.mokgongso.User
 import com.emirim.hyejin.mokgongso.api.APIRequestManager
 import com.emirim.hyejin.mokgongso.mandalart.CreateMandalart
 import com.emirim.hyejin.mokgongso.mandalart.Mandalart
+import com.emirim.hyejin.mokgongso.mandalart.ModificationActivity
 import com.emirim.hyejin.mokgongso.model.*
 import kotlinx.android.synthetic.main.activity_page_3.view.*
 import retrofit2.Call
@@ -56,12 +58,15 @@ class Page3 : Fragment() {
                     when(response.code()) {
                         200 -> {
                             first = false
+                            User.first = false
                         }
                         401 -> {
                             first = true
+                            User.first = true
                         }
                         404 -> {
                             first = true
+                            User.first = true
                         }
                     }
                 }
@@ -85,6 +90,32 @@ class Page3 : Fragment() {
                     when(response.code()) {
                         200 -> {
                             Log.d("Page4", "성공")
+
+                            com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(LoginActivity.appData!!.getString("ID", ""))
+
+                            var call: Call<Re> = APIRequestManager.getInstance().requestServer().getMandal(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
+
+                            call.enqueue(object: Callback<Re> {
+                                override fun onResponse(call: Call<Re>, response: Response<Re>) {
+                                    when(response.code()) {
+                                        200 -> {
+                                            val re: Re = response.body() as Re
+                                            com.emirim.hyejin.mokgongso.Mandalart.re = re
+                                            Log.d("getMandal", re.toString())
+                                        }
+                                        401 -> {
+
+                                        }
+                                        404 -> {
+
+                                        }
+                                    }
+                                }
+                                override fun onFailure(call: Call<Re>, t: Throwable) {
+                                    Log.e("ServerMandal", "에러: " + t.message)
+                                    t.printStackTrace()
+                                }
+                            })
 
                             if(first) {
                                 val date = Date()
@@ -143,33 +174,9 @@ class Page3 : Fragment() {
                                         t.printStackTrace()
                                     }
                                 })
+                            } else {
+                                Log.d("first false", "first ${first}")
                             }
-
-                            com.emirim.hyejin.mokgongso.Mandalart.mandalChk = MandalChk(LoginActivity.appData!!.getString("ID", ""))
-
-                            var call: Call<Re> = APIRequestManager.getInstance().requestServer().getMandal(com.emirim.hyejin.mokgongso.Mandalart.mandalChk)
-
-                            call.enqueue(object: Callback<Re> {
-                                override fun onResponse(call: Call<Re>, response: Response<Re>) {
-                                    when(response.code()) {
-                                        200 -> {
-                                            val re: Re = response.body() as Re
-                                            com.emirim.hyejin.mokgongso.Mandalart.re = re
-                                            Log.d("getMandal", re.toString())
-                                        }
-                                        401 -> {
-
-                                        }
-                                        404 -> {
-
-                                        }
-                                    }
-                                }
-                                override fun onFailure(call: Call<Re>, t: Throwable) {
-                                    Log.e("ServerMandal", "에러: " + t.message)
-                                    t.printStackTrace()
-                                }
-                            })
                         }
                         404 -> {
                             Log.d("Page4", "반성공")

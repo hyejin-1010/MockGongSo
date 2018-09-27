@@ -1,5 +1,6 @@
 package com.emirim.hyejin.mokgongso.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater
@@ -9,7 +10,9 @@ import android.widget.TextView
 import android.widget.Toast
 import com.emirim.hyejin.mokgongso.MainActivity
 import com.emirim.hyejin.mokgongso.R
+import com.emirim.hyejin.mokgongso.User
 import com.emirim.hyejin.mokgongso.mandalart.Mandalart
+import com.emirim.hyejin.mokgongso.mandalart.ModificationActivity
 import kotlinx.android.synthetic.main.fragment_mandalartview.*
 import kotlinx.android.synthetic.main.fragment_mandalartview.view.*
 
@@ -25,6 +28,13 @@ class MandalartViewFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         constraintLayout = inflater?.inflate(R.layout.fragment_mandalartview, container, false)
+
+        if(User.first) {
+            User.first = false
+
+            var intent = Intent(activity, ModificationActivity::class.java)
+            startActivity(intent)
+        }
 
         // title
         constraintLayout.title.text = Mandalart.title
