@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.emirim.hyejin.mokgongso.MainActivity
+import com.emirim.hyejin.mokgongso.MandalartActivity
 import com.emirim.hyejin.mokgongso.R
 import com.emirim.hyejin.mokgongso.User
 import com.emirim.hyejin.mokgongso.mandalart.Mandalart
@@ -64,6 +65,13 @@ class MandalartViewFragment : Fragment() {
                 Mandalart.secondSelect = -1
                 Mandalart.viewer = 0
                 secondInit()
+            } else {
+                fragmentManager
+                        ?.beginTransaction()
+                        ?.replace(R.id.frameLayout, MandalartallFragment.newInstance())
+                        ?.commit()
+
+                MandalartActivity.rightButtonImageView.setImageResource(0)
             }
         }
 

@@ -1,0 +1,875 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.constraint.ConstraintLayout
+        android:layout_marginTop="65dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="지금까지의 만다라트"
+            android:gravity="center"
+            style="@style/textStyle5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/guideline"/>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            android:background="@color/colorPrimaryDark"/>
+
+        <TextView
+            android:id="@+id/subTitle"
+            style="@style/TextStyle2"
+            app:layout_constraintTop_toBottomOf="@id/line"
+            android:layout_marginTop="15dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="지금까지 얼마나 자신의 목표를 이루었는지 확인하세요!"/>
+    </android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="160sp"
+        android:layout_height="wrap_content">
+        <TableLayout
+            android:layout_width="340dp"
+            android:layout_height="340dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:gravity="center"
+            android:layout_margin="8dp">
+            <TableRow
+                android:layout_gravity="center"
+                android:gravity="center">
+                /*  firstbox, secondbox처럼 id생성
+                */
+                <TextView
+                    android:id="@+id/boxfirst1"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="1.2dp"
+                    android:layout_marginRight="1.2dp"
+                    android:layout_marginBottom="1.2dp"
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfirst2"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfirst3"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxsecond1"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxsecond2"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxsecond3"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxthird1"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxthird2"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxthird3"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_gravity="center"
+                android:gravity="center">//2
+                <TextView
+                    android:id="@+id/boxfirst4"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="1.2dp"
+                    android:layout_marginRight="1.2dp"
+                    android:layout_marginBottom="1.2dp"
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfirstcenter"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfirst5"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxsecond4"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxsecondcenter"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxsecond5"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxthird4"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxthirdcenter"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxthird5"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+            </TableRow>
+
+            <TableRow
+                android:layout_gravity="center"
+                android:gravity="center">//3
+                <TextView
+                    android:id="@+id/boxfirst6"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="1.2dp"
+                    android:layout_marginRight="1.2dp"
+                    android:layout_marginBottom="1.2dp"
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfirst7"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfirst8"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxsecond6"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxsecond7"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxsecond8"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxthird6"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxthird7"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxthird8"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+            </TableRow>
+
+
+            <TableRow
+                android:layout_gravity="center"
+                android:gravity="center">//4
+                <TextView
+                    android:id="@+id/boxfourth1"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="1.2dp"
+                    android:layout_marginRight="1.2dp"
+                    android:layout_marginBottom="1.2dp"
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfourth2"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfourth3"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxcenter1"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxcenter2"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxcenter3"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfifth1"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfifth2"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfifth3"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+            </TableRow>
+
+
+            <TableRow
+                android:layout_gravity="center"
+                android:gravity="center">//5
+                <TextView
+                    android:id="@+id/boxfourth4"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="1.2dp"
+                    android:layout_marginRight="1.2dp"
+                    android:layout_marginBottom="1.2dp"
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfourthcenter"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfourth5"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxcenter4"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/centerbox"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_4"
+                    android:textSize="9sp"
+                    android:textColor="#FFFFFF"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxcenter5"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfifth4"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfifthcenter"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfifth5"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+            </TableRow>
+
+
+
+            <TableRow
+                android:layout_gravity="center"
+                android:gravity="center">//6
+                <TextView
+                    android:id="@+id/boxfourth6"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="1.2dp"
+                    android:layout_marginRight="1.2dp"
+                    android:layout_marginBottom="1.2dp"
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfourth7"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfourth8"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxcenter6"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxcenter7"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxcenter8"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfifth6"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfifth7"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxfifth8"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+            </TableRow>
+
+
+            <TableRow
+                android:layout_gravity="center"
+                android:gravity="center">//7
+                <TextView
+                    android:id="@+id/boxsixth1"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="1.2dp"
+                    android:layout_marginRight="1.2dp"
+                    android:layout_marginBottom="1.2dp"
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxsixth2"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxsixth3"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxseventh1"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxseventh2"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxseventh3"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxeighth1"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxeighth2"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxeighth3"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+            </TableRow>
+
+
+            <TableRow
+                android:layout_gravity="center"
+                android:gravity="center">//8
+                <TextView
+                    android:id="@+id/boxsixth4"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="1.2dp"
+                    android:layout_marginRight="1.2dp"
+                    android:layout_marginBottom="1.2dp"
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxsixthcenter"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxsixth5"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxseventh4"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxseventhcenter"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxseventh5"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxeighth4"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxeighthcenter"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxeighth5"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+            </TableRow>
+
+
+            <TableRow
+                android:layout_gravity="center"
+                android:gravity="center">//9
+                <TextView
+                    android:id="@+id/boxsixth6"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="1.2dp"
+                    android:layout_marginRight="1.2dp"
+                    android:layout_marginBottom="1.2dp"
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxsixth7"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxsixth8"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxseventh6"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxseventh7"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxseventh8"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxeighth6"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxeighth7"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+                <TextView
+                    android:id="@+id/boxeighth8"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:gravity="center"
+                    android:background="@drawable/mandalart_box_2"
+                    android:textSize="9sp"
+                    
+                    android:text="A" />
+            </TableRow>
+        </TableLayout>
+    </android.support.constraint.ConstraintLayout>
+</RelativeLayout>

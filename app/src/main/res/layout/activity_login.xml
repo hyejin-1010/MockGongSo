@@ -113,7 +113,7 @@
         android:layout_marginTop="7dp">
         <com.facebook.login.widget.LoginButton
             android:id="@+id/facebookSignInBtn"
-            android:layout_width="220dp"
+            android:layout_width="225dp"
             android:layout_height="wrap_content" />
         <com.google.android.gms.common.SignInButton
             android:id="@+id/googleSignInBtn"

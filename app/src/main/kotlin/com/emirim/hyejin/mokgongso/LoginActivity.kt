@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import com.emirim.hyejin.mokgongso.api.API
 import com.emirim.hyejin.mokgongso.api.APIRequestManager
@@ -17,6 +19,7 @@ import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
+import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 
 import com.google.android.gms.auth.api.Auth
@@ -31,6 +34,7 @@ import kotlinx.android.synthetic.main.activity_signup.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class LoginActivity : AppCompatActivity() {
     private var mAuth: FirebaseAuth? = null
@@ -153,7 +157,7 @@ class LoginActivity : AppCompatActivity() {
                             User.startDay = message.data.startDay.trim()
 
                             Log.d("Login" ,message.data.toString())
-                            
+
                             editor.apply()
 
                             // 튜토리얼을 봐야하는 지 확인
@@ -277,24 +281,34 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+
+    private var callbackManager: CallbackManager? = null
     // Facebook
     private fun handleFacebookAccessToken(token: AccessToken) {
-        Log.d(TAG, "handleFacebookAccessToken:$token")
+        var btnLoginFacebook = findViewById<Button>(R.id.facebookSignInBtn)
 
-        val credential = FacebookAuthProvider.getCredential(token.token)
-
-        mAuth?.let {
-            it.signInWithCredential(credential)
-                    .addOnCompleteListener(this) { task ->
-                        if(task.isSuccessful) {
-                            Log.d(TAG, "signInWithCredential:success")
-                            var user = mAuth!!.currentUser
-                            updateUI(user)
-                        } else {
-                            Log.w(TAG, "signInWithCredential:failure", task.exception)
+        btnLoginFacebook.setOnClickListener(View.OnClickListener {
+            // Login
+            callbackManager = CallbackManager.Factory.create()
+            LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email"))
+            LoginManager.getInstance().registerCallback(callbackManager,
+                    object : FacebookCallback<LoginResult> {
+                        override fun onSuccess(loginResult: LoginResult) {
+                            Log.d("MainActivity", "Facebook token: " + loginResult.accessToken.token)
+                            startActivity(Intent(applicationContext, MandalartActivity::class.java))
                         }
-                    }
-        }
+
+                        override fun onCancel() {
+                            Log.d("MainActivity", "Login Fail")
+
+                        }
+
+                        override fun onError(error: FacebookException) {
+                            Log.d("MainActivity", "FaceBook Server is gone")
+
+                        }
+                    })
+        })
     }
 
     fun intentMandalart() {
@@ -377,4 +391,3 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 }
-
