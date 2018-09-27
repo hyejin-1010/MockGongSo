@@ -27,8 +27,6 @@ class MandalartallFragment : Fragment() {
         Log.d("Mandalartall", "dfsfsd")
 
         constraintLayout = inflater?.inflate(R.layout.fragment_mandalartall, container, false)
-        constraintLayout.title.text = Mandalart.title
-        constraintLayout.subTitle.text = "지금까지의 ${Mandalart.achievement} 만다라트"
 
         // MandalartViewFragment.secondSelector = arrayOf(MandalartViewFragment.constraintLayout.secondTitle1, MandalartViewFragment.constraintLayout.secondTitle2, MandalartViewFragment.constraintLayout.secondTitle3, MandalartViewFragment.constraintLayout.secondTitle4, MandalartViewFragment.constraintLayout.secondTitle5, MandalartViewFragment.constraintLayout.secondTitle6, MandalartViewFragment.constraintLayout.secondTitle7, MandalartViewFragment.constraintLayout.secondTitle8)
 
