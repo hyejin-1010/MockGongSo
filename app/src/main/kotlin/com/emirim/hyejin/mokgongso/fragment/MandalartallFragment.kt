@@ -65,6 +65,10 @@ class MandalartallFragment : Fragment() {
             for(j in 0..8) {
                 if(j == 4) {
                     viewBox[i][j].text = Mandalart.subMandalartTitle[i]
+
+                    if(Mandalart.subMandalartTitle[i] != null && !(Mandalart.subMandalartTitle[i].equals(""))) {
+                        viewBox[i][j].background = resources.getDrawable(R.drawable.mandalart_box_4)
+                    }
                 } else {
                     if(j > 4) {
                         viewBox[i][j].text = Mandalart.thirdContent[i][j-1]
@@ -80,8 +84,16 @@ class MandalartallFragment : Fragment() {
                 centerBox[i].text = Mandalart.title
             } else if(i > 4) {
                 centerBox[i].text = Mandalart.subMandalartTitle[i - 1]
+
+                if(Mandalart.subMandalartTitle[i - 1] != null && !(Mandalart.subMandalartTitle[i - 1].equals(""))) {
+                    centerBox[i].background = resources.getDrawable(R.drawable.mandalart_box_4)
+                }
             } else {
                 centerBox[i].text = Mandalart.subMandalartTitle[i]
+
+                if(Mandalart.subMandalartTitle[i] != null && !(Mandalart.subMandalartTitle[i].equals(""))) {
+                    centerBox[i].background = resources.getDrawable(R.drawable.mandalart_box_4)
+                }
             }
         }
 
